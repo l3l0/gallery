@@ -1,0 +1,9 @@
+language: php
+php:
+  - "5.4"
+
+script:
+  - bin/phpspec run -n -f dot
+
+before_script:
+    - composer install -n
