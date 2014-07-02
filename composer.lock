@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66991771c2cb4e99e556b6f9fbac85fc",
+    "hash": "e686cb52da84617a6a37a5df83f7aa15",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1859,12 +1859,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "0caf5fb4ba45b9a04405bb35051efcb93d3b07c8"
+                "reference": "294cfcc2c4a23f6f22f55f48dd885a40b441d4ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/0caf5fb4ba45b9a04405bb35051efcb93d3b07c8",
-                "reference": "0caf5fb4ba45b9a04405bb35051efcb93d3b07c8",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/294cfcc2c4a23f6f22f55f48dd885a40b441d4ac",
+                "reference": "294cfcc2c4a23f6f22f55f48dd885a40b441d4ac",
                 "shasum": ""
             },
             "require": {
@@ -1924,7 +1924,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-07-01 14:08:18"
+            "time": "2014-07-02 12:25:38"
         },
         {
             "name": "phpspec/prophecy",
@@ -2145,7 +2145,10 @@
         "freyr/lightroom-parser-bundle": 20
     },
     "platform": {
-        "php": ">=5.4.3"
+        "php": "~5.4",
+        "ext-exif": "*",
+        "ext-gd": "*",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }

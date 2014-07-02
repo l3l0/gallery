@@ -10,7 +10,7 @@
         }
     },
     "require": {
-        "php": ">=5.4.3",
+        "php": "~5.4",
         "symfony/symfony": "=2.5.0",
         "doctrine/orm": "=2.4.3",
         "doctrine/doctrine-bundle": "=1.2.0",
@@ -21,7 +21,10 @@
         "sensio/distribution-bundle": "=3.0.1",
         "sensio/framework-extra-bundle": "=3.0.1",
         "incenteev/composer-parameter-handler": "=2.1.0",
-        "freyr/lightroom-parser-bundle": "dev-master"
+        "freyr/lightroom-parser-bundle": "dev-master",
+        "ext-exif": "*",
+        "ext-gd":"*",
+        "ext-intl": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "=2.3.5",
