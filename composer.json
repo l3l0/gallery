@@ -27,7 +27,6 @@
         "ext-intl": "*"
     },
     "require-dev": {
-        "sensio/generator-bundle": "=2.3.5",
         "phpspec/phpspec": "~2.0",
         "dflydev/markdown": "~1.0",
         "phpspec/nyan-formatters": "~1.0"
