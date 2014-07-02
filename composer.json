@@ -26,7 +26,8 @@
         "freyr/lightroom-parser-bundle": "dev-master",
         "ext-exif": "*",
         "ext-gd":"*",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "ext-mongo": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
