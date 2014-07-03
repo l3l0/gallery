@@ -20,16 +20,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SinglePhotoController extends Controller {
 
     /**
-     * @Route("/{gallery}/{photoId}")
+     * @Route("/{keyword}/{imageId}")
      * @Template("FreyrGalleryBundle:SinglePhoto:index.html.twig")
      */
-    public function indexAction($keyword, $photoId)
+    public function indexAction($keyword, $imageId)
     {
-        $photoService = $this->get('freyr.gallery.single_photo_service');
-        $photo = $photoService->getPhotoByKeywordAndId($keyword, $photoId);
         return [
             'keyword' => $keyword,
-            'photo' => $photo
+            'photo' => $imageId
         ];
     }
 
