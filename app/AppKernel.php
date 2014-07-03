@@ -19,11 +19,11 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Freyr\LightroomParserBundle\FreyrLightroomParserBundle(),
             new Freyr\GalleryBundle\FreyrGalleryBundle(),
+            new Sensio\Bundle\DistributionBundle\SensioDistributionBundle()
         ];
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }
 
         return $bundles;
