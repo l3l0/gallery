@@ -27,7 +27,8 @@
         "ext-exif": "*",
         "ext-gd":"*",
         "ext-intl": "*",
-        "ext-mongo": "*"
+        "ext-mongo": "*",
+        "ext-newrelic": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
