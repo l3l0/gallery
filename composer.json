@@ -2,7 +2,7 @@
     "name": "freyr/gallery",
     "license": "MIT",
     "type": "project",
-    "description": "Freyr Gallery based on Freyr package set",
+    "description": "Online photo album",
     "autoload": {
         "psr-0": {
             "": "src/",
