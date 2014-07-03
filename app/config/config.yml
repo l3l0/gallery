@@ -1,4 +1,5 @@
 imports:
+    - { resource: parameters.php }
     - { resource: parameters.yml }
     - { resource: security.yml }
 
@@ -63,9 +64,8 @@ doctrine:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://gallery:gallery@lennon.mongohq.com:10035
+            server: %mongohq.url%
             options: {}
-    default_database: app27012761
     document_managers:
         default:
             auto_mapping: true

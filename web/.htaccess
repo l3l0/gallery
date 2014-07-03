@@ -10,9 +10,3 @@ DirectoryIndex app.php
     RewriteRule .? - [L]
     RewriteRule .? %{ENV:BASE}/app.php [L]
 </IfModule>
-
-<IfModule !mod_rewrite.c>
-    <IfModule mod_alias.c>
-        RedirectMatch 302 ^/$ /app.php/
-    </IfModule>
-</IfModule>

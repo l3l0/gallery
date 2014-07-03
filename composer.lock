@@ -4,8 +4,57 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d2e121d85e31735401c6d730363f54f",
+    "hash": "7931be34fe7e0eb492918d7b7c1a00ee",
     "packages": [
+        {
+            "name": "cloudinary/cloudinary_php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cloudinary/cloudinary_php.git",
+                "reference": "904dcec5d3fc57bb375e3266fff16b86dad4a594"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/904dcec5d3fc57bb375e3266fff16b86dad4a594",
+                "reference": "904dcec5d3fc57bb375e3266fff16b86dad4a594",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ],
+                "files": [
+                    "src/Helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cloudinary",
+                    "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
+                }
+            ],
+            "description": "Cloudinary PHP SDK",
+            "homepage": "https://github.com/cloudinary/cloudinary_php",
+            "keywords": [
+                "cdn",
+                "cloud",
+                "cloudinary",
+                "image management",
+                "sdk"
+            ],
+            "time": "2014-04-29 09:43:40"
+        },
         {
             "name": "doctrine/annotations",
             "version": "dev-master",
@@ -2314,7 +2363,8 @@
     "stability-flags": {
         "doctrine/mongodb-odm": 20,
         "doctrine/mongodb-odm-bundle": 20,
-        "freyr/lightroom-parser-bundle": 20
+        "freyr/lightroom-parser-bundle": 20,
+        "cloudinary/cloudinary_php": 20
     },
     "platform": {
         "php": "~5.4",
@@ -2322,7 +2372,8 @@
         "ext-gd": "*",
         "ext-intl": "*",
         "ext-mongo": "*",
-        "ext-newrelic": "*"
+        "ext-newrelic": "*",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

@@ -24,11 +24,13 @@
         "sensio/framework-extra-bundle": "=3.0.1",
         "incenteev/composer-parameter-handler": "=2.1.0",
         "freyr/lightroom-parser-bundle": "dev-master",
+        "cloudinary/cloudinary_php": "dev-master",
         "ext-exif": "*",
         "ext-gd":"*",
         "ext-intl": "*",
         "ext-mongo": "*",
-        "ext-newrelic": "*"
+        "ext-newrelic": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
