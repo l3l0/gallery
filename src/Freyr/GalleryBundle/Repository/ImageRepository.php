@@ -11,6 +11,7 @@ namespace Freyr\GalleryBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Freyr\GalleryBundle\Document\Image;
+use Freyr\GalleryBundle\Document\Keyword;
 
 /**
  * ImageRepository
@@ -28,6 +29,22 @@ class ImageRepository extends DocumentRepository
     public function getByKeywordAndId($keyword, $imageId)
     {
         return $this->findOneBy(["keyword" => $keyword, "id" => $imageId]);
+    }
+
+    /**
+     * @return Keyword[]
+     */
+    public function getAllUniqueKeywords()
+    {
+        $cursor = $this->createQueryBuilder()->distinct('keywords.name')->getQuery()->execute();
+
+        $result = [];
+        foreach ($cursor as $value)
+        {
+            $result[] = new Keyword($value);
+        }
+
+        return $result;
     }
 
     /**

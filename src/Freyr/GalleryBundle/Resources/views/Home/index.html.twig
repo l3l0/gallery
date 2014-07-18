@@ -1,0 +1,5 @@
+List of all keywords:
+
+{% for keyword in keywords %}
+    <li><a href="/{{ keyword.name|e }}">{{ keyword.name|e }}</a></li>
+{% endfor %}

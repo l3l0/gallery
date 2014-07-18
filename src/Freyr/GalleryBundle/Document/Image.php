@@ -25,16 +25,52 @@ class Image {
     private $id;
 
     /**
-     * @MongoDB\String
-     * @var string
+     * @MongoDB\EmbedMany(targetDocument="Keyword")
+     * @var Keyword[]
      */
-    private $keyword;
+    private $keywords = [];
 
     /**
      * @MongoDB\String
      * @var string
      */
     private $cloudinaryId;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $importPath;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $exposureTime;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $fNumber;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $iso;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $createdAt;
+
+    /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $focalLength;
 
     /**
      * @return string
@@ -71,16 +107,122 @@ class Image {
     /**
      * @return string
      */
-    public function getKeyword()
+    public function getKeywords()
     {
-        return $this->keyword;
+        return $this->keywords;
     }
 
     /**
-     * @param string $keyword
+     * @param $keywords
      */
-    public function setKeyword($keyword)
+    public function setKeywords($keywords)
     {
-        $this->keyword = $keyword;
+        $this->keywords = $keywords;
     }
+
+    /**
+     * @param $keyword
+     */
+    public function addKeyword($keyword)
+    {
+        $this->keywords[] = $keyword;
+    }
+
+    /**
+     * @param string $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param string $exposureTime
+     */
+    public function setExposureTime($exposureTime)
+    {
+        $this->exposureTime = $exposureTime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExposureTime()
+    {
+        return $this->exposureTime;
+    }
+
+    /**
+     * @param string $fNumber
+     */
+    public function setFNumber($fNumber)
+    {
+        $this->fNumber = $fNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFNumber()
+    {
+        return $this->fNumber;
+    }
+
+    /**
+     * @param string $focalLength
+     */
+    public function setFocalLength($focalLength)
+    {
+        $this->focalLength = $focalLength;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFocalLength()
+    {
+        return $this->focalLength;
+    }
+
+    /**
+     * @param string $importPath
+     */
+    public function setImportPath($importPath)
+    {
+        $this->importPath = $importPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImportPath()
+    {
+        return $this->importPath;
+    }
+
+    /**
+     * @param string $iso
+     */
+    public function setIso($iso)
+    {
+        $this->iso = $iso;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIso()
+    {
+        return $this->iso;
+    }
+
+
 }
