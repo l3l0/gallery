@@ -1,0 +1,30 @@
+parameters:
+  freyr.gallery.repository.image.class: Freyr\GalleryBundle\Repository\ImageRepository
+  freyr.parser.class: Freyr\LightroomParser\LightroomParser
+  freyr.parser.image_factory.class: Freyr\LightroomParser\ImageFactory
+  freyr.parser.file_parser.class: Freyr\LightroomParser\FileParser
+  freyr.parser.image.class: Freyr\LightroomParser\Core\Image
+
+services:
+
+  freyr.gallery.repository.image:
+    class: %freyr.gallery.repository.image.class%
+    factory_service: doctrine_mongodb.odm.default_document_manager
+    factory_method: getRepository
+    arguments:
+      - FreyrGalleryBundle:Image
+
+  freyr.parser.image_factory:
+    class: %freyr.parser.image_factory.class%
+    arguments:
+      - %freyr.parser.image.class%
+
+  freyr.parser.file_parser:
+    class: %freyr.parser.file_parser.class%
+
+  freyr.parser:
+    class: %freyr.parser.class%
+    arguments:
+      - @freyr.parser.image_factory
+      - @freyr.parser.file_parser
+      - %freyr_parser.import_path%

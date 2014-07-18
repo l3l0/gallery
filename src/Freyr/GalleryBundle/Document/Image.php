@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
@@ -26,13 +34,31 @@ class Image {
      * @MongoDB\String
      * @var string
      */
-    private $internalUrl;
+    private $cloudinaryId;
 
     /**
-     * @MongoDB\String
-     * @var string
+     * @return string
      */
-    private $importPath;
+    public function getCloudinaryId()
+    {
+        return $this->cloudinaryId;
+    }
+
+    /**
+     * @param string $cloudinaryId
+     */
+    public function setCloudinaryId($cloudinaryId)
+    {
+        $this->cloudinaryId = $cloudinaryId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @param string $id
@@ -45,41 +71,9 @@ class Image {
     /**
      * @return string
      */
-    public function getId()
+    public function getKeyword()
     {
-        return $this->id;
-    }
-
-    /**
-     * @param string $importPath
-     */
-    public function setImportPath($importPath)
-    {
-        $this->importPath = $importPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImportPath()
-    {
-        return $this->importPath;
-    }
-
-    /**
-     * @param string $internalUrl
-     */
-    public function setInternalUrl($internalUrl)
-    {
-        $this->internalUrl = $internalUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInternalUrl()
-    {
-        return $this->internalUrl;
+        return $this->keyword;
     }
 
     /**
@@ -88,13 +82,5 @@ class Image {
     public function setKeyword($keyword)
     {
         $this->keyword = $keyword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return $this->keyword;
     }
 }

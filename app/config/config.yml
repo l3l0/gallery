@@ -66,6 +66,7 @@ doctrine_mongodb:
         default:
             server: %mongohq.url%
             options: {}
+    default_database: app27012761
     document_managers:
         default:
             auto_mapping: true
@@ -77,3 +78,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+freyr_gallery:
+  import_path: /tmp/freyr_gallery

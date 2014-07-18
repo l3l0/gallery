@@ -25,9 +25,11 @@ class SinglePhotoController extends Controller {
      */
     public function indexAction($keyword, $imageId)
     {
+        $imageRepository = $this->get('freyr.gallery.repository.image');
+        $image = $imageRepository->getByKeywordAndId($keyword, $imageId);
+
         return [
-            'keyword' => $keyword,
-            'photo' => $imageId
+            'imageUri' => cloudinary_url($image->getCloudinaryId(), ['width' => '200']),
         ];
     }
 

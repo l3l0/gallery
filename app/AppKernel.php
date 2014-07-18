@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Freyr\LightroomParserBundle\FreyrLightroomParserBundle(),
             new Freyr\GalleryBundle\FreyrGalleryBundle(),
             new Sensio\Bundle\DistributionBundle\SensioDistributionBundle()
         ];
