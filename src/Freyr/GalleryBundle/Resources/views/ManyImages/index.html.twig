@@ -1,0 +1,7 @@
+-
+{% for image in images %}
+    <a href="/{{ image.getCurrentKeyword().getName() }}/{{ image.getId() }}">
+        <img src="{{ image.getThumbImageUrl() }}" />
+    </a>
+{% endfor %}
+--

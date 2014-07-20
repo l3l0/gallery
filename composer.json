@@ -29,7 +29,6 @@
         "ext-gd":"*",
         "ext-intl": "*",
         "ext-mongo": "*",
-
         "ext-json": "*"
     },
     "require-dev": {

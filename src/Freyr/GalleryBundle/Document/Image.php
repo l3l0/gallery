@@ -73,6 +73,38 @@ class Image {
     private $focalLength;
 
     /**
+     * @var Keyword
+     */
+    private $currentKeyword;
+
+    /**
+     * @var string
+     */
+    private $thumbImageUrl;
+
+    /**
+     * @var string
+     */
+    private $imageUrl;
+
+    /**
+     * @var string
+     */
+    private $bigImageUrl;
+
+    public function setCurrentKeyword($keywords)
+    {
+        foreach($this->getKeywords() as $keywordEmbed)
+        {
+            if (in_array($keywordEmbed->getName(), $keywords))
+            {
+                $this->currentKeyword = $keywordEmbed;
+                break;
+            }
+        }
+    }
+
+    /**
      * @return string
      */
     public function getCloudinaryId()
@@ -105,7 +137,7 @@ class Image {
     }
 
     /**
-     * @return string
+     * @return Keyword[]
      */
     public function getKeywords()
     {
@@ -222,6 +254,62 @@ class Image {
     public function getIso()
     {
         return $this->iso;
+    }
+
+    /**
+     * @return \Freyr\GalleryBundle\Document\Keyword
+     */
+    public function getCurrentKeyword()
+    {
+        return $this->currentKeyword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbImageUrl()
+    {
+        return $this->thumbImageUrl;
+    }
+
+    /**
+     * @param string $thumbImageUrl
+     */
+    public function setThumbImageUrl($thumbImageUrl)
+    {
+        $this->thumbImageUrl = $thumbImageUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * @param string $imageUrl
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBigImageUrl()
+    {
+        return $this->bigImageUrl;
+    }
+
+    /**
+     * @param string $bigImageUrl
+     */
+    public function setBigImageUrl($bigImageUrl)
+    {
+        $this->bigImageUrl = $bigImageUrl;
     }
 
 

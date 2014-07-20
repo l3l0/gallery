@@ -28,7 +28,7 @@ class ImageRepository extends DocumentRepository
      */
     public function getByKeywordAndId($keyword, $imageId)
     {
-        return $this->findOneBy(["keyword" => $keyword, "id" => $imageId]);
+        return $this->findOneBy(["keywords.name" => $keyword, "id" => new \MongoId($imageId)]);
     }
 
     /**
@@ -45,6 +45,28 @@ class ImageRepository extends DocumentRepository
         }
 
         return $result;
+    }
+
+    public function getByKeywords(array $keywords)
+    {
+
+        $cursor = $this->createQueryBuilder('')
+            ->field('keywords.name')
+            ->in($keywords)
+            ->getQuery()->execute();
+
+        $images = [];
+        /** @var Image $image */
+        foreach($cursor as $image)
+        {
+            $image->setCurrentKeyword($keywords);
+            $image->setThumbImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '250']));
+            $image->setImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '650']));
+            $image->setBigImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '950']));
+            $images[] = $image;
+        }
+
+        return $images;
     }
 
     /**
