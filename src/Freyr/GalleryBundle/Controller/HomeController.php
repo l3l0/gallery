@@ -1,6 +1,7 @@
 <?php
 namespace Freyr\GalleryBundle\Controller;
 
+use Freyr\GalleryBundle\Service\ImageService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,7 +19,9 @@ class HomeController extends Controller {
     public function getHomeAction()
     {
         $imageRepository = $this->get('freyr.gallery.repository.image');
-        $keywords = $imageRepository->getAllUniqueKeywords();
+        $imageService = new ImageService($imageRepository);
+        $keywords = $imageService->getKeywordsList();
+
         return [
             'keywords' => $keywords
         ];

@@ -24,6 +24,14 @@ class Keyword {
      */
     private $name;
 
+    /**
+     * @var Image
+     */
+    private $primaryImage;
+
+    /**
+     * @param string $name
+     */
     public function __construct($name)
     {
         $this->name = str_replace(' ', '-', $name);
@@ -35,5 +43,21 @@ class Keyword {
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Image
+     */
+    public function getPrimaryImage()
+    {
+        return $this->primaryImage;
+    }
+
+    /**
+     * @param Image $primaryImage
+     */
+    public function setPrimaryImage($primaryImage)
+    {
+        $this->primaryImage = $primaryImage;
     }
 }

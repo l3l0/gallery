@@ -9,9 +9,9 @@
 
 namespace Freyr\GalleryBundle\Repository;
 
+use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Freyr\GalleryBundle\Document\Image;
-use Freyr\GalleryBundle\Document\Keyword;
 
 /**
  * ImageRepository
@@ -32,21 +32,17 @@ class ImageRepository extends DocumentRepository
     }
 
     /**
-     * @return Keyword[]
+     * @return Cursor
      */
     public function getAllUniqueKeywords()
     {
-        $cursor = $this->createQueryBuilder()->distinct('keywords.name')->getQuery()->execute();
-
-        $result = [];
-        foreach ($cursor as $value)
-        {
-            $result[] = new Keyword($value);
-        }
-
-        return $result;
+        return $this->createQueryBuilder()->distinct('keywords.name')->getQuery()->execute();
     }
 
+    /**
+     * @param array $keywords
+     * @return array
+     */
     public function getByKeywords(array $keywords)
     {
 
@@ -76,5 +72,17 @@ class ImageRepository extends DocumentRepository
     {
         $this->getDocumentManager()->persist($image);
         $this->getDocumentManager()->flush();
+    }
+
+    /**
+     * @param $name
+     * @param $limit
+     * @return Image
+     */
+    public function getRandomImageByKeyword($name, $limit)
+    {
+        /** @var Cursor $cursor */
+        $images = $this->findBy(['keywords.name' => $name], ["limit" => $limit]);
+        return $images[array_rand($images)];
     }
 }
