@@ -29,7 +29,7 @@ class FreyrGalleryExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('freyr_parser.import_path', $config['import_path']);
+        $container->setParameter('freyr_gallery.import_path', $config['import_path']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

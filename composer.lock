@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f730ff2c23d1dd3ae04da134eac35dba",
+    "hash": "d4ad1e408ec1bed6399e3ab826a274f0",
     "packages": [
         {
             "name": "cloudinary/cloudinary_php",
@@ -915,7 +915,7 @@
             "time": "2014-06-10 11:49:08"
         },
         {
-            "name": "freyr/lightroom-parser",
+            "name": "freyr/lightroom-image-parser",
             "version": "dev-master",
             "source": {
                 "type": "git",
@@ -2364,7 +2364,7 @@
     "stability-flags": {
         "doctrine/mongodb-odm": 20,
         "doctrine/mongodb-odm-bundle": 20,
-        "freyr/lightroom-parser": 20,
+        "freyr/lightroom-image-parser": 20,
         "cloudinary/cloudinary_php": 20
     },
     "platform": {

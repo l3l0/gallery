@@ -24,7 +24,7 @@
         "sensio/framework-extra-bundle": "=3.0.1",
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "=2.1.0",
-        "freyr/lightroom-parser": "dev-master",
+        "freyr/lightroom-image-parser": "dev-master",
         "cloudinary/cloudinary_php": "dev-master",
         "ext-exif": "*",
         "ext-gd":"*",
@@ -72,7 +72,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "2.5-dev"
+            "dev-master": "master"
         }
     }
 }
