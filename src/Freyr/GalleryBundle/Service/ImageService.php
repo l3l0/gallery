@@ -68,9 +68,6 @@ class ImageService {
     private function setImageMetaData($keyword, Image $image)
     {
         $image->setCurrentKeyword([$keyword]);
-        $image->setThumbImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '250']));
-        $image->setImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '650']));
-        $image->setBigImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '950']));
         return $image;
     }
 } 

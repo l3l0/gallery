@@ -29,7 +29,7 @@ class SinglePhotoController extends Controller {
         $image = $imageRepository->getByKeywordAndId($keyword, $imageId);
 
         return [
-            'imageUri' => cloudinary_url($image->getCloudinaryId(), ['width' => '200']),
+            'image' => $image
         ];
     }
 

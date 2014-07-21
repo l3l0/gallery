@@ -56,9 +56,6 @@ class ImageRepository extends DocumentRepository
         foreach($cursor as $image)
         {
             $image->setCurrentKeyword($keywords);
-            $image->setThumbImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '250']));
-            $image->setImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '650']));
-            $image->setBigImageUrl(cloudinary_url($image->getCloudinaryId(), ['width' => '950']));
             $images[] = $image;
         }
 

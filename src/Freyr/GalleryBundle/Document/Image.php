@@ -78,20 +78,8 @@ class Image {
     private $currentKeyword;
 
     /**
-     * @var string
+     * @param Keyword[] $keywords
      */
-    private $thumbImageUrl;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
-
-    /**
-     * @var string
-     */
-    private $bigImageUrl;
-
     public function setCurrentKeyword($keywords)
     {
         foreach($this->getKeywords() as $keywordEmbed)
@@ -263,54 +251,4 @@ class Image {
     {
         return $this->currentKeyword;
     }
-
-    /**
-     * @return string
-     */
-    public function getThumbImageUrl()
-    {
-        return $this->thumbImageUrl;
-    }
-
-    /**
-     * @param string $thumbImageUrl
-     */
-    public function setThumbImageUrl($thumbImageUrl)
-    {
-        $this->thumbImageUrl = $thumbImageUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl()
-    {
-        return $this->imageUrl;
-    }
-
-    /**
-     * @param string $imageUrl
-     */
-    public function setImageUrl($imageUrl)
-    {
-        $this->imageUrl = $imageUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBigImageUrl()
-    {
-        return $this->bigImageUrl;
-    }
-
-    /**
-     * @param string $bigImageUrl
-     */
-    public function setBigImageUrl($bigImageUrl)
-    {
-        $this->bigImageUrl = $bigImageUrl;
-    }
-
-
 }
