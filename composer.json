@@ -22,6 +22,7 @@
         "symfony/monolog-bundle": "=2.6.0",
         "sensio/distribution-bundle": "=3.0.1",
         "sensio/framework-extra-bundle": "=3.0.1",
+        "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "=2.1.0",
         "freyr/lightroom-parser": "dev-master",
         "cloudinary/cloudinary_php": "dev-master",

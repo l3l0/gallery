@@ -24,7 +24,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Freyr\GalleryBundle\FreyrGalleryBundle(),
-            new Sensio\Bundle\DistributionBundle\SensioDistributionBundle()
+            new Sensio\Bundle\DistributionBundle\SensioDistributionBundle(),
+            new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
