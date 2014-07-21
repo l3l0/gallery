@@ -1,9 +1,9 @@
 parameters:
   freyr.gallery.repository.image.class: Freyr\GalleryBundle\Repository\ImageRepository
-  freyr.parser.class: Freyr\LightroomParser\LightroomParser
-  freyr.parser.image_factory.class: Freyr\LightroomParser\ImageFactory
-  freyr.parser.file_parser.class: Freyr\LightroomParser\FileParser
-  freyr.parser.image.class: Freyr\LightroomParser\Core\Image
+  freyr.parser.class: Freyr\LightroomImageParser\LightroomImageParser
+  freyr.parser.image_factory.class: Freyr\LightroomImageParser\ImageFactory
+  freyr.parser.file_parser.class: Freyr\LightroomImageParser\FileParser
+  freyr.parser.image.class: Freyr\LightroomImageParser\Core\Image
 
 services:
 
@@ -27,4 +27,9 @@ services:
     arguments:
       - @freyr.parser.image_factory
       - @freyr.parser.file_parser
-      - %freyr_parser.import_path%
+      - %freyr_gallery.import_path%
+
+  acme.twig.acme_extension:
+    class: Freyr\GalleryBundle\Twig\CloudinaryExtension
+    tags:
+        - { name: twig.extension }
