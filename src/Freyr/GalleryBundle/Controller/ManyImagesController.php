@@ -22,10 +22,9 @@ class ManyImagesController extends Controller {
     public function getImagesByKeywords($keyword)
     {
         $imageService = $this->get('freyr.gallery.service.image');
-        $images = $imageService->getImagesByKeyword($keyword);
 
         return [
-            'images' => $images
+            'images' => $imageService->getImagesByKeywords($keyword)
         ];
     }
 }

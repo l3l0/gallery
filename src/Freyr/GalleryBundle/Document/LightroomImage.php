@@ -28,6 +28,12 @@ class LightroomImage implements Image
     private $id;
 
     /**
+     * @MongoDB\EmbedOne(targetDocument="LightroomKeyword")
+     * @var Keyword
+     */
+    private $category;
+
+    /**
      * @MongoDB\EmbedMany(targetDocument="LightroomKeyword")
      * @var Keyword[]
      */
@@ -253,5 +259,21 @@ class LightroomImage implements Image
     public function getIso()
     {
         return $this->iso;
+    }
+
+    /**
+     * @param Keyword $category
+     */
+    public function setCategory(Keyword $category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * @return Keyword
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

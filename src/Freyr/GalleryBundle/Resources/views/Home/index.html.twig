@@ -2,6 +2,23 @@
 
 {% block body %}
     <div class="row">
+    {% for keyword in categories %}
+        {% if (loop.index0 is divisibleby(4)) %}
+            </div>
+            <div class="row">
+        {% endif %}
+        <div class="col-md-3">
+            <a href="/{{ keyword.name|e }}" class="thumbnail">
+                <img src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" data-src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" alt="..." />
+            </a>
+            <div class="caption">
+                <h3 class="text-center">{{ keyword.name|e }}</h3>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+    <div class="row">
     {% for keyword in keywords %}
         {% if (loop.index0 is divisibleby(4)) %}
             </div>

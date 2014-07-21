@@ -88,4 +88,25 @@ class ImageService {
     {
         return $this->imageRepository->getImageByKeywordAndId($keyword, $imageId);
     }
+
+    /**
+     * @return Keyword[]
+     * TODO: This should be category object, not reuse keyword, also refactory this and AllKeyword method... code duplicate smell
+     */
+    public function getAllCategories()
+    {
+        $result = $this->imageRepository->getAllUniqueCategories();
+        $keywords = [];
+        foreach ($result as $name)
+        {
+            $keyword = $this->keywordFactory->create($name);
+            $image = $this->imageRepository->getRandomImageByCategory($keyword, 10);
+            $image->setCurrentKeyword([$keyword]);
+            $keyword->setPrimaryImage($image);
+
+            $keywords[] = $keyword;
+        }
+
+        return $keywords;
+    }
 }

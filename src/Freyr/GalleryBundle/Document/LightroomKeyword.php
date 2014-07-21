@@ -63,4 +63,12 @@ class LightroomKeyword implements KeywordInterface
     {
         $this->primaryImage = $primaryImage;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->name;
+    }
 }

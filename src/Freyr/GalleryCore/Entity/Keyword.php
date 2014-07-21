@@ -26,4 +26,9 @@ interface Keyword {
      * @param Image $primaryImage
      */
     public function setPrimaryImage(Image $primaryImage);
+
+    /**
+     * @return array
+     */
+    public function toArray();
 }

@@ -4,7 +4,8 @@ namespace Freyr\GalleryBundle\Command;
 use Cloudinary\Uploader;
 use Freyr\GalleryBundle\Document\LightroomImage;
 use Freyr\GalleryBundle\Document\LightroomKeyword;
-use Freyr\LightroomParser\Core\Image as CoreImage;
+use Freyr\GalleryCore\Entity\Keyword;
+use Freyr\LightroomImageParser\Core\Image as CoreImage;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,6 +29,7 @@ class ImageImportCommand extends ContainerAwareCommand {
 
         foreach ($parsedImages->getImages() as $parsedImage) {
             $image = $this->createImageFromParsedData($parsedImage);
+            $images[] = $image;
             $imageRepository->save($image);
         }
     }
@@ -40,7 +42,7 @@ class ImageImportCommand extends ContainerAwareCommand {
     {
         $image = new LightroomImage();
         $result = Uploader::upload($coreImage->getImportPath());
-        $image->setCloudinaryId($result['public_id']);
+        $image->setName($result['public_id']);
         $image->setImportPath($coreImage->getImportPath());
         $image->setCreatedAt($coreImage->getCreatedAt());
         $image->setExposureTime($coreImage->getExposureTime());
@@ -50,10 +52,22 @@ class ImageImportCommand extends ContainerAwareCommand {
 
         foreach ($coreImage->getKeywords() as $keyword)
         {
-            $image->addKeyword(new LightroomKeyword($keyword));
+            if (preg_match('/^Category\:/', $keyword) != false)
+            {
+                $category = str_replace('Category: ', '', $keyword);
+                ($image->getCategory() instanceof Keyword) ?: $image->setCategory(new LightroomKeyword($this->standardize($category)));
+            }
+            else
+            {
+                $image->addKeyword(new LightroomKeyword($keyword));
+            }
         }
 
         return $image;
     }
 
+    public function standardize($string)
+    {
+        return strtolower(str_replace(' ', '-', $string));
+    }
 }

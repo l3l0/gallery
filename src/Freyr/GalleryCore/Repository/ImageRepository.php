@@ -40,4 +40,16 @@ interface ImageRepository {
      * @return Image
      */
     public function getRandomImageByKeyword(Keyword $keyword, $randomizedSampleSize);
+
+    /**
+     * @param Keyword $keyword
+     * @param int $randomizedSampleSize
+     * @return Image
+     */
+    public function getRandomImageByCategory(Keyword $keyword, $randomizedSampleSize);
+
+    /**
+     * @return Keyword[]
+     */
+    public function getAllUniqueCategories();
 }

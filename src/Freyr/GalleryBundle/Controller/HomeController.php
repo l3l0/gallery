@@ -27,10 +27,10 @@ class HomeController extends Controller {
     public function getHomeAction()
     {
         $imageService = $this->get('freyr.gallery.service.image');
-        $keywords = $imageService->getKeywordsList();
 
         return [
-            'keywords' => $keywords
+            'keywords' => $imageService->getKeywordsList(),
+            'categories' => $imageService->getAllCategories()
         ];
     }
 }

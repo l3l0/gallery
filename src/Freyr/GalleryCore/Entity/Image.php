@@ -8,6 +8,16 @@ namespace Freyr\GalleryCore\Entity;
 interface Image {
 
     /**
+     * @param Keyword $category
+     */
+    public function setCategory(Keyword $category);
+
+    /**
+     * @return Keyword
+     */
+    public function getCategory();
+
+    /**
      * @param Keyword[] $keywords
      */
     public function setCurrentKeyword(array $keywords);

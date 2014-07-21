@@ -55,6 +55,18 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
 
     /**
      * @param Keyword $keyword
+     * @param int $randomizedSampleSize
+     * @return Image
+     */
+    public function getRandomImageByCategory(Keyword $keyword, $randomizedSampleSize)
+    {
+        /** @var Cursor $cursor */
+        $images = $this->findBy(['category.name' => $keyword->getName()], ["limit" => $randomizedSampleSize]);
+        return $images[array_rand($images)];
+    }
+
+    /**
+     * @param Keyword $keyword
      * @param string $imageId
      * @return Image
      */
@@ -69,13 +81,12 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
      */
     public function getImagesByKeywords(array $keywords)
     {
-        $cursor = $this->createQueryBuilder('')
+        $cursor = $this->createQueryBuilder()
             ->field('keywords.name')
-            ->in($keywords)
+            ->in($this->keywordsToArray($keywords))
             ->getQuery()->execute();
 
         $images = [];
-
         /** @var Image $image */
         foreach($cursor as $image)
         {
@@ -84,5 +95,24 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
         }
 
         return $images;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllUniqueCategories()
+    {
+        return $this->createQueryBuilder()->distinct('category.name')->getQuery()->execute();
+    }
+
+    public function keywordsToArray($keywords)
+    {
+        $result = [];
+        foreach ($keywords as $keyword)
+        {
+            $result[] = $keyword->getName();
+        }
+
+        return $result;
     }
 }

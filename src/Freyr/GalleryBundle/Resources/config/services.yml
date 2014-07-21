@@ -35,13 +35,13 @@ services:
   freyr.gallery.factory.keyword:
     class: %freyr.gallery.factory.keyword.class%
     arguments:
-      - freyr.gallery.keyword.class
+      - %freyr.gallery.keyword.class%
 
   freyr.gallery.service.image:
     class: %freyr.gallery.service.image.class%
     arguments:
-      - freyr.gallery.repository.image
-      - freyr.gallery.factory.keyword
+      - @freyr.gallery.repository.image
+      - @freyr.gallery.factory.keyword
 
   freyr.twig.gallery_extension:
     class: Freyr\GalleryBundle\Twig\CloudinaryExtension

@@ -11,7 +11,7 @@ class KeywordFactory {
 
     public function __construct($keywordClass)
     {
-        $this->keyword = $keywordClass;
+        $this->keywordClass = $keywordClass;
     }
 
     public function create($keywordName)
