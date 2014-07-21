@@ -1,7 +1,7 @@
 -
 {% for image in images %}
     <a href="/{{ image.getCurrentKeyword().getName() }}/{{ image.getId() }}">
-        <img src="{{ cl(image.getCloudinaryId(), 250) }}" />
+        <img src="{{ cl(image.getName(), 250) }}" />
     </a>
 {% endfor %}
 --

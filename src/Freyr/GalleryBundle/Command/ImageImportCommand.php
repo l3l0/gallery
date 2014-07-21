@@ -2,8 +2,8 @@
 namespace Freyr\GalleryBundle\Command;
 
 use Cloudinary\Uploader;
-use Freyr\GalleryBundle\Document\Image;
-use Freyr\GalleryBundle\Document\Keyword;
+use Freyr\GalleryBundle\Document\LightroomImage;
+use Freyr\GalleryBundle\Document\LightroomKeyword;
 use Freyr\LightroomParser\Core\Image as CoreImage;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,7 +38,7 @@ class ImageImportCommand extends ContainerAwareCommand {
      */
     private function createImageFromParsedData(CoreImage $coreImage)
     {
-        $image = new Image();
+        $image = new LightroomImage();
         $result = Uploader::upload($coreImage->getImportPath());
         $image->setCloudinaryId($result['public_id']);
         $image->setImportPath($coreImage->getImportPath());
@@ -50,7 +50,7 @@ class ImageImportCommand extends ContainerAwareCommand {
 
         foreach ($coreImage->getKeywords() as $keyword)
         {
-            $image->addKeyword(new Keyword($keyword));
+            $image->addKeyword(new LightroomKeyword($keyword));
         }
 
         return $image;

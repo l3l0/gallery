@@ -9,6 +9,7 @@
 
 namespace Freyr\GalleryBundle\Controller;
 
+use Freyr\GalleryBundle\Document\LightroomKeyword;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -25,12 +26,13 @@ class SinglePhotoController extends Controller {
      */
     public function indexAction($keyword, $imageId)
     {
-        $imageRepository = $this->get('freyr.gallery.repository.image');
-        $image = $imageRepository->getByKeywordAndId($keyword, $imageId);
+        $imageService = $this->get('freyr.gallery.service.image');
+        $keyword = new LightroomKeyword($keyword);
+        $image = $imageService->getImageByKeywordAndId($keyword, $imageId);
 
         return [
             'image' => $image
         ];
     }
 
-} 
+}

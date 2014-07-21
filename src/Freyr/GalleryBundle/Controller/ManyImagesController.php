@@ -1,7 +1,13 @@
 <?php
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Freyr\GalleryBundle\Controller;
-
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,20 +21,11 @@ class ManyImagesController extends Controller {
      */
     public function getImagesByKeywords($keyword)
     {
-        $imageRepository = $this->get('freyr.gallery.repository.image');
-        if (strpos($keyword, ',') != false)
-        {
-            $keywords = explode(',', $keyword);
-        }
-        else
-        {
-            $keywords = [$keyword];
-        }
-        $images = $imageRepository->getByKeywords($keywords);
+        $imageService = $this->get('freyr.gallery.service.image');
+        $images = $imageService->getImagesByKeyword($keyword);
 
         return [
             'images' => $images
-
         ];
     }
 }

@@ -10,13 +10,16 @@
 namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\GalleryCore\Entity\Image;
+use Freyr\GalleryCore\Entity\Keyword as KeywordInterface;
 
 /**
- * Class Keyword
+ * Class LightroomKeyword
  * @package Freyr\GalleryBundle\Document
  * @MongoDB\EmbeddedDocument
  */
-class Keyword {
+class LightroomKeyword implements KeywordInterface
+{
 
     /**
      * @MongoDB\String
@@ -56,7 +59,7 @@ class Keyword {
     /**
      * @param Image $primaryImage
      */
-    public function setPrimaryImage($primaryImage)
+    public function setPrimaryImage(Image $primaryImage)
     {
         $this->primaryImage = $primaryImage;
     }

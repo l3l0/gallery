@@ -1,9 +1,12 @@
 parameters:
-  freyr.gallery.repository.image.class: Freyr\GalleryBundle\Repository\ImageRepository
+  freyr.gallery.repository.image.class: Freyr\GalleryBundle\Repository\MongoDBImageRepository
   freyr.parser.class: Freyr\LightroomImageParser\LightroomImageParser
   freyr.parser.image_factory.class: Freyr\LightroomImageParser\ImageFactory
   freyr.parser.file_parser.class: Freyr\LightroomImageParser\FileParser
   freyr.parser.image.class: Freyr\LightroomImageParser\Core\Image
+  freyr.gallery.keyword.class: Freyr\GalleryBundle\Document\LightroomKeyword
+  freyr.gallery.factory.keyword.class: Freyr\GalleryCore\Service\KeywordFactory
+  freyr.gallery.service.image.class: Freyr\GalleryCore\Service\ImageService
 
 services:
 
@@ -12,7 +15,7 @@ services:
     factory_service: doctrine_mongodb.odm.default_document_manager
     factory_method: getRepository
     arguments:
-      - FreyrGalleryBundle:Image
+      - FreyrGalleryBundle:LightroomImage
 
   freyr.parser.image_factory:
     class: %freyr.parser.image_factory.class%
@@ -29,7 +32,18 @@ services:
       - @freyr.parser.file_parser
       - %freyr_gallery.import_path%
 
-  acme.twig.acme_extension:
+  freyr.gallery.factory.keyword:
+    class: %freyr.gallery.factory.keyword.class%
+    arguments:
+      - freyr.gallery.keyword.class
+
+  freyr.gallery.service.image:
+    class: %freyr.gallery.service.image.class%
+    arguments:
+      - freyr.gallery.repository.image
+      - freyr.gallery.factory.keyword
+
+  freyr.twig.gallery_extension:
     class: Freyr\GalleryBundle\Twig\CloudinaryExtension
     tags:
         - { name: twig.extension }

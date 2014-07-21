@@ -10,13 +10,16 @@
 namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\GalleryCore\Entity\Image;
+use Freyr\GalleryCore\Entity\Keyword;
 
 /**
- * Class Image
+ * Class LightroomImage
  * @package Freyr\GalleryBundle\Document
- * @MongoDB\Document(repositoryClass="Freyr\GalleryBundle\Repository\ImageRepository")
+ * @MongoDB\Document(repositoryClass="Freyr\GalleryBundle\Repository\MongoDBImageRepository")
  */
-class Image {
+class LightroomImage implements Image
+{
 
     /**
      * @MongoDB\Id
@@ -25,7 +28,7 @@ class Image {
     private $id;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="Keyword")
+     * @MongoDB\EmbedMany(targetDocument="LightroomKeyword")
      * @var Keyword[]
      */
     private $keywords = [];
@@ -34,7 +37,7 @@ class Image {
      * @MongoDB\String
      * @var string
      */
-    private $cloudinaryId;
+    private $name;
 
     /**
      * @MongoDB\String
@@ -80,7 +83,7 @@ class Image {
     /**
      * @param Keyword[] $keywords
      */
-    public function setCurrentKeyword($keywords)
+    public function setCurrentKeyword(array $keywords)
     {
         foreach($this->getKeywords() as $keywordEmbed)
         {
@@ -93,19 +96,27 @@ class Image {
     }
 
     /**
-     * @return string
+     * @return Keyword
      */
-    public function getCloudinaryId()
+    public function getCurrentKeyword()
     {
-        return $this->cloudinaryId;
+        return $this->currentKeyword;
     }
 
     /**
-     * @param string $cloudinaryId
+     * @return string
      */
-    public function setCloudinaryId($cloudinaryId)
+    public function getName()
     {
-        $this->cloudinaryId = $cloudinaryId;
+        return $this->name;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setName($imageName)
+    {
+        $this->name = $imageName;
     }
 
     /**
@@ -133,17 +144,17 @@ class Image {
     }
 
     /**
-     * @param $keywords
+     * @param Keyword[] $keywords
      */
-    public function setKeywords($keywords)
+    public function setKeywords(array $keywords)
     {
         $this->keywords = $keywords;
     }
 
     /**
-     * @param $keyword
+     * @param Keyword $keyword
      */
-    public function addKeyword($keyword)
+    public function addKeyword(Keyword $keyword)
     {
         $this->keywords[] = $keyword;
     }
@@ -242,13 +253,5 @@ class Image {
     public function getIso()
     {
         return $this->iso;
-    }
-
-    /**
-     * @return \Freyr\GalleryBundle\Document\Keyword
-     */
-    public function getCurrentKeyword()
-    {
-        return $this->currentKeyword;
     }
 }
