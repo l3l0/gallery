@@ -1,14 +1,18 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+<div id="masonry-container">
     {% for image in images %}
         {% if (image.getCurrentKeyword() is empty) %}
             {% set url = image.getGallery().getName() %}
         {% else %}
             {% set url = image.getCurrentKeyword().getName() %}
         {% endif %}
-        <a href="/{{ url }}/{{ image.getId() }}">
-            <img src="{{ cl(image.getName(), 250) }}" />
-        </a>
+
+
+            <a href="/{{ url }}/{{ image.getId() }}">
+                <img class="masonry-thumb" src="{{ cl(image.getName(), 250) }}" style="margin-right: 10px;margin-bottom: 10px" />
+            </a>
     {% endfor %}
+</div>
 {% endblock %}

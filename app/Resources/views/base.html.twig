@@ -6,12 +6,24 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-        <!-- Bootstrap -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.2.0/cyborg/bootstrap.min.css" />
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
+
+        <script type="text/javascript">
+            jQuery(window).load(function() {
+                jQuery(function(){
+                    jQuery('#masonry-container').masonry({
+                        itemSelector: '.masonry-thumb',
+                        columnWidth: 200
+                    });
+                });
+            });
+        </script>
     </head>
-    <body>
+
+    <body style="background: none repeat scroll 0 0 #f4f3ef;">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
