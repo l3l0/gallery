@@ -12,6 +12,7 @@ namespace Freyr\GalleryBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Freyr\GalleryCore\Entity\Image;
 use Freyr\GalleryCore\Entity\Keyword;
+use Freyr\GalleryCore\Entity\Gallery;
 
 /**
  * Class LightroomImage
@@ -28,8 +29,9 @@ class LightroomImage implements Image
     private $id;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="LightroomKeyword")
-     * @var Keyword
+     * @MongoDB\EmbedOne(targetDocument="LightroomGallery")
+     * @var Gallery
+     * TODO: Refactor names go gallery (find usages and related)
      */
     private $category;
 
@@ -262,17 +264,17 @@ class LightroomImage implements Image
     }
 
     /**
-     * @param Keyword $category
+     * @param Gallery $gallery
      */
-    public function setCategory(Keyword $category)
+    public function setGallery(Gallery $gallery)
     {
-        $this->category = $category;
+        $this->category = $gallery;
     }
 
     /**
-     * @return Keyword
+     * @return Gallery
      */
-    public function getCategory()
+    public function getGallery()
     {
         return $this->category;
     }

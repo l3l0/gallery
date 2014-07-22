@@ -1,6 +1,7 @@
 <?php
 namespace Freyr\GalleryCore\Repository;
 
+use Freyr\GalleryCore\Entity\Gallery;
 use Freyr\GalleryCore\Entity\Image;
 use Freyr\GalleryCore\Entity\Keyword;
 
@@ -30,6 +31,12 @@ interface ImageRepository {
     public function getImagesByKeywords(array $keywords);
 
     /**
+     * @param Gallery $gallery
+     * @return Image[]
+     */
+    public function getImagesByGallery(Gallery $gallery);
+
+    /**
      * @param Image $image
      */
     public function save(Image $image);
@@ -42,14 +49,14 @@ interface ImageRepository {
     public function getRandomImageByKeyword(Keyword $keyword, $randomizedSampleSize);
 
     /**
-     * @param Keyword $keyword
+     * @param Gallery $gallery
      * @param int $randomizedSampleSize
      * @return Image
      */
-    public function getRandomImageByCategory(Keyword $keyword, $randomizedSampleSize);
+    public function getRandomImageByCategory(Gallery $gallery, $randomizedSampleSize);
 
     /**
-     * @return Keyword[]
+     * @return Gallery[]
      */
     public function getAllUniqueCategories();
 }

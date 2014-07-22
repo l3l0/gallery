@@ -8,6 +8,7 @@
  */
 namespace Freyr\GalleryCore\Service;
 
+use Freyr\GalleryCore\Entity\Gallery;
 use Freyr\GalleryCore\Entity\Image;
 use Freyr\GalleryCore\Entity\Keyword;
 use Freyr\GalleryCore\Repository\ImageRepository;
@@ -19,22 +20,28 @@ use Freyr\GalleryCore\Repository\ImageRepository;
 class ImageService {
 
     /**
-     * @var MongoDBImageRepository
+     * @var ImageRepository
      */
     private $imageRepository;
     /**
      * @var KeywordFactory
      */
     private $keywordFactory;
+    /**
+     * @var GalleryFactory
+     */
+    private $galleryFactory;
 
     /**
      * @param ImageRepository $imageRepository
      * @param KeywordFactory $keywordFactory
+     * @param GalleryFactory $galleryFactory
      */
-    public function __construct(ImageRepository $imageRepository, KeywordFactory $keywordFactory)
+    public function __construct(ImageRepository $imageRepository, KeywordFactory $keywordFactory, GalleryFactory $galleryFactory)
     {
         $this->imageRepository = $imageRepository;
         $this->keywordFactory = $keywordFactory;
+        $this->galleryFactory = $galleryFactory;
     }
 
     /**
@@ -61,7 +68,7 @@ class ImageService {
      * @param string $keyword - one keyword or lists of keywords separated by comma.
      * @return Image[]
      */
-    public function getImagesByKeywords($keyword)
+    public function getImagesByKeywordsOrGallery($keyword)
     {
         if (strpos($keyword, ',') != false)
         {
@@ -70,13 +77,20 @@ class ImageService {
             {
                 $keywords[$key] = $this->keywordFactory->create($keyword);
             }
+            return $this->imageRepository->getImagesByKeywords($keywords);
         }
         else
         {
             $keywords = [$this->keywordFactory->create($keyword)];
+            $result = $this->imageRepository->getImagesByKeywords($keywords);
+            if (count($result) <= 0)
+            {
+                $gallery = $this->galleryFactory->create($keyword);
+                $result = $this->imageRepository->getImagesByGallery($gallery);
+            }
         }
 
-        return $this->imageRepository->getImagesByKeywords($keywords);
+        return $result;
     }
 
     /**
@@ -90,23 +104,22 @@ class ImageService {
     }
 
     /**
-     * @return Keyword[]
-     * TODO: This should be category object, not reuse keyword, also refactory this and AllKeyword method... code duplicate smell
+     * @return Gallery[]
      */
     public function getAllCategories()
     {
         $result = $this->imageRepository->getAllUniqueCategories();
-        $keywords = [];
+        $galleries = [];
         foreach ($result as $name)
         {
-            $keyword = $this->keywordFactory->create($name);
-            $image = $this->imageRepository->getRandomImageByCategory($keyword, 10);
-            $image->setCurrentKeyword([$keyword]);
-            $keyword->setPrimaryImage($image);
+            $gallery = $this->galleryFactory->create($name);
+            $image = $this->imageRepository->getRandomImageByCategory($gallery, 10);
+            $image->setCurrentKeyword([$gallery]);
+            $gallery->setPrimaryImage($image);
 
-            $keywords[] = $keyword;
+            $galleries[] = $gallery;
         }
 
-        return $keywords;
+        return $galleries;
     }
 }

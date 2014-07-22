@@ -11,6 +11,7 @@ namespace Freyr\GalleryBundle\Repository;
 
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
+use Freyr\GalleryCore\Entity\Gallery;
 use Freyr\GalleryCore\Entity\Image;
 use Freyr\GalleryCore\Entity\Keyword;
 use Freyr\GalleryCore\Repository\ImageRepository;
@@ -54,14 +55,14 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
     }
 
     /**
-     * @param Keyword $keyword
+     * @param Gallery $gallery
      * @param int $randomizedSampleSize
      * @return Image
      */
-    public function getRandomImageByCategory(Keyword $keyword, $randomizedSampleSize)
+    public function getRandomImageByCategory(Gallery $gallery, $randomizedSampleSize)
     {
         /** @var Cursor $cursor */
-        $images = $this->findBy(['category.name' => $keyword->getName()], ["limit" => $randomizedSampleSize]);
+        $images = $this->findBy(['category.name' => $gallery->getName()], ["limit" => $randomizedSampleSize]);
         return $images[array_rand($images)];
     }
 
@@ -98,13 +99,37 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
     }
 
     /**
-     * @return array
+     * @param Gallery $gallery
+     * @return Image[]
+     */
+    public function getImagesByGallery(Gallery $gallery)
+    {
+        $cursor = $this->createQueryBuilder()
+            ->field('category.name')->equals($gallery->getName())
+            ->getQuery()->execute();
+
+        $images = [];
+        /** @var Image $image */
+        foreach($cursor as $image)
+        {
+            $images[] = $image;
+        }
+
+        return $images;
+    }
+
+    /**
+     * @return Cursor
      */
     public function getAllUniqueCategories()
     {
         return $this->createQueryBuilder()->distinct('category.name')->getQuery()->execute();
     }
 
+    /**
+     * @param Keyword[] $keywords
+     * @return array
+     */
     public function keywordsToArray($keywords)
     {
         $result = [];

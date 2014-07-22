@@ -13,6 +13,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class ManyImagesController
+ * @package Freyr\GalleryBundle\Controller
+ */
 class ManyImagesController extends Controller {
 
     /**
@@ -24,7 +28,7 @@ class ManyImagesController extends Controller {
         $imageService = $this->get('freyr.gallery.service.image');
 
         return [
-            'images' => $imageService->getImagesByKeywords($keyword)
+            'images' => $imageService->getImagesByKeywordsOrGallery($keyword)
         ];
     }
 }

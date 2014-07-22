@@ -5,7 +5,9 @@ parameters:
   freyr.parser.file_parser.class: Freyr\LightroomImageParser\FileParser
   freyr.parser.image.class: Freyr\LightroomImageParser\Core\Image
   freyr.gallery.keyword.class: Freyr\GalleryBundle\Document\LightroomKeyword
+  freyr.gallery.gallery.class: Freyr\GalleryBundle\Document\LightroomGallery
   freyr.gallery.factory.keyword.class: Freyr\GalleryCore\Service\KeywordFactory
+  freyr.gallery.factory.gallery.class: Freyr\GalleryCore\Service\GalleryFactory
   freyr.gallery.service.image.class: Freyr\GalleryCore\Service\ImageService
 
 services:
@@ -37,11 +39,17 @@ services:
     arguments:
       - %freyr.gallery.keyword.class%
 
+  freyr.gallery.factory.gallery:
+      class: %freyr.gallery.factory.gallery.class%
+      arguments:
+        - %freyr.gallery.gallery.class%
+
   freyr.gallery.service.image:
     class: %freyr.gallery.service.image.class%
     arguments:
       - @freyr.gallery.repository.image
       - @freyr.gallery.factory.keyword
+      - @freyr.gallery.factory.gallery
 
   freyr.twig.gallery_extension:
     class: Freyr\GalleryBundle\Twig\CloudinaryExtension

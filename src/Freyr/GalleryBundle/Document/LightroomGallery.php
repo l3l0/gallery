@@ -11,16 +11,15 @@ namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Freyr\GalleryCore\Entity\Image;
-use Freyr\GalleryCore\Entity\Keyword;
+use Freyr\GalleryCore\Entity\Gallery;
 
 /**
  * Class LightroomKeyword
  * @package Freyr\GalleryBundle\Document
  * @MongoDB\EmbeddedDocument
  */
-class LightroomKeyword implements Keyword
+class LightroomGallery implements Gallery
 {
-
     /**
      * @MongoDB\String
      * @var string

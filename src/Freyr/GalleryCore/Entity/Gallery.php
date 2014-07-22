@@ -5,12 +5,12 @@ namespace Freyr\GalleryCore\Entity;
  * Interface Keyword
  * @package Freyr\GalleryCore\Entity
  */
-interface Keyword {
+interface Gallery {
 
     /**
-     * @param string $keywordName
+     * @param string $galleryName
      */
-    public function __construct($keywordName);
+    public function __construct($galleryName);
 
     /**
      * @return string
