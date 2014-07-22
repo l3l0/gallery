@@ -104,6 +104,14 @@ class LightroomImage implements Image
     }
 
     /**
+     * @param Gallery $gallery
+     */
+    public function setGalleryAsKeyword(Gallery $gallery)
+    {
+        $this->currentKeyword = $gallery;
+    }
+
+    /**
      * @return Keyword
      */
     public function getCurrentKeyword()

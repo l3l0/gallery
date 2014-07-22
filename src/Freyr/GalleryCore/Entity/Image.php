@@ -23,6 +23,11 @@ interface Image {
     public function setCurrentKeyword(array $keywords);
 
     /**
+     * @param Gallery $gallery
+     */
+    public function setGalleryAsKeyword(Gallery $gallery);
+
+    /**
      * @return Keyword
      */
     public function getCurrentKeyword();

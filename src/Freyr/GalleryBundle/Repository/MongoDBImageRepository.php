@@ -101,7 +101,7 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
         /** @var Image $image */
         foreach($cursor as $image)
         {
-            $image->setCurrentKeyword($keywords);
+
             $images[] = $image;
         }
 
@@ -111,6 +111,7 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
     /**
      * @param Gallery $gallery
      * @return Image[]
+     * TODO: smell, overcomplicated - check gallery and keywords - maybe can be IS-A?
      */
     public function getImagesByGallery(Gallery $gallery)
     {
@@ -122,6 +123,7 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
         /** @var Image $image */
         foreach($cursor as $image)
         {
+            $image->setGalleryAsKeyword($gallery);
             $images[] = $image;
         }
 

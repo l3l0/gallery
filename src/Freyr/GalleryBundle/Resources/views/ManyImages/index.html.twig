@@ -1,18 +1,22 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<div id="masonry-container">
+    <div class="page-header">
+        <h2>{{ type }} <small>{{ tagName }}</small></h2>
+    </div>
+
+    <div class="row">
     {% for image in images %}
-        {% if (image.getCurrentKeyword() is empty) %}
-            {% set url = image.getGallery().getName() %}
-        {% else %}
-            {% set url = image.getCurrentKeyword().getName() %}
+        {% if (loop.index0 is divisibleby(4)) %}
+        </div>
+        <div class="row">
         {% endif %}
-
-
-            <a href="/{{ url }}/{{ image.getId() }}">
-                <img class="masonry-thumb" src="{{ cl(image.getName(), 250) }}" style="margin-right: 10px;margin-bottom: 10px" />
+        <div class="col-md-3">
+            <a class="fancybox" rel="group" href="{{ cl(image.getName(), 850, false) }}">
+                <img class="thumbnail" src="{{ cl(image.getName(), 250) }}" />
             </a>
+        </div>
     {% endfor %}
-</div>
+    </div>
+
 {% endblock %}

@@ -7,24 +7,23 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.2.0/cyborg/bootstrap.min.css" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.css" />
+
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
-
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
         <script type="text/javascript">
-            jQuery(window).load(function() {
-                jQuery(function(){
-                    jQuery('#masonry-container').masonry({
-                        itemSelector: '.masonry-thumb',
-                        columnWidth: 200
-                    });
-                });
+            $(document).ready(function() {
+                $(".fancybox").fancybox();
             });
         </script>
     </head>
 
-    <body style="background: none repeat scroll 0 0 #f4f3ef;">
+    <body>
+    {% include 'navbar.html.twig' %}
+    <div class="container">
         {% block body %}{% endblock %}
+    </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

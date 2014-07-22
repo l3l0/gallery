@@ -65,32 +65,35 @@ class ImageService {
     }
 
     /**
-     * @param string $keyword - one keyword or lists of keywords separated by comma.
+     * @param string $keywordsName - one keyword or lists of keywords separated by comma.
      * @return Image[]
      */
-    public function getImagesByKeywordsOrGallery($keyword)
+    public function getImagesByKeywords($keywordsName)
     {
-        if (strpos($keyword, ',') != false)
+        if (strpos($keywordsName, ',') != false)
         {
-            $keywords = explode(',', $keyword);
-            foreach ($keywords as $key => $keyword)
+            $keywords = explode(',', $keywordsName);
+            foreach ($keywords as $key => $keywordsName)
             {
-                $keywords[$key] = $this->keywordFactory->create($keyword);
+                $keywords[$key] = $this->keywordFactory->create($keywordsName);
             }
-            return $this->imageRepository->getImagesByKeywords($keywords);
         }
         else
         {
-            $keywords = [$this->keywordFactory->create($keyword)];
-            $result = $this->imageRepository->getImagesByKeywords($keywords);
-            if (count($result) <= 0)
-            {
-                $gallery = $this->galleryFactory->create($keyword);
-                $result = $this->imageRepository->getImagesByGallery($gallery);
-            }
+            $keywords = [$this->keywordFactory->create($keywordsName)];
         }
 
-        return $result;
+        return $this->imageRepository->getImagesByKeywords($keywords);
+    }
+
+    /**
+     * @param $galleryName
+     * @return Image[]
+     */
+    public function getImagesByGallery($galleryName)
+    {
+        $gallery = $this->galleryFactory->create($galleryName);
+        return $this->imageRepository->getImagesByGallery($gallery);
     }
 
     /**

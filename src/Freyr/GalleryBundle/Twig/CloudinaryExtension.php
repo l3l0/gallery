@@ -27,13 +27,19 @@ class CloudinaryExtension extends \Twig_Extension {
     /**
      * @param string $publicId
      * @param int $height
-     * @param int $width
+     * @param bool $thumb
      * @return string
      */
-    public function cloudinaryFunction($publicId, $height = 0, $width = 0)
+    public function cloudinaryFunction($publicId, $height = 0, $thumb = true)
     {
         $params = [];
-        ($width === 0) ?: $params['width'] = $width;
+        if ($thumb === true)
+        {
+            $params['width'] = $height;
+            $params['height'] = $height;
+            $params['crop'] = 'fill';
+            $params['gravity'] = 'faces';
+        }
         ($height === 0) ?: $params['height'] = $height;
         return cloudinary_url($publicId, $params);
     }
@@ -46,4 +52,4 @@ class CloudinaryExtension extends \Twig_Extension {
         return 'cloudinary_extension';
     }
 
-} 
+}

@@ -26,9 +26,22 @@ class ManyImagesController extends Controller {
     public function getImagesByKeywords($keyword)
     {
         $imageService = $this->get('freyr.gallery.service.image');
+        $images = $imageService->getImagesByKeywords($keyword);
+
+        if (count($images) <= 0 )
+        {
+            $type = 'Gallery';
+            $images = $imageService->getImagesByGallery($keyword);
+        }
+        else
+        {
+            $type = 'Tag';
+        }
 
         return [
-            'images' => $imageService->getImagesByKeywordsOrGallery($keyword)
+            'images' => $images,
+            'type' => $type,
+            'tagName' => $keyword
         ];
     }
 }
