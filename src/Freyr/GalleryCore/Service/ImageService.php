@@ -94,13 +94,21 @@ class ImageService {
     }
 
     /**
-     * @param Keyword $keyword
-     * @param $imageId
+     * @param string $name
+     * @param string $imageId
      * @return Image
      */
-    public function getImageByKeywordAndId(Keyword $keyword, $imageId)
+    public function getImageByKeywordAndId($name, $imageId)
     {
-        return $this->imageRepository->getImageByKeywordAndId($keyword, $imageId);
+        $keyword = $this->keywordFactory->create($name);
+        $result = $this->imageRepository->getImageByKeywordAndId($keyword, $imageId);
+        if (empty($result))
+        {
+            $gallery = $this->galleryFactory->create($name);
+            $result = $this->imageRepository->getImageByGalleryAndId($gallery, $imageId);
+        }
+
+        return $result;
     }
 
     /**

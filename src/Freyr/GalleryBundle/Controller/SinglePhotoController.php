@@ -27,7 +27,6 @@ class SinglePhotoController extends Controller {
     public function indexAction($keyword, $imageId)
     {
         $imageService = $this->get('freyr.gallery.service.image');
-        $keyword = new LightroomKeyword($keyword);
         $image = $imageService->getImageByKeywordAndId($keyword, $imageId);
 
         return [

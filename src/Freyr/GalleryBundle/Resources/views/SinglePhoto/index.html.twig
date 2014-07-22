@@ -1,1 +1,5 @@
-<img src="{{ cl(image.cloudinaryId, 650) }}">
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <img src="{{ cl(image.getName(), 650) }}">
+{% endblock %}

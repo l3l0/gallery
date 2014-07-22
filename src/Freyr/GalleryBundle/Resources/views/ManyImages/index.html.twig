@@ -1,12 +1,14 @@
--
-{% for image in images %}
-    {% if (image.getCurrentKeyword() is empty) %}
-        {% set url = image.getGallery().getName() %}
-    {% else %}
-        {% set url = image.getCurrentKeyword().getName() %}
-    {% endif %}
-    <a href="/{{ url }}/{{ image.getId() }}">
-        <img src="{{ cl(image.getName(), 250) }}" />
-    </a>
-{% endfor %}
---
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% for image in images %}
+        {% if (image.getCurrentKeyword() is empty) %}
+            {% set url = image.getGallery().getName() %}
+        {% else %}
+            {% set url = image.getCurrentKeyword().getName() %}
+        {% endif %}
+        <a href="/{{ url }}/{{ image.getId() }}">
+            <img src="{{ cl(image.getName(), 250) }}" />
+        </a>
+    {% endfor %}
+{% endblock %}

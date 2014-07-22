@@ -1,6 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    <div class="page-header">
+        <h2>Galleries <small>freyr photography</small></h2>
+    </div>
     <div class="row">
     {% for keyword in categories %}
         {% if (loop.index0 is divisibleby(4)) %}
@@ -19,6 +22,9 @@
     </div>
 
     <div class="row">
+        <div class="page-header">
+            <h2>Tags <small>freyr photography</small></h2>
+        </div>
     {% for keyword in keywords %}
         {% if (loop.index0 is divisibleby(4)) %}
             </div>

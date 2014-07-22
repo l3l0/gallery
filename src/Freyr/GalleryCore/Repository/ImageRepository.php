@@ -20,6 +20,13 @@ interface ImageRepository {
     public function getImageByKeywordAndId(Keyword $keyword, $imageId);
 
     /**
+     * @param Gallery $gallery
+     * @param string $imageId
+     * @return Image
+     */
+    public function getImageByGalleryAndId(Gallery $gallery, $imageId);
+
+    /**
      * @return Keyword[]
      */
     public function getAllUniqueKeywords();

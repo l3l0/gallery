@@ -77,6 +77,16 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
     }
 
     /**
+     * @param Gallery $gallery
+     * @param string $imageId
+     * @return Image
+     */
+    public function getImageByGalleryAndId(Gallery $gallery, $imageId)
+    {
+        return $this->findOneBy(["category.name" => $gallery->getName(), "id" => new \MongoId($imageId)]);
+    }
+
+    /**
      * @param Keyword[] $keywords
      * @return Image[]
      */
