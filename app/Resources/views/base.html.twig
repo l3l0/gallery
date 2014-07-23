@@ -12,13 +12,13 @@
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+        {#<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>#}
 
-        {#{% block javascripts %}#}
-            {#{% javascripts '@FreyrGalleryBundle/Resources/public/js/jquery.lazyload.min.js' %}#}
-                {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
-            {#{% endjavascripts %}#}
-        {#{% endblock %}#}
+        {% block javascripts %}
+            {% javascripts '@FreyrGalleryBundle/Resources/public/js/jquery.lazyload.min.js' %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
 
         <script type="text/javascript">
             $(document).ready(function() {
