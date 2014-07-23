@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ManyImagesController extends Controller {
 
     /**
-     * @Route("/{keyword}")
+     * @Route("/tags/{keyword}", name="tag")
      * @Template("FreyrGalleryBundle:ManyImages:index.html.twig")
      */
     public function getImagesByKeywords($keyword)
