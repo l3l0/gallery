@@ -41,7 +41,7 @@ class CloudinaryExtension extends \Twig_Extension {
             $params['gravity'] = 'faces';
         }
         ($height === 0) ?: $params['height'] = $height;
-        return cloudinary_url($publicId, $params);
+        return cloudinary_url($publicId, $params) . '.jpg';
     }
 
     /**
