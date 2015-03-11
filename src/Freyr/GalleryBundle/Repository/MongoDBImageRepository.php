@@ -35,6 +35,7 @@ class MongoDBImageRepository extends DocumentRepository implements ImageReposito
 
     /**
      * @param Image $image
+     * TODO: Refactor - flush at the end of process, not for every image separatelly.
      */
     public function save(Image $image)
     {

@@ -1,8 +1,12 @@
 {
     "name": "freyr/gallery",
     "license": "MIT",
-    "type": "project",
+    "type": "project-private",
     "description": "Online photo album",
+    "repositories": [
+            {"type": "composer", "url": "http://toran.grlab.new/repo/packagist/"},
+        {"packagist": false}
+    ],
     "autoload": {
         "psr-0": {
             "": "src/",
@@ -17,12 +21,12 @@
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev",
         "twig/extensions": "=1.0.1",
-        "symfony/assetic-bundle": "~2.3",
+        "symfony/assetic-bundle": "=2.6.1",
         "symfony/swiftmailer-bundle": "=2.3.7",
         "symfony/monolog-bundle": "=2.6.0",
         "sensio/distribution-bundle": "=3.0.1",
         "sensio/framework-extra-bundle": "=3.0.1",
-        "sensio/generator-bundle": "2.3.*",
+        "sensio/generator-bundle": "=2.3.5",
         "incenteev/composer-parameter-handler": "=2.1.0",
         "freyr/lightroom-image-parser": "dev-master",
         "cloudinary/cloudinary_php": "dev-master",
@@ -34,7 +38,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "dflydev/markdown": "~1.0",
+        "michelf/php-markdown": "=1.5.0",
         "phpspec/nyan-formatters": "~1.0"
     },
     "minimum-stability": "dev",

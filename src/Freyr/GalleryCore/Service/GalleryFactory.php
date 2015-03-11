@@ -5,7 +5,7 @@ use Freyr\GalleryCore\Entity\Gallery;
 
 /**
  * Class GalleryFactory
- * @package Freyr\GalleryBundle\Service
+ * @package Freyr\GalleryCore\Service
  */
 class GalleryFactory {
 

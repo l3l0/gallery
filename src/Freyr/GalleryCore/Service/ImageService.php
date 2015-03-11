@@ -15,7 +15,7 @@ use Freyr\GalleryCore\Repository\ImageRepository;
 
 /**
  * Class ImageService
- * @package Freyr\GalleryBundle\Service
+ * @package Freyr\GalleryCore\Service
  */
 class ImageService {
 

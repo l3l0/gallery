@@ -5,7 +5,7 @@ use Freyr\GalleryCore\Entity\Keyword;
 
 /**
  * Class KeywordFactory
- * @package Freyr\GalleryBundle\Service
+ * @package Freyr\GalleryCore\Service
  */
 class KeywordFactory {
 
