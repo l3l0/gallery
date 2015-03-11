@@ -4,7 +4,7 @@
     "type": "project-private",
     "description": "Online photo album",
     "repositories": [
-            {"type": "composer", "url": "http://toran.grlab.new/repo/packagist/"},
+        {"type": "composer", "url": "http://toran.grlab.new/repo/packagist/"},
         {"packagist": false}
     ],
     "autoload": {

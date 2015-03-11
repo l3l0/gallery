@@ -33,4 +33,13 @@ class HomeController extends Controller {
             'categories' => $imageService->getAllCategories()
         ];
     }
+
+    /**
+     * @Route("/about")
+     * @Template("FreyrGalleryBundle:Home:about.html.twig")
+     */
+    public function getAboutAction()
+    {
+
+    }
 }
