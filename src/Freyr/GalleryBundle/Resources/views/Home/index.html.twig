@@ -31,7 +31,7 @@
             <div class="row">
         {% endif %}
         <div class="col-md-3">
-            <a href="/{{ keyword.name|e }}">
+            <a href="{{ path('tag', {'keyword': keyword.getName()}) }}">
                 <img class="thumbnail" src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" data-src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" alt="..." />
             </a>
             <div class="caption">
