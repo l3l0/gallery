@@ -40,6 +40,6 @@ class HomeController extends Controller {
      */
     public function getAboutAction()
     {
-        return '';
+        return ['page' => 'about'];
     }
 }
