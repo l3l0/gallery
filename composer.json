@@ -1,47 +1,50 @@
 {
     "name": "freyr/gallery",
     "license": "MIT",
-    "type": "project-private",
+    "type": "project",
     "description": "Online photo album",
     "repositories": [
-        {"type": "composer", "url": "http://toran.grlab.new/repo/packagist/"},
-        {"packagist": false}
+        {
+            "type": "composer",
+            "url": "http://toran.grlab.new/repo/packagist/"
+        },
+        {
+            "packagist": false
+        }
     ],
     "autoload": {
         "psr-0": {
-            "": "src/",
             "SymfonyStandard": "app/"
+        },
+        "psr-4": {
+            "Freyr\\": "src/",
+            "Tests\\Freyr\\": "tests/"
         }
     },
     "require": {
         "php": "~5.4",
-        "symfony/symfony": "=2.5.0",
-        "doctrine/orm": "=2.4.3",
-        "doctrine/doctrine-bundle": "=1.2.0",
-        "doctrine/mongodb-odm": "1.0.*@dev",
-        "doctrine/mongodb-odm-bundle": "3.0.*@dev",
-        "twig/extensions": "=1.0.1",
-        "symfony/assetic-bundle": "=2.6.1",
-        "symfony/swiftmailer-bundle": "=2.3.7",
-        "symfony/monolog-bundle": "=2.6.0",
-        "sensio/distribution-bundle": "=3.0.1",
-        "sensio/framework-extra-bundle": "=3.0.1",
-        "sensio/generator-bundle": "=2.3.5",
-        "incenteev/composer-parameter-handler": "=2.1.0",
-        "freyr/lightroom-image-parser": "dev-master",
-        "cloudinary/cloudinary_php": "dev-master",
+        "symfony/symfony": "2.5.0",
+        "doctrine/orm": "2.4.3",
+        "doctrine/doctrine-bundle": "1.2.0",
+        "doctrine/mongodb-odm": "1.0.0-BETA12",
+        "doctrine/mongodb-odm-bundle": "3.0.0-BETA6",
+        "twig/extensions": "1.0.1",
+        "symfony/assetic-bundle": "2.6.1",
+        "symfony/swiftmailer-bundle": "2.3.7",
+        "symfony/monolog-bundle": "2.6.0",
+        "sensio/distribution-bundle": "3.0.1",
+        "sensio/framework-extra-bundle": "3.0.1",
+        "sensio/generator-bundle": "2.3.5",
+        "incenteev/composer-parameter-handler": "2.1.0",
+        "freyr/lightroom-image-parser": "0.1.2",
+        "cloudinary/cloudinary_php": "1.0.17",
         "ext-exif": "*",
         "ext-gd":"*",
         "ext-intl": "*",
         "ext-mongo": "*",
         "ext-json": "*"
     },
-    "require-dev": {
-        "phpspec/phpspec": "~2.0",
-        "michelf/php-markdown": "=1.5.0",
-        "phpspec/nyan-formatters": "~1.0"
-    },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
@@ -74,9 +77,6 @@
         "symfony-assets-install": "symlink",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "master"
         }
     }
 }

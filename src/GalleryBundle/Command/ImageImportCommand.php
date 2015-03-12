@@ -6,6 +6,7 @@ use Freyr\GalleryBundle\Document\LightroomImage;
 use Freyr\GalleryBundle\Document\LightroomKeyword;
 use Freyr\GalleryCore\Entity\Keyword;
 use Freyr\LightroomImageParser\Core\Image as CoreImage;
+use Freyr\LightroomImageParser\LightroomImageParser;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,6 +24,7 @@ class ImageImportCommand extends ContainerAwareCommand {
         var_dump(getenv('CLOUDINARY_URL'));
         var_dump($this->getContainer()->getParameter('mongohq.url'));
 
+        /** @var LightroomImageParser $parser */
         $parser = $this->getContainer()->get('freyr.parser');
         $parsedImages = $parser->parse();
         $imageRepository = $this->getContainer()->get('freyr.gallery.repository.image');
