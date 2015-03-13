@@ -5,17 +5,17 @@
         <h2>Galleries <small>freyr photography</small></h2>
     </div>
     <div class="row">
-    {% for keyword in categories %}
+    {% for gallery in galleries %}
         {% if (loop.index0 is divisibleby(4)) %}
             </div>
             <div class="row">
         {% endif %}
         <div class="col-md-3">
-            <a href="{{ path('tag', {'keyword': keyword.getName()}) }}">
-                <img class="thumbnail" src="{{ cl(keyword.getPrimaryImage().getName(), 250, true) }}" data-src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" alt="..." />
+            <a href="{{ path('gallery', {'name': gallery.getName()}) }}">
+                <img class="thumbnail" src="{{ cl(gallery.getPrimaryImage().getName(), 250, true) }}" data-src="{{ cl(gallery.getPrimaryImage().getName(), 250) }}" alt="..." />
             </a>
             <div class="caption">
-                <h3 class="text-center">{{ keyword.name|e }}</h3>
+                <h3 class="text-center">{{ gallery.name|e }}</h3>
             </div>
         </div>
     {% endfor %}
@@ -25,17 +25,17 @@
         <h2>Tags <small>freyr photography</small></h2>
     </div>
     <div class="row">
-    {% for keyword in keywords %}
+    {% for tag in tags %}
         {% if (loop.index0 is divisibleby(4)) %}
             </div>
             <div class="row">
         {% endif %}
         <div class="col-md-3">
-            <a href="{{ path('tag', {'keyword': keyword.getName()}) }}">
-                <img class="thumbnail" src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" data-src="{{ cl(keyword.getPrimaryImage().getName(), 250) }}" alt="..." />
+            <a href="{{ path('tag', {'name': tag.getName()}) }}">
+                <img class="thumbnail" src="{{ cl(tag.getPrimaryImage().getName(), 250) }}" data-src="{{ cl(tag.getPrimaryImage().getName(), 250) }}" alt="..." />
             </a>
             <div class="caption">
-                <h3 class="text-center">{{ keyword.name|e }}</h3>
+                <h3 class="text-center">{{ tag.name|e }}</h3>
             </div>
         </div>
     {% endfor %}

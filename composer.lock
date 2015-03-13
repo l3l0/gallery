@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5e90aad9f623224ebb73fce1a408c5e0",
+    "hash": "6693d6e1987f293cde7c1b23928083c6",
     "packages": [
         {
             "name": "cloudinary/cloudinary_php",
@@ -1078,66 +1078,6 @@
                 "orm"
             ],
             "time": "2014-06-10 11:49:08"
-        },
-        {
-            "name": "freyr/lightroom-image-parser",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/freyr/lightroom-image-parser.git",
-                "reference": "01a51b5b773a78d4e4efcfd9ba73a5eff321a2c1",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/freyr/lightroom-image-parser/zipball/01a51b5b773a78d4e4efcfd9ba73a5eff321a2c1",
-                "reference": "01a51b5b773a78d4e4efcfd9ba73a5eff321a2c1",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://toran.grlab.new/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "ext-exif": "*",
-                "ext-gd": "*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Freyr\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michał Giergielewicz",
-                    "email": "michal@giergielewicz.pl",
-                    "homepage": "https://github.com/freyr/lightroom-image-parser"
-                }
-            ],
-            "description": "Lightroom Image parsing",
-            "homepage": "https://github.com/freyr/lightroom-image-parser",
-            "keywords": [
-                "image",
-                "keywords",
-                "lightroom"
-            ],
-            "time": "2015-03-12 12:44:20"
         },
         {
             "name": "incenteev/composer-parameter-handler",

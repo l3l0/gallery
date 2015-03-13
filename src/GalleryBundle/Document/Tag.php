@@ -10,15 +10,13 @@
 namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Freyr\GalleryCore\Entity\Image;
-use Freyr\GalleryCore\Entity\Keyword;
 
 /**
- * Class LightroomKeyword
+ * Class Tag
  * @package Freyr\GalleryBundle\Document
  * @MongoDB\EmbeddedDocument
  */
-class LightroomKeyword implements Keyword
+class Tag
 {
 
     /**
@@ -28,16 +26,16 @@ class LightroomKeyword implements Keyword
     private $name;
 
     /**
-     * @var Image
+     * @var Photo
      */
-    private $primaryImage;
+    private $primaryPhoto;
 
     /**
      * @param string $name
      */
     public function __construct($name)
     {
-        $this->name = str_replace(' ', '-', $name);
+        $this->name = strtolower(str_replace(' ', '-', $name));
     }
 
     /**
@@ -49,18 +47,18 @@ class LightroomKeyword implements Keyword
     }
 
     /**
-     * @return Image
+     * @return Photo
      */
-    public function getPrimaryImage()
+    public function getPrimaryPhoto()
     {
-        return $this->primaryImage;
+        return $this->primaryPhoto;
     }
 
     /**
-     * @param Image $primaryImage
+     * @param Photo $primaryPhoto
      */
-    public function setPrimaryImage(Image $primaryImage)
+    public function setPrimaryPhoto(Photo $primaryPhoto)
     {
-        $this->primaryImage = $primaryImage;
+        $this->primaryPhoto = $primaryPhoto;
     }
 }

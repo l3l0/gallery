@@ -6,38 +6,33 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\GalleryBundle\Controller;
 
+use Freyr\GalleryBundle\Document\Gallery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class HomeController
+ * Class GalleryController
  * @package Freyr\GalleryBundle\Controller
  */
-class HomeController extends Controller {
+class GalleryController extends Controller {
 
     /**
-     * @Route("/")
-     * @Template("FreyrGalleryBundle:Home:index.html.twig")
+     * @Route("/gallery/{name}", name="gallery")
+     * @Template("FreyrGalleryBundle:Gallery:index.html.twig")
      */
-    public function getHomeAction()
+    public function getPhotos($name)
     {
         $imageService = $this->get('freyr.gallery.service.photo');
+        $gallery = new Gallery($name);
+        $photos = $imageService->getPhotosFromGallery($gallery);
 
         return [
-            'galleries' => $imageService->getGalleryListWithPrimaryPhoto(),
-            'tags' => $imageService->getTagsListWithPrimaryPhoto()
+            'photos' => $photos,
+            'gallery' => $gallery
         ];
-    }
-
-    /**
-     * @Route("/about")
-     * @Template("FreyrGalleryBundle:Home:about.html.twig")
-     */
-    public function getAboutAction()
-    {
-        return ['page' => 'about'];
     }
 }
