@@ -10,6 +10,7 @@
 namespace Freyr\GalleryBundle\Controller;
 
 use Freyr\GalleryBundle\Document\Gallery;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,7 +24,10 @@ class GalleryController extends Controller
 
     /**
      * @Route("/gallery/{name}", name="gallery")
+     * @Method("GET")
      * @Template("FreyrGalleryBundle:Gallery:index.html.twig")
+     * @param $name
+     * @return array
      */
     public function getPhotosAction($name)
     {

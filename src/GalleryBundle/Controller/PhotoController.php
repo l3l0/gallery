@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PhotoController extends Controller {
 
     /**
-     * @Route("/api/photo")
+     * @Route("/api/photo", name="api.photo")
      * @Method("POST")
      * @param Request $request
      * @return JsonResponse

@@ -8,6 +8,7 @@
  */
 namespace Freyr\GalleryBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,7 +20,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class HomeController extends Controller {
 
     /**
-     * @Route("/")
+     * @Route("/", name="home")
+     * @Method("GET")
      * @Template("FreyrGalleryBundle:Home:index.html.twig")
      */
     public function getHomeAction()
@@ -33,7 +35,8 @@ class HomeController extends Controller {
     }
 
     /**
-     * @Route("/about")
+     * @Route("/about", name="about")
+     * @Method("GET")
      * @Template("FreyrGalleryBundle:Home:about.html.twig")
      */
     public function getAboutAction()
