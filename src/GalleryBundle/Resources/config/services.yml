@@ -1,4 +1,5 @@
 parameters:
+  doctrine.orm.metadata.driver_chain.class: Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain
 
 services:
   freyr.gallery.storage.photo:
