@@ -6,10 +6,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\Tests\GalleryCore\Service;
+namespace Freyr\Tests\Service;
 
-use Freyr\Tests\GalleryCore\GalleryCoreTestCase;
+use Freyr\Tests\FreyrTestCase;
 
-class ServiceTestCase extends GalleryCoreTestCase {
+/**
+ * Class ServiceTestCase
+ * @package Freyr\Tests\Service
+ */
+class ServiceTestCase extends FreyrTestCase
+{
 
 }

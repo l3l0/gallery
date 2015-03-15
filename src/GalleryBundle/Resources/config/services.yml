@@ -1,57 +1,26 @@
 parameters:
-  freyr.gallery.repository.image.class: Freyr\GalleryBundle\Repository\MongoDBImageRepository
-  freyr.parser.class: Freyr\LightroomImageParser\LightroomImageParser
-  freyr.parser.image_factory.class: Freyr\LightroomImageParser\ImageFactory
-  freyr.parser.file_parser.class: Freyr\LightroomImageParser\FileParser
-  freyr.parser.image.class: Freyr\LightroomImageParser\Core\Image
-  freyr.gallery.keyword.class: Freyr\GalleryBundle\Document\LightroomKeyword
-  freyr.gallery.gallery.class: Freyr\GalleryBundle\Document\LightroomGallery
-  freyr.gallery.factory.keyword.class: Freyr\GalleryCore\Service\KeywordFactory
-  freyr.gallery.factory.gallery.class: Freyr\GalleryCore\Service\GalleryFactory
-  freyr.gallery.service.image.class: Freyr\GalleryCore\Service\ImageService
 
 services:
+  freyr.gallery.storage.photo:
+    class: Freyr\GalleryBundle\Repository\CloudinaryPhotoStorage
 
-  freyr.gallery.repository.image:
-    class: %freyr.gallery.repository.image.class%
+  freyr.gallery.repository.photo:
+    class: Freyr\GalleryBundle\Repository\MongoDBPhotoRepository
     factory_service: doctrine_mongodb.odm.default_document_manager
     factory_method: getRepository
     arguments:
-      - FreyrGalleryBundle:LightroomImage
+      - FreyrGalleryBundle:Photo
 
-  freyr.parser.image_factory:
-    class: %freyr.parser.image_factory.class%
-    arguments:
-      - %freyr.parser.image.class%
+  freyr.gallery.service.photo:
+    class: Freyr\GalleryBundle\Service\PhotoService
+    arguments: [ @freyr.gallery.repository.photo ]
 
-  freyr.parser.file_parser:
-    class: %freyr.parser.file_parser.class%
-
-  freyr.parser:
-    class: %freyr.parser.class%
-    arguments:
-      - @freyr.parser.image_factory
-      - @freyr.parser.file_parser
-      - %freyr_gallery.import_path%
-
-  freyr.gallery.factory.keyword:
-    class: %freyr.gallery.factory.keyword.class%
-    arguments:
-      - %freyr.gallery.keyword.class%
-
-  freyr.gallery.factory.gallery:
-      class: %freyr.gallery.factory.gallery.class%
-      arguments:
-        - %freyr.gallery.gallery.class%
-
-  freyr.gallery.service.image:
-    class: %freyr.gallery.service.image.class%
-    arguments:
-      - @freyr.gallery.repository.image
-      - @freyr.gallery.factory.keyword
-      - @freyr.gallery.factory.gallery
+  freyr.gallery.service.photo.raw:
+    class: Freyr\GalleryBundle\Service\RawPhotoService
+    arguments: [ @freyr.gallery.repository.photo, @freyr.gallery.storage.photo ]
 
   freyr.twig.gallery_extension:
     class: Freyr\GalleryBundle\Twig\CloudinaryExtension
     tags:
-        - { name: twig.extension }
+      - { name: twig.extension }
+

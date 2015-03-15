@@ -10,15 +10,13 @@
 namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Freyr\GalleryCore\Entity\Image;
-use Freyr\GalleryCore\Entity\Gallery;
 
 /**
- * Class LightroomKeyword
+ * Class Gallery
  * @package Freyr\GalleryBundle\Document
  * @MongoDB\EmbeddedDocument
  */
-class LightroomGallery implements Gallery
+class Gallery
 {
     /**
      * @MongoDB\String
@@ -27,7 +25,7 @@ class LightroomGallery implements Gallery
     private $name;
 
     /**
-     * @var Image
+     * @var Photo
      */
     private $primaryImage;
 
@@ -36,7 +34,7 @@ class LightroomGallery implements Gallery
      */
     public function __construct($name)
     {
-        $this->name = str_replace(' ', '-', $name);
+        $this->name = strtolower(str_replace(' ', '-', $name));
     }
 
     /**
@@ -48,7 +46,7 @@ class LightroomGallery implements Gallery
     }
 
     /**
-     * @return Image
+     * @return Photo
      */
     public function getPrimaryImage()
     {
@@ -56,9 +54,9 @@ class LightroomGallery implements Gallery
     }
 
     /**
-     * @param Image $primaryImage
+     * @param Photo $primaryImage
      */
-    public function setPrimaryImage(Image $primaryImage)
+    public function setPrimaryImage(Photo $primaryImage)
     {
         $this->primaryImage = $primaryImage;
     }

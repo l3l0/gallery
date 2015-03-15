@@ -6,20 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Freyr\GalleryCore\Entity\Image;
-use Freyr\GalleryCore\Entity\Keyword;
-use Freyr\GalleryCore\Entity\Gallery;
+use JsonSerializable;
 
 /**
- * Class LightroomImage
+ * Class Photo
  * @package Freyr\GalleryBundle\Document
- * @MongoDB\Document(repositoryClass="Freyr\GalleryBundle\Repository\MongoDBImageRepository")
+ * @MongoDB\Document(repositoryClass="Freyr\GalleryBundle\Repository\MongoDBPhotoRepository")
  */
-class LightroomImage implements Image
+class Photo implements JsonSerializable
 {
 
     /**
@@ -29,29 +26,28 @@ class LightroomImage implements Image
     private $id;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="LightroomGallery")
+     * @MongoDB\EmbedOne(targetDocument="Gallery")
      * @var Gallery
-     * TODO: Refactor names go gallery (find usages and related)
      */
-    private $category;
+    private $gallery;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="LightroomKeyword")
-     * @var Keyword[]
+     * @MongoDB\EmbedOne(targetDocument="Property")
+     * @var Property
      */
-    private $keywords = [];
+    private $property;
+
+    /**
+     * @MongoDB\EmbedMany(targetDocument="Tag")
+     * @var Tag[]
+     */
+    private $tags = [];
 
     /**
      * @MongoDB\String
      * @var string
      */
     private $name;
-
-    /**
-     * @MongoDB\String
-     * @var string
-     */
-    private $importPath;
 
     /**
      * @MongoDB\String
@@ -84,55 +80,49 @@ class LightroomImage implements Image
     private $focalLength;
 
     /**
-     * @var Keyword
+     * @MongoDB\String
+     * @var string
      */
-    private $currentKeyword;
-
-    /**
-     * @param Keyword[] $keywords
-     */
-    public function setCurrentKeyword(array $keywords)
-    {
-        foreach($this->getKeywords() as $keywordEmbed)
-        {
-            if (in_array($keywordEmbed->getName(), $keywords))
-            {
-                $this->currentKeyword = $keywordEmbed;
-                break;
-            }
-        }
-    }
+    private $currentTag;
 
     /**
      * @param Gallery $gallery
      */
-    public function setGalleryAsKeyword(Gallery $gallery)
+    public function setGallery(Gallery $gallery)
     {
-        $this->currentKeyword = $gallery;
+        $this->gallery = $gallery;
     }
 
     /**
-     * @return Keyword
+     * @return Gallery
      */
-    public function getCurrentKeyword()
+    public function getGallery()
     {
-        return $this->currentKeyword;
+        return $this->gallery;
     }
 
     /**
-     * @return string
+     * @return Property
      */
-    public function getName()
+    public function getProperty()
     {
-        return $this->name;
+        return $this->property;
     }
 
     /**
-     * @param string $imageName
+     * @param Property $property
      */
-    public function setName($imageName)
+    public function setProperty($property)
     {
-        $this->name = $imageName;
+        $this->property = $property;
+    }
+
+    /**
+     * @return Tag
+     */
+    public function getCurrentTag()
+    {
+        return $this->currentTag;
     }
 
     /**
@@ -144,35 +134,51 @@ class LightroomImage implements Image
     }
 
     /**
-     * @param string $id
+     * @param string $photoId
      */
-    public function setId($id)
+    public function setId($photoId)
     {
-        $this->id = $id;
+        $this->id = $photoId;
     }
 
     /**
-     * @return Keyword[]
+     * @param string $photoName
      */
-    public function getKeywords()
+    public function setName($photoName)
     {
-        return $this->keywords;
+        $this->name = $photoName;
     }
 
     /**
-     * @param Keyword[] $keywords
+     * @return string
      */
-    public function setKeywords(array $keywords)
+    public function getName()
     {
-        $this->keywords = $keywords;
+        return $this->name;
     }
 
     /**
-     * @param Keyword $keyword
+     * @return Tag[]
      */
-    public function addKeyword(Keyword $keyword)
+    public function getTags()
     {
-        $this->keywords[] = $keyword;
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
     }
 
     /**
@@ -240,22 +246,6 @@ class LightroomImage implements Image
     }
 
     /**
-     * @param string $importPath
-     */
-    public function setImportPath($importPath)
-    {
-        $this->importPath = $importPath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImportPath()
-    {
-        return $this->importPath;
-    }
-
-    /**
      * @param string $iso
      */
     public function setIso($iso)
@@ -272,18 +262,18 @@ class LightroomImage implements Image
     }
 
     /**
-     * @param Gallery $gallery
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
      */
-    public function setGallery(Gallery $gallery)
+    function jsonSerialize()
     {
-        $this->category = $gallery;
+        return [
+            "name" => $this->name
+        ];
     }
 
-    /**
-     * @return Gallery
-     */
-    public function getGallery()
-    {
-        return $this->category;
-    }
+
 }

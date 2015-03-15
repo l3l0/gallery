@@ -6,38 +6,33 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\GalleryBundle\Controller;
 
+use Freyr\GalleryBundle\Document\TagCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class HomeController
+ * Class TagController
  * @package Freyr\GalleryBundle\Controller
  */
-class HomeController extends Controller {
+class TagController extends Controller {
 
     /**
-     * @Route("/")
-     * @Template("FreyrGalleryBundle:Home:index.html.twig")
+     * @Route("/tag/{name}", name="tag")
+     * @Template("FreyrGalleryBundle:Tag:index.html.twig")
      */
-    public function getHomeAction()
+    public function getPhotos($name)
     {
         $imageService = $this->get('freyr.gallery.service.photo');
+        $tags = new TagCollection($name);
+        $photos = $imageService->getPhotosByTags($tags);
 
         return [
-            'galleries' => $imageService->getGalleryListWithPrimaryPhoto(),
-            'tags' => $imageService->getTagsListWithPrimaryPhoto()
+            'photos' => $photos,
+            'tags' => $tags
         ];
-    }
-
-    /**
-     * @Route("/about")
-     * @Template("FreyrGalleryBundle:Home:about.html.twig")
-     */
-    public function getAboutAction()
-    {
-        return ['page' => 'about'];
     }
 }

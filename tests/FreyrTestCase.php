@@ -8,6 +8,10 @@
  */
 namespace Freyr\Tests;
 
+/**
+ * Class FreyrTestCase
+ * @package Freyr\Tests
+ */
 class FreyrTestCase extends \PHPUnit_Framework_TestCase {
 
 }

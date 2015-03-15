@@ -17,8 +17,7 @@
             "SymfonyStandard": "app/"
         },
         "psr-4": {
-            "Freyr\\": "src/",
-            "Tests\\Freyr\\": "tests/"
+            "Freyr\\": "src/"
         }
     },
     "require": {
@@ -36,13 +35,15 @@
         "sensio/framework-extra-bundle": "3.0.1",
         "sensio/generator-bundle": "2.3.5",
         "incenteev/composer-parameter-handler": "2.1.0",
-        "freyr/lightroom-image-parser": "0.1.2",
         "cloudinary/cloudinary_php": "1.0.17",
         "ext-exif": "*",
         "ext-gd":"*",
         "ext-intl": "*",
         "ext-mongo": "*",
         "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.5.0"
     },
     "minimum-stability": "stable",
     "scripts": {
