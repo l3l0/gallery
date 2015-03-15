@@ -18,13 +18,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * Class GalleryController
  * @package Freyr\GalleryBundle\Controller
  */
-class GalleryController extends Controller {
+class GalleryController extends Controller
+{
 
     /**
      * @Route("/gallery/{name}", name="gallery")
      * @Template("FreyrGalleryBundle:Gallery:index.html.twig")
      */
-    public function getPhotos($name)
+    public function getPhotosAction($name)
     {
         $imageService = $this->get('freyr.gallery.service.photo');
         $gallery = new Gallery($name);

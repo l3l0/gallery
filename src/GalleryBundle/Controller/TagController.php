@@ -18,13 +18,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * Class TagController
  * @package Freyr\GalleryBundle\Controller
  */
-class TagController extends Controller {
+class TagController extends Controller
+{
 
     /**
      * @Route("/tag/{name}", name="tag")
      * @Template("FreyrGalleryBundle:Tag:index.html.twig")
      */
-    public function getPhotos($name)
+    public function getPhotosAction($name)
     {
         $imageService = $this->get('freyr.gallery.service.photo');
         $tags = new TagCollection($name);
