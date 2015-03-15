@@ -30,15 +30,13 @@ abstract class ImageData
      */
     public function __construct(array $data)
     {
-        // TODO: refactor name, separate gallery fetching
-        $this->parseTags($data['tags']);
-        // TODO: add more image properties
+        $this->processLightroomKeywords($data['tags']);
     }
 
     /**
      * @param $tags
      */
-    private function parseTags($tags)
+    private function processLightroomKeywords($tags)
     {
         foreach ($tags as $tag) {
             if (preg_match('/Gallery:', $tag)) {

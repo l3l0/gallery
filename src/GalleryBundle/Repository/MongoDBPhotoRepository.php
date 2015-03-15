@@ -46,7 +46,6 @@ class MongoDBPhotoRepository extends DocumentRepository
             $tags[] = new Tag($tag);
         }
         $photo->setTags($tags);
-        // TODO: add properties
 
         $this->getDocumentManager()->persist($photo);
         $this->getDocumentManager()->flush();
