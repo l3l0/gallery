@@ -13,12 +13,12 @@ use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Freyr\GalleryBundle\Document\Gallery;
 use Freyr\GalleryBundle\Document\GalleryCollection;
-use Freyr\GalleryBundle\Document\LightroomImage;
 use Freyr\GalleryBundle\Document\Property;
 use Freyr\GalleryBundle\Document\Tag;
 use Freyr\GalleryBundle\Document\Photo;
 
 use Freyr\GalleryBundle\Document\TagCollection;
+use Freyr\GalleryBundle\Entity\ImageData;
 
 /**
  * MongoDBPhotoRepository
@@ -28,6 +28,31 @@ use Freyr\GalleryBundle\Document\TagCollection;
  */
 class MongoDBPhotoRepository extends DocumentRepository
 {
+
+    /**
+     * @param ImageData $image
+     * @param Property $storagePropertyInterface
+     * @return Photo
+     */
+    public function saveImage(ImageData $image, Property $storagePropertyInterface)
+    {
+        $photo = new Photo();
+        $photo->setProperty($storagePropertyInterface);
+        $photo->setName($storagePropertyInterface->getPublicId());
+        $gallery = new Gallery($image->getGallery());
+        $photo->setGallery($gallery);
+        $tags = [];
+        foreach ($image->getTags() as $tag) {
+            $tags[] = new Tag($tag);
+        }
+        $photo->setTags($tags);
+        // TODO: add properties
+
+        $this->getDocumentManager()->persist($photo);
+        $this->getDocumentManager()->flush();
+
+        return $photo;
+    }
 
     /**
      * @return TagCollection
@@ -73,41 +98,6 @@ class MongoDBPhotoRepository extends DocumentRepository
         $images = $this->findBy(['tag.name' => $tag->getName()], ["limit" => $randomizedSampleSize]);
         $image = $images[array_rand($images)];
         $tag->setPrimaryPhoto($image);
-    }
-
-    /**
-     * @param Photo $image
-     */
-    public function save(Photo $image)
-    {
-        $this->getDocumentManager()->persist($image);
-        $this->getDocumentManager()->flush();
-    }
-
-    /**
-     * @param LightroomImage $image
-     * @param Property $storagePropertyInterface
-     * @return Photo
-     */
-    public function saveLightroomImage(LightroomImage $image, Property $storagePropertyInterface)
-    {
-        $photo = new Photo();
-        $photo->setProperty($storagePropertyInterface);
-        $photo->setName($storagePropertyInterface->getPublicId());
-        $gallery = new Gallery($image->getGallery());
-        $photo->setGallery($gallery);
-        $tags = [];
-        foreach ($image->getTags() as $tag)
-        {
-            $tags[] = new Tag($tag);
-        }
-        $photo->setTags($tags);
-        // TODO: add properties
-
-        $this->getDocumentManager()->persist($photo);
-        $this->getDocumentManager()->flush();
-
-        return $photo;
     }
 
     /**

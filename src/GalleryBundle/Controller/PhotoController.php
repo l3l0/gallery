@@ -8,6 +8,7 @@
  */
 namespace Freyr\GalleryBundle\Controller;
 
+use Freyr\GalleryBundle\Entity\Base64ImageData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,9 +29,9 @@ class PhotoController extends Controller {
      */
     public function createPhotoAction(Request $request)
     {
-        $data = json_decode($request->getContent());
+        $image = new Base64ImageData(json_decode($request->getContent(), true));
         $rawPhotoService = $this->get('freyr.gallery.service.photo.raw');
-        $photo = $rawPhotoService->store($data);
+        $photo = $rawPhotoService->store($image);
 
         return new JsonResponse($photo);
     }

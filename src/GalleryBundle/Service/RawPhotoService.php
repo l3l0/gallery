@@ -6,9 +6,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\GalleryBundle\Service;
 
-use Freyr\GalleryBundle\Document\LightroomImage;
+use Freyr\GalleryBundle\Entity\ImageData;
 use Freyr\GalleryBundle\Document\Photo;
 use Freyr\GalleryBundle\Repository\CloudinaryPhotoStorage;
 use Freyr\GalleryBundle\Repository\MongoDBPhotoRepository;
@@ -19,6 +20,7 @@ use Freyr\GalleryBundle\Repository\MongoDBPhotoRepository;
  */
 class RawPhotoService
 {
+
     /**
      * @var MongoDBPhotoRepository
      */
@@ -39,48 +41,14 @@ class RawPhotoService
     }
 
     /**
-     * @param $rawData
+     * @param ImageData $imageData
      * @return Photo
      */
-    public function store($rawData)
+    public function store(ImageData $imageData)
     {
-        // create image from data
-        $rawImage = $this->createImageFromRawData($rawData);
-
         // store image
-        $property = $this->photoStorage->storeRaw($rawImage);
-        return $this->photoRepository->saveLightroomImage($rawImage, $property);
-    }
+        $property = $this->photoStorage->storeRaw($imageData);
 
-    /**
-     * @param $rawData
-     * @return LightroomImage
-     */
-    public function createImageFromRawData($rawData)
-    {
-        $image = new LightroomImage();
-        $image->setRawImageContent($rawData->image);
-        $gallery = $this->fetchGalleryName($rawData->tags);
-        $image->setGallery($gallery);
-        $image->setTags($rawData->tags);
-
-        return $image;
-    }
-
-    /**
-     * @param $tags
-     * @return string
-     */
-    private function fetchGalleryName($tags)
-    {
-        $galleryName = '';
-        foreach ($tags as $key => $tag) {
-            if (preg_match('/Gallery\:/', $tag)) {
-                $galleryName = str_replace('Gallery: ', '', $tag);
-                unset($tags[$key]);
-                break;
-            }
-        }
-        return $galleryName;
+        return $this->photoRepository->saveImage($imageData, $property);
     }
 }
