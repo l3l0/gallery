@@ -9,11 +9,11 @@
 namespace Freyr\Gallery\GalleryBundle\Service;
 
 use Freyr\Gallery\GalleryBundle\Document\Gallery;
-use Freyr\Gallery\GalleryBundle\Document\GalleryCollection;
+use Freyr\Gallery\GalleryBundle\Entity\GalleryCollection;
 use Freyr\Gallery\GalleryBundle\Document\Photo;
-use Freyr\Gallery\GalleryBundle\Document\PhotoCollection;
+use Freyr\Gallery\GalleryBundle\Entity\PhotoCollection;
 use Freyr\Gallery\GalleryBundle\Document\Tag;
-use Freyr\Gallery\GalleryBundle\Document\TagCollection;
+use Freyr\Gallery\GalleryBundle\Entity\TagCollection;
 use Freyr\Gallery\GalleryBundle\Repository\MongoDB\MongoDBPhotoRepository;
 
 /**

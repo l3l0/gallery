@@ -9,7 +9,7 @@
 
 namespace Freyr\Gallery\GalleryBundle\Controller;
 
-use Freyr\Gallery\GalleryBundle\Document\TagCollection;
+use Freyr\Gallery\GalleryBundle\Entity\TagCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -24,7 +24,7 @@ class TagController extends Controller
 
     /**
      * @Route("/tag/{name}", name="tag")
-     * @Template("FreyrGalleryGalleryBundle:Tag:index.html.twig")
+     * @Template("FreyrGalleryBundle:Tag:index.html.twig")
      * @Method("GET")
      * @param string $name
      * @return array

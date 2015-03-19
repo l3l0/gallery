@@ -22,7 +22,7 @@ class HomeController extends Controller {
     /**
      * @Route("/", name="home")
      * @Method("GET")
-     * @Template("FreyrGalleryGalleryBundle:Home:index.html.twig")
+     * @Template("FreyrGalleryBundle:Home:index.html.twig")
      */
     public function getHomeAction()
     {
@@ -37,7 +37,7 @@ class HomeController extends Controller {
     /**
      * @Route("/about", name="about")
      * @Method("GET")
-     * @Template("FreyrGalleryGalleryBundle:Home:about.html.twig")
+     * @Template("FreyrGalleryBundle:Home:about.html.twig")
      */
     public function getAboutAction()
     {

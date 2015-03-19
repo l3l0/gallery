@@ -25,7 +25,7 @@ class GalleryController extends Controller
     /**
      * @Route("/gallery/{name}", name="gallery")
      * @Method("GET")
-     * @Template("FreyrGalleryGalleryBundle:Gallery:index.html.twig")
+     * @Template("FreyrGalleryBundle:Gallery:index.html.twig")
      * @param $name
      * @return array
      */
