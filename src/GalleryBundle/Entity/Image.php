@@ -6,13 +6,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Entity;
+namespace Freyr\Gallery\GalleryBundle\Entity;
 
 /**
- * Class ImageData
- * @package Freyr\GalleryBundle\Entity
+ * Class Image
+ * @package Freyr\Gallery\GalleryBundle\Entity
  */
-abstract class ImageData
+abstract class Image
 {
 
     /**

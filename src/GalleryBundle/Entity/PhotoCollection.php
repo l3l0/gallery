@@ -6,11 +6,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Document;
+namespace Freyr\Gallery\GalleryBundle\Entity;
 
 /**
  * Class PhotoCollection
- * @package Freyr\GalleryBundle\Document
+ * @package Freyr\Gallery\GalleryBundle\Document
  */
 class PhotoCollection {
 

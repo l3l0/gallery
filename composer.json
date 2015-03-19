@@ -17,7 +17,7 @@
             "SymfonyStandard": "app/"
         },
         "psr-4": {
-            "Freyr\\": "src/"
+            "Freyr\\Gallery\\": "src/"
         }
     },
     "require": {

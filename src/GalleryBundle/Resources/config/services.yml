@@ -3,25 +3,25 @@ parameters:
 
 services:
   freyr.gallery.storage.photo:
-    class: Freyr\GalleryBundle\Repository\CloudinaryPhotoStorage
+    class: Freyr\Gallery\GalleryBundle\Storage\Cloudinary\CloudinaryPhotoStorage
 
   freyr.gallery.repository.photo:
-    class: Freyr\GalleryBundle\Repository\MongoDBPhotoRepository
+    class: Freyr\Gallery\GalleryBundle\Repository\MongoDB\MongoDBPhotoRepository
     factory_service: doctrine_mongodb.odm.default_document_manager
     factory_method: getRepository
     arguments:
-      - FreyrGalleryBundle:Photo
+      - FreyrGalleryGalleryBundle:Photo
 
   freyr.gallery.service.photo:
-    class: Freyr\GalleryBundle\Service\PhotoService
+    class: Freyr\Gallery\GalleryBundle\Service\PhotoService
     arguments: [ @freyr.gallery.repository.photo ]
 
   freyr.gallery.service.photo.raw:
-    class: Freyr\GalleryBundle\Service\RawPhotoService
+    class: Freyr\Gallery\GalleryBundle\Service\RawPhotoService
     arguments: [ @freyr.gallery.repository.photo, @freyr.gallery.storage.photo ]
 
   freyr.twig.gallery_extension:
-    class: Freyr\GalleryBundle\Twig\CloudinaryExtension
+    class: Freyr\Gallery\GalleryBundle\Twig\CloudinaryExtension
     tags:
       - { name: twig.extension }
 

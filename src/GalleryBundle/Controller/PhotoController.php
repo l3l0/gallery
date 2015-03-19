@@ -6,9 +6,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Controller;
+namespace Freyr\Gallery\GalleryBundle\Controller;
 
-use Freyr\GalleryBundle\Entity\Base64ImageData;
+use Freyr\Gallery\GalleryBundle\Entity\Base64ImageData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PhotoController
- * @package Freyr\GalleryBundle\Controller
+ * @package Freyr\Gallery\GalleryBundle\Controller
  */
 class PhotoController extends Controller {
 

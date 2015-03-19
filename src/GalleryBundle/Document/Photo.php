@@ -6,15 +6,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Document;
+namespace Freyr\Gallery\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use JsonSerializable;
 
 /**
  * Class Photo
- * @package Freyr\GalleryBundle\Document
- * @MongoDB\Document(repositoryClass="Freyr\GalleryBundle\Repository\MongoDBPhotoRepository")
+ * @package Freyr\Gallery\GalleryBundle\Document
+ * @MongoDB\Document(repositoryClass="Freyr\Gallery\GalleryBundle\Repository\MongoDB\MongoDBPhotoRepository")
  */
 class Photo implements JsonSerializable
 {
@@ -86,19 +86,19 @@ class Photo implements JsonSerializable
     private $currentTag;
 
     /**
-     * @param Gallery $gallery
-     */
-    public function setGallery(Gallery $gallery)
-    {
-        $this->gallery = $gallery;
-    }
-
-    /**
      * @return Gallery
      */
     public function getGallery()
     {
         return $this->gallery;
+    }
+
+    /**
+     * @param Gallery $gallery
+     */
+    public function setGallery(Gallery $gallery)
+    {
+        $this->gallery = $gallery;
     }
 
     /**
@@ -142,19 +142,19 @@ class Photo implements JsonSerializable
     }
 
     /**
-     * @param string $photoName
-     */
-    public function setName($photoName)
-    {
-        $this->name = $photoName;
-    }
-
-    /**
      * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $photoName
+     */
+    public function setName($photoName)
+    {
+        $this->name = $photoName;
     }
 
     /**
@@ -182,6 +182,14 @@ class Photo implements JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
      * @param string $createdAt
      */
     public function setCreatedAt($createdAt)
@@ -192,9 +200,9 @@ class Photo implements JsonSerializable
     /**
      * @return string
      */
-    public function getCreatedAt()
+    public function getExposureTime()
     {
-        return $this->createdAt;
+        return $this->exposureTime;
     }
 
     /**
@@ -208,9 +216,9 @@ class Photo implements JsonSerializable
     /**
      * @return string
      */
-    public function getExposureTime()
+    public function getFNumber()
     {
-        return $this->exposureTime;
+        return $this->fNumber;
     }
 
     /**
@@ -224,9 +232,9 @@ class Photo implements JsonSerializable
     /**
      * @return string
      */
-    public function getFNumber()
+    public function getFocalLength()
     {
-        return $this->fNumber;
+        return $this->focalLength;
     }
 
     /**
@@ -240,9 +248,9 @@ class Photo implements JsonSerializable
     /**
      * @return string
      */
-    public function getFocalLength()
+    public function getIso()
     {
-        return $this->focalLength;
+        return $this->iso;
     }
 
     /**
@@ -251,14 +259,6 @@ class Photo implements JsonSerializable
     public function setIso($iso)
     {
         $this->iso = $iso;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIso()
-    {
-        return $this->iso;
     }
 
     /**

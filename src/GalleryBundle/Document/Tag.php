@@ -7,13 +7,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Freyr\GalleryBundle\Document;
+namespace Freyr\Gallery\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
  * Class Tag
- * @package Freyr\GalleryBundle\Document
+ * @package Freyr\Gallery\GalleryBundle\Document
  * @MongoDB\EmbeddedDocument
  */
 class Tag

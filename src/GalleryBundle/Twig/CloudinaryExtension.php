@@ -6,11 +6,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Twig;
+namespace Freyr\Gallery\GalleryBundle\Twig;
 
 /**
  * Class CloudinaryExtension
- * @package Freyr\GalleryBundle\Twig
+ * @package Freyr\Gallery\GalleryBundle\Twig
  */
 class CloudinaryExtension extends \Twig_Extension {
 

@@ -6,7 +6,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Controller;
+namespace Freyr\Gallery\GalleryBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,14 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class HomeController
- * @package Freyr\GalleryBundle\Controller
+ * @package Freyr\Gallery\GalleryBundle\Controller
  */
 class HomeController extends Controller {
 
     /**
      * @Route("/", name="home")
      * @Method("GET")
-     * @Template("FreyrGalleryBundle:Home:index.html.twig")
+     * @Template("FreyrGalleryGalleryBundle:Home:index.html.twig")
      */
     public function getHomeAction()
     {
@@ -37,7 +37,7 @@ class HomeController extends Controller {
     /**
      * @Route("/about", name="about")
      * @Method("GET")
-     * @Template("FreyrGalleryBundle:Home:about.html.twig")
+     * @Template("FreyrGalleryGalleryBundle:Home:about.html.twig")
      */
     public function getAboutAction()
     {

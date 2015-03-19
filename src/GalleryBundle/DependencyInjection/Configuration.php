@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Freyr\GalleryBundle\DependencyInjection;
+namespace Freyr\Gallery\GalleryBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

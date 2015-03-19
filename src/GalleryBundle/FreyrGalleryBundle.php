@@ -7,13 +7,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Freyr\GalleryBundle;
+namespace Freyr\Gallery\GalleryBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class FreyrGalleryBundle
- * @package Freyr\GalleryBundle
+ * Class FreyrGalleryGalleryBundle
+ * @package Freyr\Gallery\GalleryBundle
  */
 class FreyrGalleryBundle extends Bundle
 {

@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Freyr\GalleryBundle\Controller;
+namespace Freyr\Gallery\GalleryBundle\Controller;
 
-use Freyr\GalleryBundle\Document\Gallery;
+use Freyr\Gallery\GalleryBundle\Document\Gallery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class GalleryController
- * @package Freyr\GalleryBundle\Controller
+ * @package Freyr\Gallery\GalleryBundle\Controller
  */
 class GalleryController extends Controller
 {
@@ -25,7 +25,7 @@ class GalleryController extends Controller
     /**
      * @Route("/gallery/{name}", name="gallery")
      * @Method("GET")
-     * @Template("FreyrGalleryBundle:Gallery:index.html.twig")
+     * @Template("FreyrGalleryGalleryBundle:Gallery:index.html.twig")
      * @param $name
      * @return array
      */

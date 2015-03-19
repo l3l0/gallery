@@ -6,11 +6,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Document;
+namespace Freyr\Gallery\GalleryBundle\Entity;
+
+use Documents\Tag;
 
 /**
  * Class TagCollection
- * @package Freyr\GalleryBundle\Document
+ * @package Freyr\Gallery\GalleryBundle\Entity
  */
 class TagCollection {
 
@@ -25,28 +27,6 @@ class TagCollection {
     public function __construct($tags)
     {
         $this->createTags($tags);
-    }
-
-    /**
-     * @param mixed $tag
-     */
-    public function addTag($tag)
-    {
-        $this->createTags($tag);
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $tags = [];
-        foreach($this->tags as $tag)
-        {
-            $tags[] = $tag->getName();
-        }
-
-        return $tags;
     }
 
     /**
@@ -78,5 +58,26 @@ class TagCollection {
             }
             $this->tags[$tags->getName()] = $tags;
         }
+    }
+
+    /**
+     * @param mixed $tag
+     */
+    public function addTag($tag)
+    {
+        $this->createTags($tag);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $tags = [];
+        foreach ($this->tags as $tag) {
+            $tags[] = $tag->getName();
+        }
+
+        return $tags;
     }
 }

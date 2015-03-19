@@ -6,11 +6,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Document;
+namespace Freyr\Gallery\GalleryBundle\Entity;
 
 /**
  * Class GalleryCollection
- * @package Freyr\GalleryBundle\Document
+ * @package Freyr\Gallery\GalleryBundle\Document
  */
 class GalleryCollection {
 
@@ -25,28 +25,6 @@ class GalleryCollection {
     public function __construct($galleries)
     {
         $this->createGalleries($galleries);
-    }
-
-    /**
-     * @param mixed $gallery
-     */
-    public function addGallery($gallery)
-    {
-        $this->createGalleries($gallery);
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $galleries = [];
-        foreach($this->gallery as $gallery)
-        {
-            $galleries[] = $gallery->getName();
-        }
-
-        return $galleries;
     }
 
     /**
@@ -73,5 +51,26 @@ class GalleryCollection {
             }
             $this->gallery[$galleries->getName()] = $galleries;
         }
+    }
+
+    /**
+     * @param mixed $gallery
+     */
+    public function addGallery($gallery)
+    {
+        $this->createGalleries($gallery);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $galleries = [];
+        foreach ($this->gallery as $gallery) {
+            $galleries[] = $gallery->getName();
+        }
+
+        return $galleries;
     }
 }

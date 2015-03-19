@@ -6,15 +6,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Service;
+namespace Freyr\Gallery\GalleryBundle\Service;
 
-use Freyr\GalleryBundle\Document\Gallery;
-use Freyr\GalleryBundle\Document\GalleryCollection;
-use Freyr\GalleryBundle\Document\Photo;
-use Freyr\GalleryBundle\Document\PhotoCollection;
-use Freyr\GalleryBundle\Document\Tag;
-use Freyr\GalleryBundle\Document\TagCollection;
-use Freyr\GalleryBundle\Repository\MongoDBPhotoRepository;
+use Freyr\Gallery\GalleryBundle\Document\Gallery;
+use Freyr\Gallery\GalleryBundle\Document\GalleryCollection;
+use Freyr\Gallery\GalleryBundle\Document\Photo;
+use Freyr\Gallery\GalleryBundle\Document\PhotoCollection;
+use Freyr\Gallery\GalleryBundle\Document\Tag;
+use Freyr\Gallery\GalleryBundle\Document\TagCollection;
+use Freyr\Gallery\GalleryBundle\Repository\MongoDB\MongoDBPhotoRepository;
 
 /**
  * Class PhotoService
@@ -41,7 +41,7 @@ class PhotoService
      */
     public function getGalleryListWithPrimaryPhoto()
     {
-        $galleries = $this->photoRepository->getAllGalleries();
+        $galleries = $this->photoRepository->getGalleries();
         foreach ($galleries as $gallery)
         {
             $this->photoRepository->assignPrimaryPhotoToGallery($gallery, 3);
@@ -55,7 +55,7 @@ class PhotoService
      */
     public function getTagsListWithPrimaryPhoto()
     {
-        $tags = $this->photoRepository->getAllTags();
+        $tags = $this->photoRepository->getTags();
         foreach ($tags as $tag)
         {
             $this->photoRepository->assignPrimaryPhotoToTag($tag, 3);
@@ -109,7 +109,7 @@ class PhotoService
      */
     public function getPhotoByIdAndTag(Tag $tag, $id)
     {
-        return $this->photoRepository->getPhotoByTagAndId($tag, $id);
+        return $this->photoRepository->getPhotoByIdAndTag($id, $tag);
     }
 
     /**
@@ -119,6 +119,6 @@ class PhotoService
      */
     public function getPhotoByIdAndGallery(Gallery $gallery, $id)
     {
-        return $this->photoRepository->getPhotoFromGalleryAndById($gallery, $id);
+        return $this->photoRepository->getPhotoByIdAndGallery($id, $gallery);
     }
 }

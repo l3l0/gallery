@@ -1,7 +1,7 @@
 <?php
 namespace Freyr\Tests\Service;
 
-use Freyr\GalleryBundle\Service\PhotoService;
+use Freyr\Gallery\GalleryBundle\Service\PhotoService;
 
 /**
  * Class ImageServiceTest

@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Freyr\GalleryBundle\Controller;
+namespace Freyr\Gallery\GalleryBundle\Controller;
 
-use Freyr\GalleryBundle\Document\TagCollection;
+use Freyr\Gallery\GalleryBundle\Document\TagCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,14 +17,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class TagController
- * @package Freyr\GalleryBundle\Controller
+ * @package Freyr\Gallery\GalleryBundle\Controller
  */
 class TagController extends Controller
 {
 
     /**
      * @Route("/tag/{name}", name="tag")
-     * @Template("FreyrGalleryBundle:Tag:index.html.twig")
+     * @Template("FreyrGalleryGalleryBundle:Tag:index.html.twig")
      * @Method("GET")
      * @param string $name
      * @return array

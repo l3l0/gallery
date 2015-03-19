@@ -6,13 +6,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\GalleryBundle\Entity;
+namespace Freyr\Gallery\GalleryBundle\Entity;
 
 /**
  * Class Base64ImageData
- * @package Freyr\GalleryBundle\Entity
+ * @package Freyr\Gallery\GalleryBundle\Entity
  */
-class FileImageData extends ImageData
+class FileImageData extends Image
 {
 
     /**
