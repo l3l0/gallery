@@ -15,6 +15,7 @@ use Freyr\Gallery\GalleryBundle\Document\Gallery;
 use Freyr\Gallery\GalleryBundle\Document\Tag;
 use Freyr\Gallery\GalleryBundle\Document\Photo;
 
+use Freyr\Gallery\GalleryBundle\Entity\GalleryCollection;
 use Freyr\Gallery\GalleryBundle\Entity\TagCollection;
 use Freyr\Gallery\GalleryBundle\Entity\Image;
 use Freyr\Gallery\GalleryBundle\Entity\Property;

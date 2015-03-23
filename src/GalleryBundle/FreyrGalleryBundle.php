@@ -12,7 +12,7 @@ namespace Freyr\Gallery\GalleryBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class FreyrGalleryGalleryBundle
+ * Class FreyrGalleryBundle
  * @package Freyr\Gallery\GalleryBundle
  */
 class FreyrGalleryBundle extends Bundle
