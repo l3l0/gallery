@@ -8,11 +8,14 @@
  */
 namespace Freyr\Gallery\GalleryBundle\Entity;
 
+use Freyr\Gallery\GalleryBundle\Document\Photo;
+
 /**
  * Class PhotoCollection
  * @package Freyr\Gallery\GalleryBundle\Document
  */
-class PhotoCollection {
+class PhotoCollection
+{
 
     /**
      * @var Photo[]

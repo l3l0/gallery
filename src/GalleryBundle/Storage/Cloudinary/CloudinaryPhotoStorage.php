@@ -9,14 +9,15 @@
 namespace Freyr\Gallery\GalleryBundle\Storage\Cloudinary;
 
 use Cloudinary\Uploader;
-use Freyr\Gallery\GalleryBundle\Document\Property;
+use Freyr\Gallery\GalleryBundle\Entity\Property;
 use Freyr\Gallery\GalleryBundle\Entity\Image;
 
 /**
  * Class CloudinaryPhotoStorage
  * @package Freyr\Gallery\GalleryBundle\Storage\Cloudinary
  */
-class CloudinaryPhotoStorage {
+class CloudinaryPhotoStorage
+{
 
     /**
      * @param Image $image
@@ -25,6 +26,7 @@ class CloudinaryPhotoStorage {
     public function storeRaw(Image $image)
     {
         $response = Uploader::upload($image->getImageForStorage());
+
         return new Property($response);
     }
 }

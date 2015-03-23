@@ -9,6 +9,7 @@
 namespace Freyr\Gallery\GalleryBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\Gallery\GalleryBundle\Entity\Property;
 use JsonSerializable;
 
 /**

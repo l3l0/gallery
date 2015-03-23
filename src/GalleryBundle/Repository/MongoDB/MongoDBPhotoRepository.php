@@ -12,13 +12,12 @@ namespace Freyr\Gallery\GalleryBundle\Repository\MongoDB;
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Freyr\Gallery\GalleryBundle\Document\Gallery;
-use Freyr\Gallery\GalleryBundle\Document\GalleryCollection;
-use Freyr\Gallery\GalleryBundle\Document\Property;
 use Freyr\Gallery\GalleryBundle\Document\Tag;
 use Freyr\Gallery\GalleryBundle\Document\Photo;
 
-use Freyr\Gallery\GalleryBundle\Document\TagCollection;
+use Freyr\Gallery\GalleryBundle\Entity\TagCollection;
 use Freyr\Gallery\GalleryBundle\Entity\Image;
+use Freyr\Gallery\GalleryBundle\Entity\Property;
 use Freyr\Gallery\GalleryBundle\Repository\PhotoRepositoryInterface;
 
 /**
@@ -61,6 +60,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     {
         /** @var Cursor $tags */
         $tags = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
+
         return new TagCollection($tags->toArray());
     }
 
@@ -71,6 +71,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     {
         /** @var Cursor $galleries */
         $galleries = $this->createQueryBuilder()->distinct('gallery.name')->getQuery()->execute();
+
         return new GalleryCollection($galleries->toArray());
     }
 

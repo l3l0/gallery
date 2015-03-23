@@ -12,7 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
  * Class Property
- * @package Freyr\Gallery\GalleryBundle\Document
+ * @package Freyr\Gallery\GalleryBundle\Entity
  * @MongoDB\EmbeddedDocument
  */
 class Property

@@ -8,11 +8,14 @@
  */
 namespace Freyr\Gallery\GalleryBundle\Entity;
 
+use Freyr\Gallery\GalleryBundle\Document\Gallery;
+
 /**
  * Class GalleryCollection
  * @package Freyr\Gallery\GalleryBundle\Document
  */
-class GalleryCollection {
+class GalleryCollection
+{
 
     /**
      * @var Gallery[]
@@ -32,21 +35,15 @@ class GalleryCollection {
      */
     private function createGalleries($galleries)
     {
-        if (is_array($galleries))
-        {
-            foreach($galleries as $gallery)
-            {
-                if (!$galleries instanceof Gallery)
-                {
+        if (is_array($galleries)) {
+            foreach ($galleries as $gallery) {
+                if (!$galleries instanceof Gallery) {
                     $gallery = new Gallery($gallery);
                 }
                 $this->gallery[$gallery->getName()] = $gallery;
             }
-        }
-        else
-        {
-            if (!$galleries instanceof Gallery)
-            {
+        } else {
+            if (!$galleries instanceof Gallery) {
                 $galleries = new Gallery($galleries);
             }
             $this->gallery[$galleries->getName()] = $galleries;

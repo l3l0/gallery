@@ -8,13 +8,14 @@
  */
 namespace Freyr\Gallery\GalleryBundle\Entity;
 
-use Documents\Tag;
+use Freyr\Gallery\GalleryBundle\Document\Tag;
 
 /**
  * Class TagCollection
  * @package Freyr\Gallery\GalleryBundle\Entity
  */
-class TagCollection {
+class TagCollection
+{
 
     /**
      * @var Tag[]
@@ -34,23 +35,16 @@ class TagCollection {
      */
     private function createTags($tags)
     {
-        if (is_array($tags))
-        {
-            foreach($tags as $tag)
-            {
-                if (!$tag instanceof Tag)
-                {
+        if (is_array($tags)) {
+            foreach ($tags as $tag) {
+                if (!$tag instanceof Tag) {
                     $tag = new Tag($tag);
                 }
                 $this->tags[$tag->getName()] = $tag;
             }
-        }
-        else
-        {
-            if (!$tags instanceof Tag)
-            {
-                if (strpos($tags, ','))
-                {
+        } else {
+            if (!$tags instanceof Tag) {
+                if (strpos($tags, ',')) {
                     $tags = split(',', $tags);
                     $this->createTags($tags);
                 }
