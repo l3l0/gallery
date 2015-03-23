@@ -80,5 +80,5 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-freyr_gallery:
+freyr_gallery_web:
   import_path: /tmp/freyr_gallery

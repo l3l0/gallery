@@ -1,5 +1,5 @@
-freyr_gallery:
-    resource: "@FreyrGalleryBundle/Controller/"
+freyr_gallery_web:
+    resource: "@FreyrGalleryWebBundle/Controller/"
     type:     annotation
     prefix:   /
 

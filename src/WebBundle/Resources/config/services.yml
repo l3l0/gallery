@@ -1,0 +1,27 @@
+parameters:
+  doctrine.orm.metadata.driver_chain.class: Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain
+
+services:
+  freyr.gallery.storage.photo:
+    class: Freyr\Gallery\WebBundle\Storage\Cloudinary\CloudinaryPhotoStorage
+
+  freyr.gallery.repository.photo:
+    class: Freyr\Gallery\WebBundle\Repository\MongoDB\MongoDBPhotoRepository
+    factory_service: doctrine_mongodb.odm.default_document_manager
+    factory_method: getRepository
+    arguments:
+      - FreyrGalleryWebBundle:Photo
+
+  freyr.gallery.service.photo:
+    class: Freyr\Gallery\WebBundle\Service\PhotoService
+    arguments: [ @freyr.gallery.repository.photo ]
+
+  freyr.gallery.service.photo.raw:
+    class: Freyr\Gallery\WebBundle\Service\RawPhotoService
+    arguments: [ @freyr.gallery.repository.photo, @freyr.gallery.storage.photo ]
+
+  freyr.twig.gallery_extension:
+    class: Freyr\Gallery\WebBundle\Twig\CloudinaryExtension
+    tags:
+      - { name: twig.extension }
+
