@@ -15,10 +15,10 @@ class ImageServiceTest extends ServiceTestCase
      */
     public function testIfConstructOk()
     {
-        $repositoryMock = $this->getMockBuilder('Freyr\GalleryBundle\Repository\MongoDBPhotoRepository')
+        $repositoryMock = $this->getMockBuilder('Freyr\Gallery\GalleryBundle\Repository\MongoDB\MongoDBPhotoRepository')
             ->disableOriginalConstructor()
             ->getMock();
         $sut = new PhotoService($repositoryMock);
-        $this->assertInstanceOf('Freyr\GalleryBundle\Service\PhotoService', $sut);
+        $this->assertInstanceOf('Freyr\Gallery\GalleryBundle\Service\PhotoService', $sut);
     }
 }
