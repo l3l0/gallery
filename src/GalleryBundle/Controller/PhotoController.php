@@ -19,7 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
  * Class PhotoController
  * @package Freyr\Gallery\GalleryBundle\Controller
  */
-class PhotoController extends Controller {
+class PhotoController extends Controller
+{
 
     /**
      * @Route("/api/photo", name="api.photo")

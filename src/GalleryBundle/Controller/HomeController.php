@@ -17,7 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * Class HomeController
  * @package Freyr\Gallery\GalleryBundle\Controller
  */
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
     /**
      * @Route("/", name="home")

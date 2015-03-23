@@ -21,6 +21,7 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class FreyrGalleryExtension extends Extension
 {
+
     /**
      * {@inheritDoc}
      */
@@ -31,7 +32,7 @@ class FreyrGalleryExtension extends Extension
 
         $container->setParameter('freyr_gallery.import_path', $config['import_path']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
 }

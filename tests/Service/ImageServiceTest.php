@@ -7,7 +7,8 @@ use Freyr\Gallery\GalleryBundle\Service\PhotoService;
  * Class ImageServiceTest
  * @package Freyr\Tests\Service
  */
-class ImageServiceTest extends ServiceTestCase {
+class ImageServiceTest extends ServiceTestCase
+{
 
     /**
      *

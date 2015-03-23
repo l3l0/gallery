@@ -42,8 +42,7 @@ class PhotoService
     public function getGalleryListWithPrimaryPhoto()
     {
         $galleries = $this->photoRepository->getGalleries();
-        foreach ($galleries as $gallery)
-        {
+        foreach ($galleries as $gallery) {
             $this->photoRepository->assignPrimaryPhotoToGallery($gallery, 3);
         }
 
@@ -56,8 +55,7 @@ class PhotoService
     public function getTagsListWithPrimaryPhoto()
     {
         $tags = $this->photoRepository->getTags();
-        foreach ($tags as $tag)
-        {
+        foreach ($tags as $tag) {
             $this->photoRepository->assignPrimaryPhotoToTag($tag, 3);
         }
 
@@ -75,8 +73,7 @@ class PhotoService
         $photos = new PhotoCollection();
 
         /** @var Photo $photo */
-        foreach($cursor as $photo)
-        {
+        foreach ($cursor as $photo) {
             $photos->addPhoto($photo);
         }
 
@@ -94,8 +91,7 @@ class PhotoService
         $photos = new PhotoCollection();
 
         /** @var Photo $photo */
-        foreach($cursor as $photo)
-        {
+        foreach ($cursor as $photo) {
             $photos->addPhoto($photo);
         }
 

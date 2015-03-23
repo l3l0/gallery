@@ -18,6 +18,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  */
 class Gallery
 {
+
     /**
      * @MongoDB\String
      * @var string

@@ -8,7 +8,7 @@
  */
 namespace Freyr\Tests\Service;
 
-use Freyr\Gallery\Tests\FreyrTestCase;
+use Freyr\Tests\FreyrTestCase;
 
 /**
  * Class ServiceTestCase
