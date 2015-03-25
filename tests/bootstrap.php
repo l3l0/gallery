@@ -7,5 +7,5 @@ if (version_compare(PHP_VERSION, '5.4', '>=') && gc_enabled()) {
 }
 /** @var Composer\Autoload\ClassLoader $loader */
 $loader = require_once __DIR__ . '/../vendor/autoload.php';
-$loader->addPsr4('Freyr\\Tests\\', __DIR__);
+$loader->addPsr4('Freyr\\Gallery\\Tests\\', __DIR__);
 return $loader;

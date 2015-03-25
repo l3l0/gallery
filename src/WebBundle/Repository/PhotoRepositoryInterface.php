@@ -2,14 +2,15 @@
 namespace Freyr\Gallery\WebBundle\Repository;
 
 use Doctrine\ODM\MongoDB\Cursor;
+use Freyr\Gallery\Core\GalleryInterface;
+use Freyr\Gallery\Core\PhotoInterface;
+use Freyr\Gallery\Core\TagInterface;
 use Freyr\Gallery\WebBundle\Document\Gallery;
 use Freyr\Gallery\WebBundle\Document\Tag;
 use Freyr\Gallery\WebBundle\Document\Photo;
 
-use Freyr\Gallery\WebBundle\Entity\GalleryCollection;
-use Freyr\Gallery\WebBundle\Entity\Property;
-use Freyr\Gallery\WebBundle\Entity\TagCollection;
-use Freyr\Gallery\WebBundle\Entity\Image;
+use Freyr\Gallery\WebBundle\Document\Property;
+use Freyr\Gallery\Core\Entity\Image;
 
 /**
  * Interface PhotoRepositoryInterface
@@ -21,58 +22,57 @@ interface PhotoRepositoryInterface
     /**
      * @param Image $image
      * @param Property $storagePropertyInterface
-     * @return Photo
+     * @return PhotoInterface
      */
     public function persist(Image $image, Property $storagePropertyInterface);
 
     /**
-     * @return TagCollection
+     * @return TagInterface[]
      */
     public function getTags();
 
     /**
-     * @return GalleryCollection
+     * @return GalleryInterface[]
      */
     public function getGalleries();
 
     /**
-     * @param Gallery $gallery
+     * @param GalleryInterface $gallery
      * @param int $randomizedSampleSize
      * @return Photo
      */
-    public function assignPrimaryPhotoToGallery(Gallery $gallery, $randomizedSampleSize);
+    public function assignPrimaryPhotoToGallery(GalleryInterface $gallery, $randomizedSampleSize);
 
     /**
-     * @param Tag $tag
+     * @param TagInterface $tag
      * @param int $randomizedSampleSize
      * @return Photo
      */
-    public function assignPrimaryPhotoToTag(Tag $tag, $randomizedSampleSize);
+    public function assignPrimaryPhotoToTag(TagInterface $tag, $randomizedSampleSize);
 
     /**
      * @param string $imageId
-     * @param Tag $tag
+     * @param TagInterface $tag
      * @return Photo
      */
-    public function getPhotoByIdAndTag($imageId, Tag $tag);
+    public function getPhotoByIdAndTag($imageId, TagInterface $tag);
 
     /**
      * @param string $imageId
-     * @param Gallery $gallery
+     * @param GalleryInterface $gallery
      * @return Photo
      */
-    public function getPhotoByIdAndGallery($imageId, Gallery $gallery);
+    public function getPhotoByIdAndGallery($imageId, GalleryInterface $gallery);
 
     /**
-     * @param TagCollection $tags
-     * @TODO: separate database sursor from interface
-     * @return Cursor
+     * @param TagInterface[] $tags
+     * @return \Iterator
      */
-    public function getPhotosByTags(TagCollection $tags);
+    public function getPhotosByTags(array $tags);
 
     /**
-     * @param Gallery $gallery
+     * @param GalleryInterface $gallery
      * @return Cursor
      */
-    public function getPhotosFromGallery(Gallery $gallery);
+    public function getPhotosFromGallery(GalleryInterface $gallery);
 }

@@ -10,13 +10,15 @@
 namespace Freyr\Gallery\WebBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\Gallery\Core\GalleryInterface;
+use Freyr\Gallery\Core\PhotoInterface;
 
 /**
  * Class Gallery
  * @package Freyr\Gallery\WebBundle\Document
  * @MongoDB\EmbeddedDocument
  */
-class Gallery
+class Gallery implements GalleryInterface
 {
 
     /**
@@ -55,9 +57,9 @@ class Gallery
     }
 
     /**
-     * @param Photo $primaryImage
+     * @param PhotoInterface $primaryImage
      */
-    public function setPrimaryImage(Photo $primaryImage)
+    public function setPrimaryImage(PhotoInterface $primaryImage)
     {
         $this->primaryImage = $primaryImage;
     }

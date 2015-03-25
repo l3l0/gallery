@@ -6,36 +6,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\Gallery\WebBundle\Entity;
+namespace Freyr\Gallery\Core\Entity;
 
 /**
- * Class Base64ImageData
- * @package Freyr\Gallery\WebBundle\Entity
+ * Class Gallery
+ * @package Freyr\Gallery\Core\Entity
  */
-class Base64ImageData extends Image
+class Gallery
 {
-
-    /**
-     * @var string
-     */
-    public $content = '';
 
     /**
      * @param array $data
      */
     public function __construct(array $data)
     {
-        parent::__construct($data);
-        $this->content = 'data:image/png;base64,' . $data['content'];
+        $this->name = $this->sanitizeName($data['name']);
     }
 
     /**
+     * @param $name
      * @return string
      */
-    public function getImageForStorage()
+    private function sanitizeName($name)
     {
-        return $this->content;
+        return strtolower(str_replace(' ', '-', trim($name)));
     }
 
-
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }

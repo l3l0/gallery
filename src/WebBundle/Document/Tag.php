@@ -10,13 +10,15 @@
 namespace Freyr\Gallery\WebBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\Gallery\Core\PhotoInterface;
+use Freyr\Gallery\Core\TagInterface;
 
 /**
  * Class Tag
  * @package Freyr\Gallery\WebBundle\Document
  * @MongoDB\EmbeddedDocument
  */
-class Tag
+class Tag implements TagInterface
 {
 
     /**
@@ -26,7 +28,7 @@ class Tag
     private $name;
 
     /**
-     * @var Photo
+     * @var PhotoInterface
      */
     private $primaryPhoto;
 
@@ -47,7 +49,7 @@ class Tag
     }
 
     /**
-     * @return Photo
+     * @return PhotoInterface
      */
     public function getPrimaryPhoto()
     {
@@ -55,9 +57,9 @@ class Tag
     }
 
     /**
-     * @param Photo $primaryPhoto
+     * @param PhotoInterface $primaryPhoto
      */
-    public function setPrimaryPhoto(Photo $primaryPhoto)
+    public function setPrimaryPhoto(PhotoInterface $primaryPhoto)
     {
         $this->primaryPhoto = $primaryPhoto;
     }

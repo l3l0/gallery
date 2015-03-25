@@ -9,7 +9,7 @@
 
 namespace Freyr\Gallery\WebBundle\Controller;
 
-use Freyr\Gallery\WebBundle\Entity\TagCollection;
+use Freyr\Gallery\Core\TagFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -32,7 +32,7 @@ class TagController extends Controller
     public function getPhotosAction($name)
     {
         $imageService = $this->get('freyr.gallery.service.photo');
-        $tags = new TagCollection($name);
+        $tags = TagFactory::createTagsFromList($name, 'Freyr\Gallery\WebBundle\Document\Tag');
         $photos = $imageService->getPhotosByTags($tags);
 
         return [

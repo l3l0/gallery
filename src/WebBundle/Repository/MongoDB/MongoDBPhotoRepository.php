@@ -11,14 +11,20 @@ namespace Freyr\Gallery\WebBundle\Repository\MongoDB;
 
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
+
+use Freyr\Gallery\Core\GalleryFactory;
+use Freyr\Gallery\Core\GalleryInterface;
+use Freyr\Gallery\Core\Entity\Image;
+
+use Freyr\Gallery\Core\PhotoFactory;
+use Freyr\Gallery\Core\PhotoInterface;
+use Freyr\Gallery\Core\TagFactory;
+use Freyr\Gallery\Core\TagInterface;
 use Freyr\Gallery\WebBundle\Document\Gallery;
 use Freyr\Gallery\WebBundle\Document\Tag;
 use Freyr\Gallery\WebBundle\Document\Photo;
+use Freyr\Gallery\WebBundle\Document\Property;
 
-use Freyr\Gallery\WebBundle\Entity\GalleryCollection;
-use Freyr\Gallery\WebBundle\Entity\TagCollection;
-use Freyr\Gallery\WebBundle\Entity\Image;
-use Freyr\Gallery\WebBundle\Entity\Property;
 use Freyr\Gallery\WebBundle\Repository\PhotoRepositoryInterface;
 
 /**
@@ -33,7 +39,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     /**
      * @param Image $image
      * @param Property $storagePropertyInterface
-     * @return Photo
+     * @return PhotoInterface
      */
     public function persist(Image $image, Property $storagePropertyInterface)
     {
@@ -55,33 +61,33 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     }
 
     /**
-     * @return TagCollection
+     * @return TagInterface[]
      */
     public function getTags()
     {
         /** @var Cursor $tags */
         $tags = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
 
-        return new TagCollection($tags->toArray());
+        return TagFactory::createMultipleTags($tags, 'Freyr\Gallery\WebBundle\Document\Tag');
     }
 
     /**
-     * @return GalleryCollection
+     * @return GalleryInterface[]
      */
     public function getGalleries()
     {
-        /** @var Cursor $galleries */
-        $galleries = $this->createQueryBuilder()->distinct('gallery.name')->getQuery()->execute();
+        /** @var Cursor $cursor */
+        $cursor = $this->createQueryBuilder()->distinct('gallery.name')->getQuery()->execute();
 
-        return new GalleryCollection($galleries->toArray());
+        return GalleryFactory::createMultipleGalleries($cursor, 'Freyr\Gallery\WebBundle\Document\Gallery');
     }
 
     /**
-     * @param Gallery $gallery
+     * @param GalleryInterface $gallery
      * @param int $randomizedSampleSize
      * @return Photo
      */
-    public function assignPrimaryPhotoToGallery(Gallery $gallery, $randomizedSampleSize)
+    public function assignPrimaryPhotoToGallery(GalleryInterface $gallery, $randomizedSampleSize)
     {
         /** @var Cursor $cursor */
         $images = $this->findBy(['gallery.name' => $gallery->getName()], ["limit" => $randomizedSampleSize]);
@@ -90,11 +96,11 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     }
 
     /**
-     * @param Tag $tag
+     * @param TagInterface $tag
      * @param int $randomizedSampleSize
      * @return Photo
      */
-    public function assignPrimaryPhotoToTag(Tag $tag, $randomizedSampleSize)
+    public function assignPrimaryPhotoToTag(TagInterface $tag, $randomizedSampleSize)
     {
         /** @var Cursor $cursor */
         $images = $this->findBy(['tag.name' => $tag->getName()], ["limit" => $randomizedSampleSize]);
@@ -104,45 +110,47 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
 
     /**
      * @param string $imageId
-     * @param Tag $tag
-     * @return Photo
+     * @param TagInterface $tag
+     * @return PhotoInterface
      */
-    public function getPhotoByIdAndTag($imageId, Tag $tag)
+    public function getPhotoByIdAndTag($imageId, TagInterface $tag)
     {
         return $this->findOneBy(["gallery.name" => $tag->getName(), "id" => new \MongoId($imageId)]);
     }
 
     /**
      * @param string $imageId
-     * @param Gallery $gallery
-     * @return Photo
+     * @param GalleryInterface $gallery
+     * @return PhotoInterface
      */
-    public function getPhotoByIdAndGallery($imageId, Gallery $gallery)
+    public function getPhotoByIdAndGallery($imageId, GalleryInterface $gallery)
     {
         return $this->findOneBy(["gallery.name" => $gallery->getName(), "id" => new \MongoId($imageId)]);
     }
 
 
     /**
-     * @param TagCollection $tags
+     * @param TagInterface[] $tags
      * @return Cursor
      */
-    public function getPhotosByTags(TagCollection $tags)
+    public function getPhotosByTags(array $tags)
     {
         return $this->createQueryBuilder()
             ->field('gallery.name')
-            ->in($tags->toArray())
+            ->in($tags)
             ->getQuery()->execute();
     }
 
     /**
-     * @param Gallery $gallery
-     * @return Cursor
+     * @param GalleryInterface $gallery
+     * @return PhotoInterface[]
      */
-    public function getPhotosFromGallery(Gallery $gallery)
+    public function getPhotosFromGallery(GalleryInterface $gallery)
     {
-        return $this->createQueryBuilder()
+        $cursor = $this->createQueryBuilder()
             ->field('gallery.name')->equals($gallery->getName())
             ->getQuery()->execute();
+
+        return PhotoFactory::createMultiplePhotos($cursor, 'Freyr\Gallery\WebBundle\Document\Photo');
     }
 }

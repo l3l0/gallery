@@ -8,12 +8,12 @@
  */
 namespace Freyr\Gallery\WebBundle\Service;
 
-use Freyr\Gallery\WebBundle\Document\Gallery;
-use Freyr\Gallery\WebBundle\Entity\GalleryCollection;
+use Freyr\Gallery\Core\GalleryInterface;
+use Freyr\Gallery\Core\PhotoFactory;
+use Freyr\Gallery\Core\PhotoInterface;
+use Freyr\Gallery\Core\TagInterface;
 use Freyr\Gallery\WebBundle\Document\Photo;
-use Freyr\Gallery\WebBundle\Entity\PhotoCollection;
 use Freyr\Gallery\WebBundle\Document\Tag;
-use Freyr\Gallery\WebBundle\Entity\TagCollection;
 use Freyr\Gallery\WebBundle\Repository\MongoDB\MongoDBPhotoRepository;
 
 /**
@@ -37,7 +37,7 @@ class PhotoService
     }
 
     /**
-     * @return GalleryCollection
+     * @return GalleryInterface[]
      */
     public function getGalleryListWithPrimaryPhoto()
     {
@@ -50,7 +50,7 @@ class PhotoService
     }
 
     /**
-     * @return TagCollection
+     * @return TagInterface[]
      */
     public function getTagsListWithPrimaryPhoto()
     {
@@ -63,39 +63,23 @@ class PhotoService
     }
 
     /**
-     * @param Gallery $gallery
-     * @return PhotoCollection
+     * @param GalleryInterface $gallery
+     * @return PhotoInterface[]
      */
-    public function getPhotosFromGallery(Gallery $gallery)
+    public function getPhotosFromGallery(GalleryInterface $gallery)
     {
-        $cursor = $this->photoRepository->getPhotosFromGallery($gallery);
-
-        $photos = new PhotoCollection();
-
-        /** @var Photo $photo */
-        foreach ($cursor as $photo) {
-            $photos->addPhoto($photo);
-        }
-
-        return $photos;
+        return $this->photoRepository->getPhotosFromGallery($gallery);
     }
 
     /**
-     * @param TagCollection $tags
-     * @return PhotoCollection
+     * @param TagInterface[] $tags
+     * @return PhotoInterface[]
      */
-    public function getPhotosByTags(TagCollection $tags)
+    public function getPhotosByTags(array $tags)
     {
         $cursor = $this->photoRepository->getPhotosByTags($tags);
 
-        $photos = new PhotoCollection();
-
-        /** @var Photo $photo */
-        foreach ($cursor as $photo) {
-            $photos->addPhoto($photo);
-        }
-
-        return $photos;
+        return PhotoFactory::createMultiplePhotos($cursor, 'Freyr\Gallery\WebBundle\Document\Photo');
     }
 
     /**
@@ -109,11 +93,11 @@ class PhotoService
     }
 
     /**
-     * @param Gallery $gallery
+     * @param GalleryInterface $gallery
      * @param $id
      * @return Photo
      */
-    public function getPhotoByIdAndGallery(Gallery $gallery, $id)
+    public function getPhotoByIdAndGallery(GalleryInterface $gallery, $id)
     {
         return $this->photoRepository->getPhotoByIdAndGallery($id, $gallery);
     }

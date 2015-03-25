@@ -6,15 +6,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\Tests\Service;
-
-use Freyr\Tests\FreyrTestCase;
+namespace Freyr\Gallery\Core;
 
 /**
- * Class ServiceTestCase
- * @package Freyr\Tests\Service
+ * Class ResponseModel
+ * @package Freyr\Gallery\Core
  */
-class ServiceTestCase extends FreyrTestCase
+class ResponseModel extends \stdClass
 {
 
 }

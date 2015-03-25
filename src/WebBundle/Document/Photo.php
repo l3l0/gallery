@@ -9,6 +9,9 @@
 namespace Freyr\Gallery\WebBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\Gallery\Core\GalleryInterface;
+use Freyr\Gallery\Core\PhotoInterface;
+use Freyr\Gallery\Core\PropertyInterface;
 use Freyr\Gallery\WebBundle\Entity\Property;
 use JsonSerializable;
 
@@ -17,7 +20,7 @@ use JsonSerializable;
  * @package Freyr\Gallery\WebBundle\Document
  * @MongoDB\Document(repositoryClass="Freyr\Gallery\WebBundle\Repository\MongoDB\MongoDBPhotoRepository")
  */
-class Photo implements JsonSerializable
+class Photo implements PhotoInterface, JsonSerializable
 {
 
     /**
@@ -95,15 +98,15 @@ class Photo implements JsonSerializable
     }
 
     /**
-     * @param Gallery $gallery
+     * @param GalleryInterface $gallery
      */
-    public function setGallery(Gallery $gallery)
+    public function setGallery(GalleryInterface $gallery)
     {
         $this->gallery = $gallery;
     }
 
     /**
-     * @return Property
+     * @return PropertyInterface
      */
     public function getProperty()
     {
@@ -111,7 +114,7 @@ class Photo implements JsonSerializable
     }
 
     /**
-     * @param Property $property
+     * @param PropertyInterface $property
      */
     public function setProperty($property)
     {

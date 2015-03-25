@@ -6,16 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\Gallery\WebBundle\Entity;
+namespace Freyr\Gallery\WebBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Freyr\Gallery\Core\PropertyInterface;
 
 /**
  * Class Property
  * @package Freyr\Gallery\WebBundle\Entity
  * @MongoDB\EmbeddedDocument
  */
-class Property
+class Property implements PropertyInterface
 {
 
     /**
