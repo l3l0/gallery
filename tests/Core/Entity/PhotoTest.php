@@ -11,8 +11,8 @@ use Freyr\Gallery\Tests\Core\PhotoTestCase;
 class PhotoTest extends PhotoTestCase
 {
 
-
     /**
+     *
      */
     public function testInitialiseNewImage()
     {

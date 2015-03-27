@@ -42,7 +42,7 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
     }
 
     /**
-     * @return Base64Image
+     * @return Photo
      * @TODO Add image type to base64 header
      */
     public function execute()
@@ -51,8 +51,7 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
         $data = [
             'url' => 'data:image/png;base64,' . $this->requestModel->imageContent,
             'name' => $this->requestModel->name,
-            'tags' => $this->extractTags($this->requestModel->tags),
-            'gallery' => $this->extractGallery($this->requestModel->tags)
+            'tags' => $this->requestModel->tags,
         ];
 
         $photo = new Photo($data);
@@ -60,34 +59,5 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
         $this->repository->store($photo);
 
         return $photo;
-    }
-
-    /**
-     * @param array $tags
-     * @return array
-     */
-    private function extractTags(array $tags)
-    {
-        $tagNames = [];
-        foreach ($tags as $tag) {
-            if (!preg_match('/Gallery:/', $tag)) {
-                $tagNames[] = ['name' => $tag];
-            }
-        }
-
-        return $tagNames;
-    }
-
-    /**
-     * @param array $tags
-     * @return string
-     */
-    private function extractGallery(array $tags)
-    {
-        foreach ($tags as $tag) {
-            if (preg_match('/Gallery:/', $tag)) {
-                return ['name' => str_replace('Gallery:', '', $tag)];
-            }
-        }
     }
 }

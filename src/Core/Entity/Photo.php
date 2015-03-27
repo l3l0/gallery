@@ -58,14 +58,17 @@ class Photo
         $this->url = $data['url'];
 
         foreach ($data['tags'] as $tag) {
-            $this->tags[] = new Tag($tag);
+            if (preg_match('/Gallery:/', $tag['name'])) {
+                $this->gallery = new Gallery(['name' => str_replace('Gallery:', '', $tag['name'])]);
+            } else {
+                $this->tags[] = new Tag($tag);
+            }
         }
 
-        if (empty($data['gallery'])) {
+        if (!$this->gallery instanceof Gallery) {
             // @TODO: add exception
             throw new \Exception();
         }
-        $this->gallery = new Gallery($data['gallery']);
     }
 
     /**

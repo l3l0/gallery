@@ -24,7 +24,15 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
         $requestModel = new RequestModel();
         $requestModel->imageContent = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
-        $requestModel->tags = ['tag1', 'tag2', 'tag4', '  tag5', '   5jhs8  ', '  kjdhs ksjh jdh   ', 'Gallery: gallery1   '];
+        $requestModel->tags = [
+            ['name' => 'tag1'],
+            ['name' => 'tag2',],
+            ['name' => 'tag4'],
+            ['name' => '  tag5'],
+            ['name' => '   5jhs8  '],
+            ['name' => '  kjdhs ksjh jdh   '],
+            ['name' => 'Gallery: gallery1   '],
+        ];
         $interactor = new CreatePhotoFromBase64($this->repository, $this->storage);
         $interactor->setRequestModel($requestModel);
 
@@ -39,7 +47,14 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
         $requestModel = new RequestModel();
         $requestModel->imageContent = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
-        $requestModel->tags = ['tag1', 'tag2', 'tag4', '  tag5', '   5jhs8  ', '  kjdhs ksjh jdh   '];
+        $requestModel->tags = [
+            ['name' => 'tag1'],
+            ['name' => 'tag2',],
+            ['name' => 'tag4'],
+            ['name' => '  tag5'],
+            ['name' => '   5jhs8  '],
+            ['name' => '  kjdhs ksjh jdh   ']
+        ];
 
         $interactor = new CreatePhotoFromBase64($this->repository, $this->storage);
         $interactor->setRequestModel($requestModel);

@@ -46,19 +46,15 @@ class PhotoTestCase extends BaseTestCase
             ['name' => '   tag'],
             ['name' => 'tag '],
             ['name' => ' tag   '],
-            ['name' => 'tag']
-        ];
-
-        $gallery = [
-            'name' => ' gallery1  '
+            ['name' => 'tag'],
+            ['name' => ' Gallery: Gallery1  ']
         ];
 
         //@TODO add real image base 64 (small 10x10px)
         return [
             'name' => 'photoname',
             'url' => 'somebase64image',
-            'tags' => $tags,
-            'gallery' => $gallery
+            'tags' => $tags
         ];
     }
 }
