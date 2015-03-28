@@ -8,6 +8,7 @@
  */
 namespace Freyr\Gallery\Core\Repository;
 
+use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 
 /**
@@ -22,4 +23,15 @@ interface PhotoRepositoryInterface
      * @return Photo
      */
     public function store(Photo $photo);
+
+    /**
+     * @param string $photoId
+     * @return Photo
+     */
+    public function findById($photoId);
+
+    /**
+     * @return Gallery[]
+     */
+    public function findAllGalleries();
 }

@@ -8,6 +8,7 @@
  */
 namespace Freyr\Gallery\Core\Repository;
 
+use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 
 /**
@@ -34,5 +35,38 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
         }
         $this->photos[$photo->getId()] = $photo;
     }
+
+    /**
+     * @param string $photoId
+     * @return Photo
+     * @throws \Exception
+     */
+    public function findById($photoId)
+    {
+        $photo = $this->photos[$photoId];
+        if (!$photo instanceof Photo) {
+            // TODO: add exception
+            throw new \Exception();
+        }
+
+        return $photo;
+
+    }
+
+    /**
+     * @return Gallery[]
+     */
+    public function findAllGalleries()
+    {
+        $galleries = [];
+        foreach ($this->photos as $photo) {
+            $gallery = $photo->getGallery();
+            $gallery->setCoverPhoto($photo);
+            $galleries[$photo->getGallery()->getName()] = $gallery;
+        }
+
+        return $galleries;
+    }
+
 
 }

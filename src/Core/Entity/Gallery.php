@@ -16,6 +16,11 @@ class Gallery
 {
 
     /**
+     * @var Photo
+     */
+    private $coverPhoto;
+
+    /**
      * @param array $data
      */
     public function __construct(array $data)
@@ -24,7 +29,7 @@ class Gallery
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return string
      */
     private function sanitizeName($name)
@@ -33,10 +38,26 @@ class Gallery
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Photo
+     */
+    public function getCoverPhoto()
+    {
+        return $this->coverPhoto;
+    }
+
+    /**
+     * @param Photo $photo
+     */
+    public function setCoverPhoto(Photo $photo)
+    {
+        $this->coverPhoto = $photo;
     }
 }

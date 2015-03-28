@@ -8,7 +8,6 @@
  */
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
-use Freyr\Gallery\Core\Entity\Image;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
@@ -41,6 +40,10 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
         $this->storage = $storage;
     }
 
+    /**
+     * @return Photo
+     * @throws \Exception
+     */
     public function execute()
     {
         parent::execute();
@@ -69,7 +72,9 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
             $iptc = iptcparse($info['APP13']);
             /** @noinspection PhpParamsInspection */
             if (count($iptc["2#025"] > 0)) {
-                $tags = ['name' => $iptc["2#025"]];
+                foreach ($iptc["2#025"] as $tagName) {
+                    $tags[] = ['name' => $tagName];
+                }
             }
         }
         return $tags;

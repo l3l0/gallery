@@ -8,8 +8,10 @@
  */
 namespace Freyr\Gallery\Tests\Core;
 
+use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Repository\MemoryPhotoRepository;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
+use Freyr\Gallery\Core\RequestModel;
 use Freyr\Gallery\Core\Storage\MemoryPhotoStorage;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 use Freyr\Gallery\Tests\BaseTestCase;
@@ -56,5 +58,51 @@ class PhotoTestCase extends BaseTestCase
             'url' => 'somebase64image',
             'tags' => $tags
         ];
+    }
+
+    /**
+     * TODO: consider refactor
+     * @return Photo
+     */
+    protected function addRandomPhoto()
+    {
+        $tags = [
+            ['name' => '   tag'],
+            ['name' => 'tag '],
+            ['name' => ' tag   '],
+            ['name' => 'tag'],
+            ['name' => ' Gallery: Gallery1  ']
+        ];
+
+        $data = [
+            'name' => uniqid('name'),
+            'url' => uniqid('url'),
+            'tags' => $tags,
+        ];
+
+        $photo = new Photo($data);
+        $this->repository->store($photo);
+        return $photo;
+    }
+
+    /**
+     * @return RequestModel
+     */
+    protected function generatePhotoRequestModel()
+    {
+        $uniq = uniqid();
+        $tags = [
+            ['name' => 'tag' . $uniq],
+            ['name' => 'tag2' . $uniq],
+            ['name' => 'tag3' . $uniq],
+            ['name' => 'Gallery: Gallery' . $uniq]
+        ];
+
+        $requestModel = new RequestModel();
+        $requestModel->name = 'photoname' . $uniq;
+        $requestModel->imageContent = 'someBase64EncodedString';
+        $requestModel->tags = $tags;
+
+        return $requestModel;
     }
 }
