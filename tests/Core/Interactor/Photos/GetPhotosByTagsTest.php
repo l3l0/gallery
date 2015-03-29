@@ -23,20 +23,19 @@ class GetPhotosByTagsTest extends PhotoTestCase
     public function testInitialise()
     {
         $this->loadFixture(100, ['One', 'Two', 'three'], ['uno', 'duo', 'single', 'double', 'triple', 'octo']);
-        $interactor = new GetPhotosByTags($this->repository);
         $requestModel = new PhotoRequestModel();
 
         $tags = [];
         $tags[] = new Tag(['name' => 'uno']);
         $requestModel->tags = $tags;
-        $interactor->setRequestModel($requestModel);
+        $interactor = new GetPhotosByTags($requestModel, $this->repository);
         $result = $interactor->execute();
         $this->assertNotEmpty($result);
 
         $tags = [];
         $tags[] = new Tag(['name' => 'ta']);
         $requestModel->tags = $tags;
-        $interactor->setRequestModel($requestModel);
+        $interactor = new GetPhotosByTags($requestModel, $this->repository);
         $result = $interactor->execute();
         $this->assertEmpty($result);
     }

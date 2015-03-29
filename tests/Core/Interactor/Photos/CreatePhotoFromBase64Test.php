@@ -33,9 +33,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
             ['name' => '  kjdhs ksjh jdh   '],
             ['name' => 'Gallery: gallery1   '],
         ];
-        $interactor = new CreatePhotoFromBase64($this->repository, $this->storage);
-        $interactor->setRequestModel($requestModel);
-
+        $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }
 
@@ -56,8 +54,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
             ['name' => '  kjdhs ksjh jdh   ']
         ];
 
-        $interactor = new CreatePhotoFromBase64($this->repository, $this->storage);
-        $interactor->setRequestModel($requestModel);
+        $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }
 }

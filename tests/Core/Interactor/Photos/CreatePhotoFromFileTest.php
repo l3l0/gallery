@@ -21,13 +21,12 @@ class CreatePhotoFromFileTest extends PhotoTestCase
 
     public function testCreateNewPhoto()
     {
-        $interactor = new CreatePhotoFromFile($this->repository, $this->storage);
 
         $requestModel = new PhotoRequestModel();
         $requestModel->url = __DIR__ . '/../../ImportFileWithGallery.jpg';
         $requestModel->name = 'photoName';
 
-        $interactor->setRequestModel($requestModel);
+        $interactor = new CreatePhotoFromFile($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }
 
@@ -36,13 +35,11 @@ class CreatePhotoFromFileTest extends PhotoTestCase
      */
     public function testCreateNewPhotoFromFileWithoutGallery()
     {
-        $interactor = new CreatePhotoFromFile($this->repository, $this->storage);
-
         $requestModel = new PhotoRequestModel();
         $requestModel->url = __DIR__ . '/../../ImportFileWithoutGallery.jpg';
         $requestModel->name = 'photoName';
 
-        $interactor->setRequestModel($requestModel);
+        $interactor = new CreatePhotoFromFile($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }
 }

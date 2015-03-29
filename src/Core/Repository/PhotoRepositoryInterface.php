@@ -37,10 +37,10 @@ interface PhotoRepositoryInterface
     public function findAllGalleries();
 
     /**
-     * @param Gallery $gallery
+     * @param string $gallery
      * @return Photo[]
      */
-    public function findPhotosFromGallery(Gallery $gallery);
+    public function findPhotosFromGallery($gallery);
 
     /**
      * @param Tag[] $tags

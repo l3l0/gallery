@@ -24,17 +24,15 @@ class GetPhotoByIdTest extends PhotoTestCase
     public function testGetExistingPhoto()
     {
         $photo = $this->addRandomPhoto();
-        $interactor = new GetPhotoById($this->repository);
-
         $requestModel = new PhotoRequestModel();
         $requestModel->photoId = $photo->getId();
 
-        $interactor->setRequestModel($requestModel);
+        $interactor = new GetPhotoById($requestModel, $this->repository);
         $fetchedPhoto = $interactor->execute();
 
-        $this->assertEquals($photo->getId(), $fetchedPhoto->getId());
-        $this->assertEquals($photo->getName(), $fetchedPhoto->getName());
-        $this->assertEquals($photo->getGallery()->getName(), $fetchedPhoto->getGallery()->getName());
+        $this->assertEquals($photo->getId(), $fetchedPhoto->photoId);
+        $this->assertEquals($photo->getName(), $fetchedPhoto->name);
+        $this->assertEquals($photo->getGallery()->getName(), $fetchedPhoto->gallery);
 
     }
 
@@ -43,12 +41,10 @@ class GetPhotoByIdTest extends PhotoTestCase
      */
     public function getNonExistingPhoto()
     {
-        $interactor = new GetPhotoById($this->repository);
-
         $requestModel = new PhotoRequestModel();
         $requestModel->photoId = 1;
 
-        $interactor->setRequestModel($requestModel);
+        $interactor = new GetPhotoById($requestModel, $this->repository);
         $interactor->execute();
     }
 }

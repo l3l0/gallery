@@ -38,9 +38,6 @@ class GetGalleries extends AbstractInteractor implements CommandInterface
      */
     public function execute()
     {
-        parent::execute();
-
-        // TODO: Maybe split repository, and create separate form galleries? And Tags?
         $galleries = $this->repository->findAllGalleries();
 
         return $galleries;

@@ -17,32 +17,4 @@ use Freyr\Gallery\Core\RequestModel;
 class AbstractInteractor
 {
 
-    /**
-     * @var RequestModel
-     */
-    protected $requestModel = null;
-
-    /**
-     * @param RequestModel $requestModel
-     */
-    public function setRequestModel(RequestModel $requestModel)
-    {
-        $this->requestModel = $requestModel;
-    }
-
-    public function execute()
-    {
-        if ($this->isRequestSet() === false) {
-            // TODO: Add exception
-            throw new \Exception();
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isRequestSet()
-    {
-        return is_null($this->requestModel) ? false : true;
-    }
 }

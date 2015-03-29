@@ -13,6 +13,7 @@ use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
 use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
+use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 
 /**
@@ -36,24 +37,24 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
     private $storage;
 
     /**
+     * @param PhotoRequestModel $requestModel
      * @param PhotoRepositoryInterface $repository
      * @param PhotoStorageInterface $storage
      */
-    public function __construct(PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
+    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
     {
         $this->repository = $repository;
         $this->storage = $storage;
+        $this->requestModel = $requestModel;
     }
 
     /**
-     * @return Photo
-     * @TODO Add image type to base64 header
+     * @return PhotoResponseModel
      */
     public function execute()
     {
-        parent::execute();
         $data = [
-            'url' => 'data:image/png;base64,' . $this->requestModel->url,
+            'url' => 'data:' . $this->requestModel->imageMime . ';base64,' . $this->requestModel->url,
             'name' => $this->requestModel->name,
             'tags' => $this->requestModel->tags,
         ];
@@ -62,6 +63,6 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
         $this->storage->store($photo);
         $this->repository->store($photo);
 
-        return $photo;
+        return $photo->toResponseModel();
     }
 }

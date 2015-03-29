@@ -9,7 +9,7 @@
 namespace Freyr\Gallery\Core;
 
 /**
- * Class RequestModel
+ * Interface RequestModel
  * @package Freyr\Gallery\Core
  */
 interface RequestModel

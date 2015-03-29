@@ -9,10 +9,10 @@
 namespace Freyr\Gallery\Core;
 
 /**
- * Class ResponseModel
+ * Interface ResponseModel
  * @package Freyr\Gallery\Core
  */
-class ResponseModel extends \stdClass
+interface ResponseModel
 {
 
 }

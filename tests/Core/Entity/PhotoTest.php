@@ -43,4 +43,27 @@ class PhotoTest extends PhotoTestCase
         $this->assertNotNull($photo->getId());
         $this->assertNotNull($photo->getCloudId());
     }
+
+    public function testConversionToResponseModel()
+    {
+        $data = [
+            'name' => 'Name',
+            'url' => 'url',
+            'tags' => [
+                ['name' => 'one'], ['name' => 'Gallery: GalleryName']
+            ]
+        ];
+
+        $photo = new Photo($data);
+        $this->repository->store($photo);
+        $responsePhoto = $photo->toResponseModel();
+        $this->assertObjectHasAttribute('tags', $responsePhoto);
+        foreach ($responsePhoto->tags as $tag) {
+            $this->assertEquals('one', $tag);
+        }
+        $this->assertEquals('galleryname', $responsePhoto->gallery);
+        $this->assertEquals('Name', $responsePhoto->name);
+        $this->assertEquals('url', $responsePhoto->url);
+
+    }
 }

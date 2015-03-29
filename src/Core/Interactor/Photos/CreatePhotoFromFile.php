@@ -13,6 +13,7 @@ use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
 use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
+use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 
 /**
@@ -36,22 +37,23 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
     private $repository;
 
     /**
+     * @param PhotoRequestModel $requestModel
      * @param PhotoRepositoryInterface $repository
      * @param PhotoStorageInterface $storage
      */
-    public function __construct(PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
+    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
     {
         $this->repository = $repository;
         $this->storage = $storage;
+        $this->requestModel = $requestModel;
     }
 
     /**
-     * @return Photo
+     * @return PhotoResponseModel
      * @throws \Exception
      */
     public function execute()
     {
-        parent::execute();
         $data = [
             'url' => $this->requestModel->url,
             'name' => $this->requestModel->name,
@@ -62,7 +64,7 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
         $this->storage->store($photo);
         $this->repository->store($photo);
 
-        return $photo;
+        return $photo->toResponseModel();
     }
 
     /**

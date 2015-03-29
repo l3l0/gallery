@@ -8,6 +8,8 @@
  */
 namespace Freyr\Gallery\Core\Entity;
 
+use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
+
 /**
  * Class Photo
  * @package Freyr\Gallery\Core\Entity
@@ -141,5 +143,23 @@ class Photo
     public function getGallery()
     {
         return $this->gallery;
+    }
+
+    /**
+     * @return PhotoResponseModel
+     */
+    public function toResponseModel()
+    {
+        $data = new PhotoResponseModel();
+        $data->cloudId = $this->cloudId;
+        $data->gallery = $this->gallery->getName();
+        foreach ($this->tags as $tag) {
+            $data->tags[] = $tag->getName();
+        }
+        $data->name = $this->name;
+        $data->photoId = $this->id;
+        $data->url = $this->url;
+
+        return $data;
     }
 }

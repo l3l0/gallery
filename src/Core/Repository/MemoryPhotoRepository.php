@@ -70,14 +70,14 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     }
 
     /**
-     * @param Gallery $gallery
+     * @param string $gallery
      * @return Photo[]
      */
-    public function findPhotosFromGallery(Gallery $gallery)
+    public function findPhotosFromGallery($gallery)
     {
         $photos = [];
         foreach ($this->photos as $photo) {
-            if ($photo->getGallery()->getName() === $gallery->getName()) {
+            if ($photo->getGallery()->getName() === $gallery) {
                 $photos[] = $photo;
             }
         }
