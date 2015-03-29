@@ -12,7 +12,7 @@ namespace Freyr\Gallery\Core;
  * Class RequestModel
  * @package Freyr\Gallery\Core
  */
-class RequestModel extends \stdClass
+interface RequestModel
 {
 
 }

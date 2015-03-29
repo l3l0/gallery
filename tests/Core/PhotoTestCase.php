@@ -11,7 +11,7 @@ namespace Freyr\Gallery\Tests\Core;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Repository\MemoryPhotoRepository;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel;
+use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Core\Storage\MemoryPhotoStorage;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 use Freyr\Gallery\Tests\BaseTestCase;
@@ -120,7 +120,7 @@ class PhotoTestCase extends BaseTestCase
     }
 
     /**
-     * @return RequestModel
+     * @return PhotoRequestModel
      */
     protected function generatePhotoRequestModel()
     {
@@ -132,7 +132,7 @@ class PhotoTestCase extends BaseTestCase
             ['name' => 'Gallery: Gallery' . $uniq]
         ];
 
-        $requestModel = new RequestModel();
+        $requestModel = new PhotoRequestModel();
         $requestModel->name = 'photoname' . $uniq;
         $requestModel->url = 'someBase64EncodedString';
         $requestModel->tags = $tags;

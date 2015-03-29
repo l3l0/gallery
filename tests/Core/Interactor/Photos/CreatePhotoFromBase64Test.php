@@ -9,7 +9,7 @@
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromBase64;
-use Freyr\Gallery\Core\RequestModel;
+use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -21,7 +21,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
 
     public function testCreateNewPhoto()
     {
-        $requestModel = new RequestModel();
+        $requestModel = new PhotoRequestModel();
         $requestModel->url = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
         $requestModel->tags = [
@@ -44,7 +44,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
      */
     public function testValidationEmptyGallery()
     {
-        $requestModel = new RequestModel();
+        $requestModel = new PhotoRequestModel();
         $requestModel->url = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
         $requestModel->tags = [

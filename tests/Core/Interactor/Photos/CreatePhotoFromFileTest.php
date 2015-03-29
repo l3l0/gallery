@@ -9,7 +9,7 @@
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromFile;
-use Freyr\Gallery\Core\RequestModel;
+use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -23,8 +23,8 @@ class CreatePhotoFromFileTest extends PhotoTestCase
     {
         $interactor = new CreatePhotoFromFile($this->repository, $this->storage);
 
-        $requestModel = new RequestModel();
-        $requestModel->absoluteFilePath = __DIR__ . '/../../ImportFileWithGallery.jpg';
+        $requestModel = new PhotoRequestModel();
+        $requestModel->url = __DIR__ . '/../../ImportFileWithGallery.jpg';
         $requestModel->name = 'photoName';
 
         $interactor->setRequestModel($requestModel);
@@ -38,8 +38,8 @@ class CreatePhotoFromFileTest extends PhotoTestCase
     {
         $interactor = new CreatePhotoFromFile($this->repository, $this->storage);
 
-        $requestModel = new RequestModel();
-        $requestModel->absoluteFilePath = __DIR__ . '/../../ImportFileWithoutGallery.jpg';
+        $requestModel = new PhotoRequestModel();
+        $requestModel->url = __DIR__ . '/../../ImportFileWithoutGallery.jpg';
         $requestModel->name = 'photoName';
 
         $interactor->setRequestModel($requestModel);

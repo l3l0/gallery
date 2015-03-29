@@ -11,7 +11,7 @@ namespace Freyr\Gallery\Tests\Core\Interactor\Galleries;
 
 use Freyr\Gallery\Core\Interactor\Galleries\GetGalleries;
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromBase64;
-use Freyr\Gallery\Core\RequestModel;
+use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -37,7 +37,7 @@ class GetGalleriesTest extends PhotoTestCase
     {
         $interactor = new GetGalleries($this->repository);
 
-        $requestModel = new RequestModel();
+        $requestModel = new PhotoRequestModel();
         $interactor->setRequestModel($requestModel);
 
         $galleries = $interactor->execute();

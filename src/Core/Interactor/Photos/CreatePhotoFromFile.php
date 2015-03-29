@@ -12,6 +12,7 @@ use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
+use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 
 /**
@@ -21,6 +22,10 @@ use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
 {
 
+    /**
+     * @var PhotoRequestModel
+     */
+    protected $requestModel;
     /**
      * @var PhotoStorageInterface
      */
@@ -48,9 +53,9 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
     {
         parent::execute();
         $data = [
-            'url' => $this->requestModel->absoluteFilePath,
+            'url' => $this->requestModel->url,
             'name' => $this->requestModel->name,
-            'tags' => $this->extractTags($this->requestModel->absoluteFilePath),
+            'tags' => $this->extractTags($this->requestModel->url),
         ];
 
         $photo = new Photo($data);
@@ -61,13 +66,13 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @param string $absoluteFilePath
+     * @param string $url
      * @return array
      */
-    private function extractTags($absoluteFilePath)
+    private function extractTags($url)
     {
         $tags = [];
-        getimagesize($absoluteFilePath, $info);
+        getimagesize($url, $info);
         if (isset($info['APP13'])) {
             $iptc = iptcparse($info['APP13']);
             /** @noinspection PhpParamsInspection */
@@ -82,12 +87,12 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
 
     /**
      * Fetching meta data
-     * @param string $absoluteFilePath
+     * @param string $url
      * @return \stdClass
      */
-    private function retrieveMeta($absoluteFilePath)
+    private function retrieveMeta($url)
     {
-        $data = exif_read_data($absoluteFilePath, 'EXIF', true);
+        $data = exif_read_data($url, 'EXIF', true);
         $data = $data['EXIF'];
 
         $meta = new \stdClass();

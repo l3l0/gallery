@@ -12,6 +12,7 @@ use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
+use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 
 /**
@@ -21,6 +22,10 @@ use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterface
 {
 
+    /**
+     * @var PhotoRequestModel
+     */
+    protected $requestModel;
     /**
      * @var PhotoRepositoryInterface
      */
