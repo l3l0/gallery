@@ -8,7 +8,6 @@
  */
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
-use Freyr\Gallery\Core\Entity\Base64Image;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
@@ -49,7 +48,7 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
     {
         parent::execute();
         $data = [
-            'url' => 'data:image/png;base64,' . $this->requestModel->imageContent,
+            'url' => 'data:image/png;base64,' . $this->requestModel->url,
             'name' => $this->requestModel->name,
             'tags' => $this->requestModel->tags,
         ];

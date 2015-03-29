@@ -22,7 +22,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
     public function testCreateNewPhoto()
     {
         $requestModel = new RequestModel();
-        $requestModel->imageContent = 'somebase64encodedstring';
+        $requestModel->url = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
         $requestModel->tags = [
             ['name' => 'tag1'],
@@ -45,7 +45,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
     public function testValidationEmptyGallery()
     {
         $requestModel = new RequestModel();
-        $requestModel->imageContent = 'somebase64encodedstring';
+        $requestModel->url = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
         $requestModel->tags = [
             ['name' => 'tag1'],

@@ -10,6 +10,7 @@ namespace Freyr\Gallery\Core\Repository;
 
 use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
+use Freyr\Gallery\Core\Entity\Tag;
 
 /**
  * Class MemoryPhotoRepository
@@ -66,6 +67,50 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
         }
 
         return $galleries;
+    }
+
+    /**
+     * @param Gallery $gallery
+     * @return Photo[]
+     */
+    public function findPhotosFromGallery(Gallery $gallery)
+    {
+        $photos = [];
+        foreach ($this->photos as $photo) {
+            if ($photo->getGallery()->getName() === $gallery->getName()) {
+                $photos[] = $photo;
+            }
+        }
+
+        return $photos;
+    }
+
+    /**
+     * @param Tag[] $tags
+     * @return Photo[]
+     */
+    public function findPhotosByTags(array $tags)
+    {
+        $tagNames = [];
+        $photos = [];
+        foreach ($tags as $tag) {
+            $tagNames[] = $tag->getName();
+        }
+
+        foreach ($this->photos as $photo) {
+            $photoTagNames = [];
+            foreach ($photo->getTags() as $tag) {
+                $photoTagNames[] = $tag->getName();
+            }
+
+            $match = array_intersect($photoTagNames, $tagNames);
+
+            if (count($match) > 0) {
+                $photos[] = $photo;
+            }
+        }
+
+        return $photos;
     }
 
 

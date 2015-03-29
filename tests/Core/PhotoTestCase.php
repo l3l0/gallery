@@ -61,6 +61,40 @@ class PhotoTestCase extends BaseTestCase
     }
 
     /**
+     * @param Photo $photo
+     */
+    protected function addPhotoToRepository(Photo $photo)
+    {
+        $this->repository->store($photo);
+    }
+
+    /**
+     * @param int $howManyPhotos
+     * @param array $galleryNames
+     * @param array $tagNames
+     */
+    protected function loadFixture($howManyPhotos, array $galleryNames, array $tagNames)
+    {
+        $tags = [];
+        for ($i = 1; $i <= $howManyPhotos; $i++) {
+            shuffle($tagNames);
+            $randomTags = array_slice($tagNames, 0, rand(1, count($tagNames)));
+            $galleryName = $galleryNames[rand(0, count($galleryNames) - 1)];
+            foreach ($randomTags as $tagName) {
+                $tags[] = ['name' => $tagName];
+            }
+            $tags[] = ['name' => 'Gallery: ' . $galleryName];
+            $data = [
+                'name' => uniqid('PhotoName-'),
+                'url' => uniqid('url-'),
+                'tags' => $tags
+            ];
+            $photo = new Photo($data);
+            $this->repository->store($photo);
+        }
+    }
+
+    /**
      * TODO: consider refactor
      * @return Photo
      */
@@ -100,7 +134,7 @@ class PhotoTestCase extends BaseTestCase
 
         $requestModel = new RequestModel();
         $requestModel->name = 'photoname' . $uniq;
-        $requestModel->imageContent = 'someBase64EncodedString';
+        $requestModel->url = 'someBase64EncodedString';
         $requestModel->tags = $tags;
 
         return $requestModel;

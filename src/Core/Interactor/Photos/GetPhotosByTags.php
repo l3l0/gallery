@@ -1,23 +1,23 @@
 <?php
-/*
- * This file is part of the gallery package.
- * (c) Michal Giergielewicz <michal@giergielewicz.pl>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * Created by IntelliJ IDEA.
+ * User: michal
+ * Date: 2015-03-29
+ * Time: 21:34
  */
+
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
-use Freyr\Gallery\Core\Entity\Gallery;
+use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
 
 /**
- * Class GetPhotosFromGallery
+ * Class GetPhotosByTags
  * @package Freyr\Gallery\Core\Interactor\Photos
  */
-class GetPhotosFromGallery extends AbstractInteractor implements CommandInterface
+class GetPhotosByTags extends AbstractInteractor implements CommandInterface
 {
 
     /**
@@ -34,12 +34,12 @@ class GetPhotosFromGallery extends AbstractInteractor implements CommandInterfac
     }
 
     /**
-     * @return Gallery[]
+     * @return Photo[]
+     * @throws \Exception
      */
     public function execute()
     {
-        $photos = $this->repository->findPhotosFromGallery($this->requestModel->gallery);
-
-        return $photos;
+        parent::execute();
+        return $this->repository->findPhotosByTags($this->requestModel->tags);
     }
 }
