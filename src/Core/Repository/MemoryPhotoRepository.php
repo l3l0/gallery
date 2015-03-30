@@ -25,16 +25,16 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     private $photos = [];
 
     /**
-     * @param Photo $photo
+     * @param Photo $document
      * @return Photo
      */
-    public function store(Photo $photo)
+    public function store(Photo $document)
     {
-        if ($photo->getId() === null) {
+        if ($document->getId() === null) {
             $id = uniqid();
-            $photo->setId($id);
+            $document->setId($id);
         }
-        $this->photos[$photo->getId()] = $photo;
+        $this->photos[$document->getId()] = $document;
     }
 
     /**
@@ -70,14 +70,32 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     }
 
     /**
-     * @param string $gallery
+     * @return Tag[]
+     */
+    public function findAllTags()
+    {
+        $tags = [];
+        foreach ($this->photos as $photo) {
+            $photoTags = $photo->getTags();
+            foreach ($photoTags as $tag) {
+                $tag->setCoverPhoto($photo);
+                $tags[$tag->getName()] = $tag;
+            }
+        }
+
+        return $tags;
+    }
+
+
+    /**
+     * @param string $name
      * @return Photo[]
      */
-    public function findPhotosFromGallery($gallery)
+    public function findPhotosFromGallery($name)
     {
         $photos = [];
         foreach ($this->photos as $photo) {
-            if ($photo->getGallery()->getName() === $gallery) {
+            if ($photo->getGallery()->getName() === $name) {
                 $photos[] = $photo;
             }
         }

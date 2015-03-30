@@ -12,14 +12,6 @@ services:
     arguments:
       - FreyrGalleryWebBundle:Photo
 
-  freyr.gallery.service.photo:
-    class: Freyr\Gallery\WebBundle\Service\PhotoService
-    arguments: [ @freyr.gallery.repository.photo ]
-
-  freyr.gallery.service.photo.raw:
-    class: Freyr\Gallery\WebBundle\Service\RawPhotoService
-    arguments: [ @freyr.gallery.repository.photo, @freyr.gallery.storage.photo ]
-
   freyr.twig.gallery_extension:
     class: Freyr\Gallery\WebBundle\Twig\CloudinaryExtension
     tags:

@@ -20,10 +20,10 @@ interface PhotoRepositoryInterface
 {
 
     /**
-     * @param Photo $photo
+     * @param Photo $document
      * @return Photo
      */
-    public function store(Photo $photo);
+    public function store(Photo $document);
 
     /**
      * @param string $photoId
@@ -37,10 +37,15 @@ interface PhotoRepositoryInterface
     public function findAllGalleries();
 
     /**
-     * @param string $gallery
+     * @return Tag[]
+     */
+    public function findAllTags();
+
+    /**
+     * @param string $name
      * @return Photo[]
      */
-    public function findPhotosFromGallery($gallery);
+    public function findPhotosFromGallery($name);
 
     /**
      * @param Tag[] $tags
