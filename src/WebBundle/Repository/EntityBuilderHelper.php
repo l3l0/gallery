@@ -30,7 +30,8 @@ class EntityBuilderHelper
             'cloudId' => $photo->getCloudId(),
             'name' => $photo->getName(),
             'tags' => $this->buildTagData($photo->getTags()),
-            'gallery' => $this->buildGalleryData($photo->getGallery())
+            'gallery' => $this->buildGalleryData($photo->getGallery()),
+            'url' => $photo->getCloudId()
         ];
 
         return new \Freyr\Gallery\Core\Entity\Photo($data);
@@ -60,13 +61,13 @@ class EntityBuilderHelper
     }
 
     /**
-     * @param Gallery $gallery
+     * @param string $galleryName
      * @return \Freyr\Gallery\Core\Entity\Gallery
      */
-    public function buildGalleryEntity(Gallery $gallery)
+    public function buildGalleryEntity($galleryName)
     {
         $data = [
-            'name' => $gallery->getName()
+            'name' => $galleryName
         ];
 
         $entity = new \Freyr\Gallery\Core\Entity\Gallery($data);
@@ -75,13 +76,13 @@ class EntityBuilderHelper
     }
 
     /**
-     * @param Tag $tag
+     * @param string $tagName
      * @return \Freyr\Gallery\Core\Entity\Tag
      */
-    public function buildTagEntity(Tag $tag)
+    public function buildTagEntity($tagName)
     {
         $data = [
-            'name' => $tag->getName()
+            'name' => $tagName
         ];
 
         $entity = new \Freyr\Gallery\Core\Entity\Tag($data);

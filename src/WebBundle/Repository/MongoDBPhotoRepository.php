@@ -104,7 +104,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
 
         foreach ($cursor as $tag) {
             $entity = $this->builder->buildTagEntity($tag);
-            $photos = $this->findBy(['tag.name' => $entity->getName()], ["limit" => 3]);
+            $photos = $this->findBy(['tags.name' => $entity->getName()], ["limit" => 3]);
             $coverPhoto = $this->builder->buildPhotoEntity($photos[array_rand($photos)]);
             $entity->setCoverPhoto($coverPhoto);
             $result[] = $entity;
