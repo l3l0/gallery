@@ -30,9 +30,9 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
             ['name' => 'tag4'],
             ['name' => '  tag5'],
             ['name' => '   5jhs8  '],
-            ['name' => '  kjdhs ksjh jdh   '],
-            ['name' => 'Gallery: gallery1   '],
+            ['name' => '  kjdhs ksjh jdh   ']
         ];
+        $requestModel->gallery = ['name' => ' gallery1   '];
         $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }

@@ -54,10 +54,15 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
      */
     public function execute()
     {
+        $lightroomTags = $this->extractLightroomTags($this->requestModel->url);
+        $tags = $this->prepareTags($lightroomTags);
+        $gallery = $this->prepareGallery($lightroomTags);
+
         $data = [
             'url' => $this->requestModel->url,
             'name' => $this->requestModel->name,
-            'tags' => $this->extractTags($this->requestModel->url),
+            'tags' => $tags,
+            'gallery' => $gallery
         ];
 
         $photo = new Photo($data);
@@ -71,7 +76,7 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
      * @param string $url
      * @return array
      */
-    private function extractTags($url)
+    private function extractLightroomTags($url)
     {
         $tags = [];
         getimagesize($url, $info);
@@ -80,11 +85,40 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
             /** @noinspection PhpParamsInspection */
             if (count($iptc["2#025"] > 0)) {
                 foreach ($iptc["2#025"] as $tagName) {
-                    $tags[] = ['name' => $tagName];
+                    $tags[] = $tagName;
                 }
             }
         }
         return $tags;
+    }
+
+    /**
+     * @param array $lightroomTags
+     * @return array
+     */
+    private function prepareTags($lightroomTags)
+    {
+        $tags = [];
+        foreach ($lightroomTags as $tagName) {
+            if (!preg_match('/Gallery:/', $tagName)) {
+                $tags[] = ['name' => $tagName];
+            }
+        }
+
+        return $tags;
+    }
+
+    /**
+     * @param array $lightroomTags
+     * @return array
+     */
+    private function prepareGallery($lightroomTags)
+    {
+        foreach ($lightroomTags as $tagName) {
+            if (preg_match('/Gallery:/', $tagName)) {
+                return ['name' => str_replace('Gallery:', '', $tagName)];
+            }
+        }
     }
 
     /**

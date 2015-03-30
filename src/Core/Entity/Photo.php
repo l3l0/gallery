@@ -50,7 +50,8 @@ class Photo
     /**
      * @param array $data
      * @throws \Exception
-     * @TODO: maybe add proper validation method and check for every field. Maybe use 3rd party?
+     * TODO: maybe add proper validation method and check for every field. Maybe use 3rd party?
+     * TODO: Decouple gallery creation (move it outside)
      */
     public function __construct(array $data)
     {
@@ -59,18 +60,18 @@ class Photo
         $this->cloudId = !empty($data['cloudId']) ? $data['cloudId'] : null;
         $this->url = $data['url'];
 
-        foreach ($data['tags'] as $tag) {
-            if (preg_match('/Gallery:/', $tag['name'])) {
-                $this->gallery = new Gallery(['name' => str_replace('Gallery:', '', $tag['name'])]);
-            } else {
-                $this->tags[] = new Tag($tag);
-            }
-        }
-
-        if (!$this->gallery instanceof Gallery) {
-            // @TODO: add exception
+        // TODO: add exception when data['tags'] is not defined
+        if (!isset($data['tags'])) {
             throw new \Exception();
         }
+        foreach ($data['tags'] as $tag) {
+            $this->tags[] = new Tag($tag);
+        }
+        // TODO: add exception when data['gallery'] is not set
+        if (empty($data['gallery'])) {
+            throw new \Exception();
+        }
+        $this->gallery = new Gallery($data['gallery']);
     }
 
     /**

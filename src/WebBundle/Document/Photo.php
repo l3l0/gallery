@@ -44,6 +44,12 @@ class Photo implements JsonSerializable
     private $name;
 
     /**
+     * @MongoDB\String
+     * @var string
+     */
+    private $cloudId;
+
+    /**
      * @return Gallery
      */
     public function getGallery()
@@ -105,6 +111,22 @@ class Photo implements JsonSerializable
     public function setTags(array $tags)
     {
         $this->tags = $tags;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCloudId()
+    {
+        return $this->cloudId;
+    }
+
+    /**
+     * @param mixed $cloudId
+     */
+    public function setCloudId($cloudId)
+    {
+        $this->cloudId = $cloudId;
     }
 
     /**

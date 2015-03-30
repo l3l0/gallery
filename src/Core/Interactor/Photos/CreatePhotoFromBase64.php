@@ -57,6 +57,7 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
             'url' => 'data:' . $this->requestModel->imageMime . ';base64,' . $this->requestModel->url,
             'name' => $this->requestModel->name,
             'tags' => $this->requestModel->tags,
+            'gallery' => $this->requestModel->gallery
         ];
 
         $photo = new Photo($data);

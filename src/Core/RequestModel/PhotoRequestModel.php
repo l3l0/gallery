@@ -41,4 +41,9 @@ class PhotoRequestModel implements RequestModel
      * @var string
      */
     public $imageMime = '';
+
+    /**
+     * @var array
+     */
+    public $gallery = [];
 }

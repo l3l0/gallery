@@ -28,7 +28,7 @@ class PhotoTest extends PhotoTestCase
         }
 
         $this->assertInstanceOf('Freyr\Gallery\Core\Entity\Gallery', $photo->getGallery());
-        $this->assertEquals('gallery1', $photo->getGallery()->getName());
+        $this->assertEquals('galleryname', $photo->getGallery()->getName());
         $this->assertNull($photo->getId());
         $this->assertNull($photo->getCloudId());
     }
@@ -50,8 +50,9 @@ class PhotoTest extends PhotoTestCase
             'name' => 'Name',
             'url' => 'url',
             'tags' => [
-                ['name' => 'one'], ['name' => 'Gallery: GalleryName']
-            ]
+                ['name' => 'one']
+            ],
+            'gallery' => ['name' => 'GalleryName'],
         ];
 
         $photo = new Photo($data);

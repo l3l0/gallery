@@ -49,14 +49,14 @@ class PhotoTestCase extends BaseTestCase
             ['name' => 'tag '],
             ['name' => ' tag   '],
             ['name' => 'tag'],
-            ['name' => ' Gallery: Gallery1  ']
         ];
 
         //@TODO add real image base 64 (small 10x10px)
         return [
             'name' => 'photoname',
             'url' => 'somebase64image',
-            'tags' => $tags
+            'tags' => $tags,
+            'gallery' => ['name' => 'GalleryName']
         ];
     }
 
@@ -83,11 +83,12 @@ class PhotoTestCase extends BaseTestCase
             foreach ($randomTags as $tagName) {
                 $tags[] = ['name' => $tagName];
             }
-            $tags[] = ['name' => 'Gallery: ' . $galleryName];
+
             $data = [
                 'name' => uniqid('PhotoName-'),
                 'url' => uniqid('url-'),
-                'tags' => $tags
+                'tags' => $tags,
+                'gallery' => ['name' => $galleryName]
             ];
             $photo = new Photo($data);
             $this->repository->store($photo);
@@ -104,14 +105,14 @@ class PhotoTestCase extends BaseTestCase
             ['name' => '   tag'],
             ['name' => 'tag '],
             ['name' => ' tag   '],
-            ['name' => 'tag'],
-            ['name' => ' Gallery: Gallery1  ']
+            ['name' => 'tag']
         ];
 
         $data = [
             'name' => uniqid('name'),
             'url' => uniqid('url'),
             'tags' => $tags,
+            'gallery' => ['name' => ' Gallery: Gallery1  ']
         ];
 
         $photo = new Photo($data);
@@ -128,14 +129,14 @@ class PhotoTestCase extends BaseTestCase
         $tags = [
             ['name' => 'tag' . $uniq],
             ['name' => 'tag2' . $uniq],
-            ['name' => 'tag3' . $uniq],
-            ['name' => 'Gallery: Gallery' . $uniq]
+            ['name' => 'tag3' . $uniq]
         ];
 
         $requestModel = new PhotoRequestModel();
         $requestModel->name = 'photoname' . $uniq;
         $requestModel->url = 'someBase64EncodedString';
         $requestModel->tags = $tags;
+        $requestModel->gallery = ['name' => 'Gallery' . $uniq];
 
         return $requestModel;
     }
