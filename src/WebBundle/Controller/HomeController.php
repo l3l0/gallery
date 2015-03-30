@@ -27,11 +27,11 @@ class HomeController extends Controller
      */
     public function getHomeAction()
     {
-        $imageService = $this->get('freyr.gallery.service.photo');
+        $repository = $this->get('freyr.gallery.repository.photo');
 
         return [
-            'galleries' => $imageService->getGalleryListWithPrimaryPhoto(),
-            'tags' => $imageService->getTagsListWithPrimaryPhoto()
+            'galleries' => $repository->findAllGalleries(),
+            'tags' => $repository->findAllTags()
         ];
     }
 

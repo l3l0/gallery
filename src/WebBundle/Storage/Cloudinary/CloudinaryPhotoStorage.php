@@ -9,24 +9,24 @@
 namespace Freyr\Gallery\WebBundle\Storage\Cloudinary;
 
 use Cloudinary\Uploader;
+use Freyr\Gallery\Core\Entity\Photo;
+use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 use Freyr\Gallery\WebBundle\Entity\Property;
 use Freyr\Gallery\WebBundle\Entity\Image;
 
 /**
  * Class CloudinaryPhotoStorage
- * @package Freyr\Gallery\FreyrGalleryWebBundle\Storage\Cloudinary
+ * @package Freyr\Gallery\WebBundle\Storage\Cloudinary
  */
-class CloudinaryPhotoStorage
+class CloudinaryPhotoStorage implements PhotoStorageInterface
 {
-
     /**
-     * @param Image $image
-     * @return Property
+     * @param Photo $photo
+     * @return Photo
      */
-    public function storeRaw(Image $image)
+    public function store(Photo $photo)
     {
-        $response = Uploader::upload($image->getImageForStorage());
-
-        return new Property($response);
+        $response = Uploader::upload($photo->getUrl());
+        $photo->setCloudId($response['public_id']);
     }
 }

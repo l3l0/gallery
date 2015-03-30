@@ -20,7 +20,7 @@ class PhotoResponseModel implements ResponseModel
     /**
      * @var string
      */
-    public $photoId = '';
+    public $id = '';
     /**
      * @var string
      */

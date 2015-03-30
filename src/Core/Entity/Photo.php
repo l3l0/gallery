@@ -158,8 +158,8 @@ class Photo
             $data->tags[] = $tag->getName();
         }
         $data->name = $this->name;
-        $data->photoId = $this->id;
         $data->url = $this->url;
+        $data->id = $this->id;
 
         return $data;
     }

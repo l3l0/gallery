@@ -32,5 +32,15 @@ monolog:
 assetic:
     use_controller: %use_assetic_controller%
 
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://localhost:27017/heroku_app27012761
+            options: {}
+    default_database: app27012761
+    document_managers:
+        default:
+            auto_mapping: true
+
 #swiftmailer:
 #    delivery_address: me@example.com
