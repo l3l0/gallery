@@ -143,7 +143,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         $result = [];
 
         $cursor = $this->createQueryBuilder()
-            ->field('gallery.name')
+            ->field('tags.name')
             ->in($tags)
             ->getQuery()->execute();
 

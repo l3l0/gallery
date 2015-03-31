@@ -13,9 +13,9 @@
             <div class="row">
         {% endif %}
         <div class="col-md-3">
-            <a href="{{ path('gallery', {'name': gallery.getName}) }}">
-                <img class="thumbnail" src="{{ cl(gallery.getCoverPhoto.getCloudId, 250) }}"
-                     data-src="{{ cl(gallery.getCoverPhoto.getCloudId, 250) }}" alt="{{ gallery.getName|e }}"/>
+            <a href="{{ path('gallery', {'name': gallery.name}) }}">
+                <img class="thumbnail" src="{{ cl(gallery.coverPhoto.cloudId, 250) }}"
+                     data-src="{{ cl(gallery.coverPhoto.cloudId, 250) }}" alt="{{ gallery.name|e }}"/>
             </a>
 
             <div class="caption">
@@ -37,9 +37,9 @@
             <div class="row">
         {% endif %}
         <div class="col-md-3">
-            <a href="{{ path('tag', {'name': tag.getName()}) }}">
-                <img class="thumbnail" src="{{ cl(tag.getCoverPhoto.getCloudId, 250) }}"
-                     data-src="{{ cl(tag.getCoverPhoto.getCloudId, 250) }}" alt="{{ tag.getName|e }}"/>
+            <a href="{{ path('tag', {'name': tag.name}) }}">
+                <img class="thumbnail" src="{{ cl(tag.coverPhoto.cloudId, 250) }}"
+                     data-src="{{ cl(tag.coverPhoto.cloudId, 250) }}" alt="{{ tag.name|e }}"/>
             </a>
 
             <div class="caption">

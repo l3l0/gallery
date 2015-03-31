@@ -8,6 +8,8 @@
  */
 namespace Freyr\Gallery\WebBundle\Controller;
 
+use Freyr\Gallery\Core\Interactor\Galleries\GetGalleries;
+use Freyr\Gallery\Core\Interactor\Tags\GetTags;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -28,8 +30,12 @@ class HomeController extends Controller
     public function getHomeAction()
     {
         $repository = $this->get('freyr.gallery.repository.photo');
-        $galleries = $repository->findAllGalleries();
-        $tags = $repository->findAllTags();
+        $interactor = new GetGalleries($repository);
+        $galleries = $interactor->execute();
+
+        $interactor = new GetTags($repository);
+        $tags = $interactor->execute();
+
         return [
             'galleries' => $galleries,
             'tags' => $tags,

@@ -6,9 +6,8 @@
  * Time: 22:18
  */
 
-namespace Freyr\Gallery\Core\Interactor\Galleries;
+namespace Freyr\Gallery\Core\Interactor\Tags;
 
-use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
@@ -17,7 +16,7 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  * Class GetGalleries
  * @package Freyr\Gallery\Core\Interactor\Galleries
  */
-class GetGalleries extends AbstractInteractor implements CommandInterface
+class GetTags extends AbstractInteractor implements CommandInterface
 {
     /**
      * @var PhotoRepositoryInterface
@@ -33,15 +32,15 @@ class GetGalleries extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return Gallery[]
+     * @return array
      * @throws \Exception
      */
     public function execute()
     {
-        $galleries = $this->repository->findAllGalleries();
+        $tags = $this->repository->findAllTags();
         $result = [];
-        foreach ($galleries as $gallery) {
-            $result[] = $gallery->asDataStructure();
+        foreach ($tags as $tag) {
+            $result[] = $tag->asDataStructure();
         }
 
         return $result;
