@@ -13,5 +13,7 @@ bin/*
 !bin/symfony_requirements
 app/SymfonyRequirements.php
 Vagrantfile
-puphpet
+puphpet/*
+.vagrant/*
 .gitattributes
+.idea
