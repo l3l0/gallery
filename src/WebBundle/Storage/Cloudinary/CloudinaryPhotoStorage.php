@@ -27,5 +27,6 @@ class CloudinaryPhotoStorage implements PhotoStorageInterface
     {
         $response = Uploader::upload($photo->getUrl());
         $photo->setCloudId($response['public_id']);
+        $photo->setUrl($response['url']);
     }
 }
