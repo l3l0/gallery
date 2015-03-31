@@ -8,7 +8,6 @@
  */
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
-use Freyr\Gallery\Core\Exception\PhotoCreationException;
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromFile;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
@@ -28,13 +27,13 @@ class CreatePhotoFromFileTest extends PhotoTestCase
         $interactor->execute();
     }
 
+
     /**
-     * @expectedException PhotoCreationException
+     * @expectedException \Exception
      * @expectedExceptionCode 2
      */
     public function testCreateNewPhotoFromFileWithoutGallery()
     {
-
         $path = __DIR__ . '/../../ImportFileWithoutGallery.jpg';
 
         $interactor = new CreatePhotoFromFile($path, $this->repository, $this->storage);
