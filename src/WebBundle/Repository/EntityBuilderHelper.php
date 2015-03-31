@@ -1,9 +1,10 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: michal
- * Date: 2015-03-30
- * Time: 10:23
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Freyr\Gallery\WebBundle\Repository;
@@ -15,6 +16,7 @@ use Freyr\Gallery\WebBundle\Document\Tag;
 /**
  * Class EntityBuilderHelper
  * @package Freyr\Gallery\WebBundle\Repository
+ * TODO: rethink the idea...
  */
 class EntityBuilderHelper
 {

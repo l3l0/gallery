@@ -10,7 +10,6 @@
 namespace Freyr\Gallery\WebBundle\Controller;
 
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotosFromGallery;
-use Freyr\Gallery\WebBundle\Document\Gallery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
