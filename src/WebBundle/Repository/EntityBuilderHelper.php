@@ -8,8 +8,8 @@
 
 namespace Freyr\Gallery\WebBundle\Repository;
 
-use Freyr\Gallery\WebBundle\Document\Photo;
 use Freyr\Gallery\WebBundle\Document\Gallery;
+use Freyr\Gallery\WebBundle\Document\Photo;
 use Freyr\Gallery\WebBundle\Document\Tag;
 
 /**

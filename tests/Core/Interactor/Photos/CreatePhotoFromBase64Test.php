@@ -8,6 +8,7 @@
  */
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
+use Freyr\Gallery\Core\Exception\PhotoCreationException;
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromBase64;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
@@ -26,7 +27,8 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException PhotoCreationException
+     * @expectedExceptionCode 2
      */
     public function testValidationEmptyGallery()
     {

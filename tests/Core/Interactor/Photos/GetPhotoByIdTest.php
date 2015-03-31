@@ -8,8 +8,8 @@
 
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
-
 use Freyr\Gallery\Core\Entity\Photo;
+use Freyr\Gallery\Core\Exception\PhotoNotFoundException;
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotoById;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
@@ -36,7 +36,8 @@ class GetPhotoByIdTest extends PhotoTestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException PhotoNotFoundException
+     * @expectedExceptionCode 4
      */
     public function getNonExistingPhoto()
     {

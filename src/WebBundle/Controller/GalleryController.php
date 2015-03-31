@@ -9,6 +9,7 @@
 
 namespace Freyr\Gallery\WebBundle\Controller;
 
+use Freyr\Gallery\Core\Interactor\Photos\GetPhotosFromGallery;
 use Freyr\Gallery\WebBundle\Document\Gallery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,13 +32,11 @@ class GalleryController extends Controller
      */
     public function getPhotosAction($name)
     {
-        $imageService = $this->get('freyr.gallery.service.photo');
-        $gallery = new Gallery($name);
-        $photos = $imageService->getPhotosFromGallery($gallery);
-
+        $interactor = new GetPhotosFromGallery($name, $this->get('freyr.gallery.repository.photo'));
+        $photos = $interactor->execute();
         return [
             'photos' => $photos,
-            'gallery' => $gallery
+            'gallery' => $name
         ];
     }
 }

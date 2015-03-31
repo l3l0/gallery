@@ -8,6 +8,7 @@
 
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
+use Freyr\Gallery\Core\Exception\PhotoCreationException;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 
 /**
@@ -46,7 +47,7 @@ class PhotoInteractor extends AbstractInteractor
             }
         }
 
-        throw new \Exception();
+        throw new PhotoCreationException('Bad structure', 2);
     }
 
 }

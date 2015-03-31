@@ -11,8 +11,6 @@ namespace Freyr\Gallery\WebBundle\Storage\Cloudinary;
 use Cloudinary\Uploader;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
-use Freyr\Gallery\WebBundle\Entity\Property;
-use Freyr\Gallery\WebBundle\Entity\Image;
 
 /**
  * Class CloudinaryPhotoStorage

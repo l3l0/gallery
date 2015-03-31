@@ -8,9 +8,6 @@
  */
 namespace Freyr\Gallery\Core\Interactor;
 
-use Freyr\Gallery\Core\RequestModel;
-use Freyr\Gallery\Core\ResponseModel;
-
 /**
  * Interface CommandInterface
  * @package Freyr\Gallery\Core\Interactor
@@ -19,7 +16,7 @@ interface CommandInterface
 {
 
     /**
-     * @return ResponseModel
+     * @return array
      */
     public function execute();
 }

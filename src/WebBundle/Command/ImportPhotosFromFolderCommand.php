@@ -9,9 +9,6 @@
 namespace Freyr\Gallery\WebBundle\Command;
 
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromFile;
-use Freyr\Gallery\Core\Repository\MemoryPhotoRepository;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
-use Freyr\Gallery\Core\Storage\MemoryPhotoStorage;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,11 +33,11 @@ class ImportPhotosFromFolderCommand extends ContainerAwareCommand
             );
 
         // TODO: only for develop - check export url
-        \Cloudinary::config(array(
+        \Cloudinary::config([
             "cloud_name" => "hanrcocaq",
             "api_key" => "675759441666922",
             "api_secret" => "ByL-uFf9vzrfmcDCbnxFplQ47JY"
-        ));
+        ]);
     }
 
     /**
@@ -66,12 +63,9 @@ class ImportPhotosFromFolderCommand extends ContainerAwareCommand
             }
 
             $output->writeln($file);
-            $requestModel = new PhotoRequestModel();
-            $requestModel->url = $file;
-            $requestModel->name = uniqid('name');
-            $interactor = new CreatePhotoFromFile($requestModel, $repository, $storage);
+            $interactor = new CreatePhotoFromFile($file, $repository, $storage);
             $photo = $interactor->execute();
-            $output->writeln($photo->cloudId . ' - ' . $photo->id);
+            $output->writeln($photo['cloudId'] . ' - ' . $photo['id']);
         }
 
         $output->writeln('END');

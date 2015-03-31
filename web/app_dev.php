@@ -1,7 +1,7 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\HttpFoundation\Request;
 
 umask(0000);
 

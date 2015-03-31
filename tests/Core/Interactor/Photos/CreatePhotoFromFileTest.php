@@ -8,6 +8,7 @@
  */
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
+use Freyr\Gallery\Core\Exception\PhotoCreationException;
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromFile;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
@@ -28,7 +29,8 @@ class CreatePhotoFromFileTest extends PhotoTestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException PhotoCreationException
+     * @expectedExceptionCode 2
      */
     public function testCreateNewPhotoFromFileWithoutGallery()
     {

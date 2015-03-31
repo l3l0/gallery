@@ -8,6 +8,8 @@
  */
 namespace Freyr\Gallery\Core\Entity;
 
+use Freyr\Gallery\Core\Exception\PhotoCreationException;
+
 /**
  * Class Photo
  * @package Freyr\Gallery\Core\Entity
@@ -42,16 +44,16 @@ class Photo
 
     /**
      * @param array $data
-     * @throws \Exception
      * TODO: maybe add proper validation method and check for every field. Maybe use 3rd party?
+     * @throws PhotoCreationException
      */
     public function __construct(array $data)
     {
         if (!isset($data['tags'])) {
-            throw new \Exception();
+            throw new PhotoCreationException('Bad Structure', 1);
         }
         if (empty($data['gallery'])) {
-            throw new \Exception();
+            throw new PhotoCreationException('Bad Structure', 2);
         }
 
         $this->id = !empty($data['id']) ? $data['id'] : null;

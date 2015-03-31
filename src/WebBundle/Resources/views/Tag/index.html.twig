@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="page-header">
-        <h2>Tags <small>iterate.todo</small></h2>
+        <h2>Tags
+            <small>iterate.todo</small>
+        </h2>
     </div>
 
     <div class="row">
@@ -13,7 +15,8 @@
         {% endif %}
         <div class="col-md-3">
             <a class="fancybox" rel="group" href="{{ cl(photo.getName(), 850, false) }}">
-                <img class="thumbnail lazyload" data-original="{{ cl(photo.getName(), 250) }}" width="250" height="250" />
+                <img class="thumbnail lazyload" data-original="{{ cl(photo.getCloudId(), 250) }}" width="250"
+                     height="250"/>
             </a>
         </div>
     {% endfor %}

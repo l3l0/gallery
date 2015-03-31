@@ -11,6 +11,7 @@ namespace Freyr\Gallery\Core\Repository;
 use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
+use Freyr\Gallery\Core\Exception\PhotoNotFoundException;
 
 /**
  * Class MemoryPhotoRepository
@@ -42,14 +43,14 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     /**
      * @param string $photoId
      * @return Photo
-     * @throws \Exception
+     * @throws PhotoNotFoundException
      */
     public function findById($photoId)
     {
         $photo = $this->photos[$photoId];
         if (!$photo instanceof Photo) {
             // TODO: add exception
-            throw new \Exception();
+            throw new PhotoNotFoundException('Not found', 4);
         }
 
         return $photo;

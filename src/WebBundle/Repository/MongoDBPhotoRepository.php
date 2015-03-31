@@ -11,15 +11,13 @@ namespace Freyr\Gallery\WebBundle\Repository;
 
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-
 use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-
 use Freyr\Gallery\WebBundle\Document\Gallery as GalleryDocument;
-use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 use Freyr\Gallery\WebBundle\Document\Photo as PhotoDocument;
+use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 
 /**
  * Class MongoDBPhotoRepository
@@ -39,6 +37,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         $this->builder = new EntityBuilderHelper();
 
     }
+
     /**
      * @param Photo $photo
      * @return Photo

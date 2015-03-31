@@ -8,8 +8,6 @@
  */
 namespace Freyr\Gallery\Core\Interactor;
 
-use Freyr\Gallery\Core\RequestModel;
-
 /**
  * Class AbstractInteractor
  * @package Freyr\Gallery\Core\Interactor

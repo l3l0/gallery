@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="page-header">
-        <h2>Galleries <small>freyr photography</small></h2>
+        <h2>Galleries
+            <small>freyr photography</small>
+        </h2>
     </div>
     <div class="row">
     {% for gallery in galleries %}
@@ -15,6 +17,7 @@
                 <img class="thumbnail" src="{{ cl(gallery.getCoverPhoto.getCloudId, 250) }}"
                      data-src="{{ cl(gallery.getCoverPhoto.getCloudId, 250) }}" alt="{{ gallery.getName|e }}"/>
             </a>
+
             <div class="caption">
                 <h3 class="text-center">{{ gallery.name|e }}</h3>
             </div>
@@ -23,7 +26,9 @@
     </div>
 
     <div class="page-header">
-        <h2>Tags <small>freyr photography</small></h2>
+        <h2>Tags
+            <small>freyr photography</small>
+        </h2>
     </div>
     <div class="row">
     {% for tag in tags %}
@@ -36,6 +41,7 @@
                 <img class="thumbnail" src="{{ cl(tag.getCoverPhoto.getCloudId, 250) }}"
                      data-src="{{ cl(tag.getCoverPhoto.getCloudId, 250) }}" alt="{{ tag.getName|e }}"/>
             </a>
+
             <div class="caption">
                 <h3 class="text-center">{{ tag.name|e }}</h3>
             </div>
