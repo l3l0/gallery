@@ -48,7 +48,7 @@ interface PhotoRepositoryInterface
     public function findPhotosFromGallery($name);
 
     /**
-     * @param Tag[] $tags
+     * @param array $tags
      * @return Photo[]
      */
     public function findPhotosByTags(array $tags);

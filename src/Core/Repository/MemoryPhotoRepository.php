@@ -35,6 +35,8 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
             $document->setId($id);
         }
         $this->photos[$document->getId()] = $document;
+
+        return $document;
     }
 
     /**
@@ -104,7 +106,7 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     }
 
     /**
-     * @param Tag[] $tags
+     * @param array $tags
      * @return Photo[]
      */
     public function findPhotosByTags(array $tags)
@@ -112,7 +114,7 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
         $tagNames = [];
         $photos = [];
         foreach ($tags as $tag) {
-            $tagNames[] = $tag->getName();
+            $tagNames[] = $tag;
         }
 
         foreach ($this->photos as $photo) {

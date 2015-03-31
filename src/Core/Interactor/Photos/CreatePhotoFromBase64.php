@@ -9,24 +9,17 @@
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Entity\Photo;
-use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 
 /**
  * Class CreatePhotoFromBase64
  * @package Freyr\Gallery\Core\Interactor
  */
-class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterface
+class CreatePhotoFromBase64 extends PhotoInteractor implements CommandInterface
 {
 
-    /**
-     * @var PhotoRequestModel
-     */
-    protected $requestModel;
     /**
      * @var PhotoRepositoryInterface
      */
@@ -35,35 +28,43 @@ class CreatePhotoFromBase64 extends AbstractInteractor implements CommandInterfa
      * @var PhotoStorageInterface
      */
     private $storage;
+    /**
+     * @var array
+     */
+    private $dataStructure;
 
     /**
-     * @param PhotoRequestModel $requestModel
+     * @param array $dataStructure
      * @param PhotoRepositoryInterface $repository
      * @param PhotoStorageInterface $storage
      */
-    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
+    public function __construct(array $dataStructure, PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
     {
         $this->repository = $repository;
         $this->storage = $storage;
-        $this->requestModel = $requestModel;
+        $this->dataStructure = $dataStructure;
     }
 
     /**
-     * @return PhotoResponseModel
+     * @return array
      */
     public function execute()
     {
+        $lightroomTags = $this->dataStructure['lightroomTags'];
+        $tags = $this->prepareTags($lightroomTags);
+        $gallery = $this->prepareGallery($lightroomTags);
+
         $data = [
-            'url' => 'data:' . $this->requestModel->imageMime . ';base64,' . $this->requestModel->url,
-            'name' => $this->requestModel->name,
-            'tags' => $this->requestModel->tags,
-            'gallery' => $this->requestModel->gallery
+            'url' => 'data:' . $this->dataStructure['mime'] . ';base64,' . $this->dataStructure['base64'],
+            'name' => $this->dataStructure['name'],
+            'tags' => $tags,
+            'gallery' => $gallery,
         ];
 
         $photo = new Photo($data);
         $this->storage->store($photo);
         $this->repository->store($photo);
 
-        return $photo->toResponseModel();
+        return $photo->asDataStructure();
     }
 }

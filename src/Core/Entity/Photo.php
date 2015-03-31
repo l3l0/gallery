@@ -8,8 +8,6 @@
  */
 namespace Freyr\Gallery\Core\Entity;
 
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
-
 /**
  * Class Photo
  * @package Freyr\Gallery\Core\Entity
@@ -20,58 +18,53 @@ class Photo
     /**
      * @var string
      */
+    protected $cloudId;
+    /**
+     * @var string
+     */
+    protected $url;
+    /**
+     * @var Gallery
+     */
+    protected $gallery;
+    /**
+     * @var Tag[]
+     */
+    protected $tags;
+    /**
+     * @var string
+     */
     private $id;
-
     /**
      * @var string
      */
     private $name;
 
     /**
-     * @var string
-     */
-    private $cloudId;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var Gallery
-     */
-    private $gallery;
-
-    /**
-     * @var Tag[]
-     */
-    private $tags;
-
-    /**
      * @param array $data
      * @throws \Exception
      * TODO: maybe add proper validation method and check for every field. Maybe use 3rd party?
-     * TODO: Decouple gallery creation (move it outside)
      */
     public function __construct(array $data)
     {
-        $this->id = !empty($data['id']) ? $data['id'] : null;
-        $this->name = $data['name'];
-        $this->cloudId = !empty($data['cloudId']) ? $data['cloudId'] : null;
-        $this->url = $data['url'];
-
-        // TODO: add exception when data['tags'] is not defined
         if (!isset($data['tags'])) {
             throw new \Exception();
         }
-        foreach ($data['tags'] as $tag) {
-            $this->tags[] = new Tag($tag);
-        }
-        // TODO: add exception when data['gallery'] is not set
         if (empty($data['gallery'])) {
             throw new \Exception();
         }
+
+        $this->id = !empty($data['id']) ? $data['id'] : null;
+        $this->cloudId = !empty($data['cloudId']) ? $data['cloudId'] : null;
+
+        $this->name = $data['name'];
+        $this->url = $data['url'];
+
         $this->gallery = new Gallery($data['gallery']);
+
+        foreach ($data['tags'] as $tag) {
+            $this->tags[] = new Tag($tag);
+        }
     }
 
     /**
@@ -147,20 +140,22 @@ class Photo
     }
 
     /**
-     * @return PhotoResponseModel
+     * @return array
      */
-    public function toResponseModel()
+    public function asDataStructure()
     {
-        $data = new PhotoResponseModel();
-        $data->cloudId = $this->cloudId;
-        $data->gallery = $this->gallery->getName();
+        $tags = [];
         foreach ($this->tags as $tag) {
-            $data->tags[] = $tag->getName();
+            $tags[] = $tag->asDataStructure();
         }
-        $data->name = $this->name;
-        $data->url = $this->url;
-        $data->id = $this->id;
 
-        return $data;
+        return [
+            'id' => $this->id,
+            'cloudId' => $this->cloudId,
+            'url' => $this->url,
+            'name' => $this->name,
+            'gallery' => $this->gallery->asDataStructure(),
+            'tags' => $tags,
+        ];
     }
 }

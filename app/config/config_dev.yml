@@ -35,9 +35,9 @@ assetic:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://localhost:27017/heroku_app27012761
+            server: mongodb://localhost:27017/app27012762
             options: {}
-    default_database: app27012761
+    default_database: app27012762
     document_managers:
         default:
             auto_mapping: true

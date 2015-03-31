@@ -47,6 +47,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     {
         $document = new PhotoDocument();
         $document->setName($photo->getName());
+        $document->setCloudId($photo->getCloudId());
         $gallery = new GalleryDocument($photo->getGallery()->getName());
         $document->setGallery($gallery);
         $tags = [];
@@ -110,6 +111,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
             $result[] = $entity;
         }
 
+        return $result;
     }
 
 

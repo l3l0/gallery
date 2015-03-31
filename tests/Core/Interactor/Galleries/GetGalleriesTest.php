@@ -24,7 +24,7 @@ class GetGalleriesTest extends PhotoTestCase
     {
         parent::setUp();
         for ($i = 1; $i <= 10; $i++) {
-            $requestModel = $this->generatePhotoRequestModel();
+            $requestModel = $this->generateBase64PhotoData();
             $createInteractor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
             $createInteractor->execute();
         }
@@ -37,7 +37,7 @@ class GetGalleriesTest extends PhotoTestCase
 
         foreach ($galleries as $gallery) {
             $this->assertInstanceOf('Freyr\Gallery\Core\Entity\Gallery', $gallery);
-            $this->assertInstanceOf('Freyr\Gallery\Core\Entity\Photo', $gallery->getCoverPhoto());
+            $this->assertInstanceOf('Freyr\Gallery\Core\Entity\CoverPhoto', $gallery->getCoverPhoto());
         }
     }
 }

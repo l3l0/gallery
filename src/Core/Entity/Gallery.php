@@ -16,7 +16,7 @@ class Gallery
 {
 
     /**
-     * @var Photo
+     * @var CoverPhoto
      */
     private $coverPhoto;
 
@@ -46,7 +46,7 @@ class Gallery
     }
 
     /**
-     * @return Photo
+     * @return CoverPhoto
      */
     public function getCoverPhoto()
     {
@@ -58,6 +58,20 @@ class Gallery
      */
     public function setCoverPhoto(Photo $photo)
     {
-        $this->coverPhoto = $photo;
+        $this->coverPhoto = new CoverPhoto($photo);
+    }
+
+    /**
+     * @return array
+     */
+    public function asDataStructure()
+    {
+        $result = [];
+        if ($this->coverPhoto instanceof CoverPhoto) {
+            $result['coverPhoto'] = $this->coverPhoto->asDataStructure();
+        }
+        $result['name'] = $this->name;
+
+        return $result;
     }
 }

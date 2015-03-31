@@ -57,14 +57,14 @@ class PhotoTest extends PhotoTestCase
 
         $photo = new Photo($data);
         $this->repository->store($photo);
-        $responsePhoto = $photo->toResponseModel();
-        $this->assertObjectHasAttribute('tags', $responsePhoto);
-        foreach ($responsePhoto->tags as $tag) {
-            $this->assertEquals('one', $tag);
+        $responsePhoto = $photo->asDataStructure();
+        $this->assertArrayHasKey('tags', $responsePhoto);
+        foreach ($responsePhoto['tags'] as $tag) {
+            $this->assertEquals('one', $tag['name']);
         }
-        $this->assertEquals('galleryname', $responsePhoto->gallery);
-        $this->assertEquals('Name', $responsePhoto->name);
-        $this->assertEquals('url', $responsePhoto->url);
+        $this->assertEquals('galleryname', $responsePhoto['gallery']['name']);
+        $this->assertEquals('Name', $responsePhoto['name']);
+        $this->assertEquals('url', $responsePhoto['url']);
 
     }
 }

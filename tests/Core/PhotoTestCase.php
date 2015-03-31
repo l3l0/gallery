@@ -11,7 +11,6 @@ namespace Freyr\Gallery\Tests\Core;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Repository\MemoryPhotoRepository;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Core\Storage\MemoryPhotoStorage;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 use Freyr\Gallery\Tests\BaseTestCase;
@@ -96,10 +95,9 @@ class PhotoTestCase extends BaseTestCase
     }
 
     /**
-     * TODO: consider refactor
-     * @return Photo
+     * @return array
      */
-    protected function addRandomPhoto()
+    protected function generateRandomPhotoData()
     {
         $tags = [
             ['name' => '   tag'],
@@ -112,32 +110,24 @@ class PhotoTestCase extends BaseTestCase
             'name' => uniqid('name'),
             'url' => uniqid('url'),
             'tags' => $tags,
-            'gallery' => ['name' => ' Gallery: Gallery1  ']
+            'gallery' => ['name' => ' Gallery1  ']
         ];
 
-        $photo = new Photo($data);
-        $this->repository->store($photo);
-        return $photo;
+        return $data;
     }
 
     /**
-     * @return PhotoRequestModel
+     * @return array
      */
-    protected function generatePhotoRequestModel()
+    protected function generateBase64PhotoData()
     {
         $uniq = uniqid();
-        $tags = [
-            ['name' => 'tag' . $uniq],
-            ['name' => 'tag2' . $uniq],
-            ['name' => 'tag3' . $uniq]
-        ];
 
-        $requestModel = new PhotoRequestModel();
-        $requestModel->name = 'photoname' . $uniq;
-        $requestModel->url = 'someBase64EncodedString';
-        $requestModel->tags = $tags;
-        $requestModel->gallery = ['name' => 'Gallery' . $uniq];
+        $data['name'] = 'photoname' . $uniq;
+        $data['base64'] = 'someBase64EncodedString';
+        $data['lightroomTags'] = ['tag' . $uniq, 'tag2' . $uniq, 'tag3' . $uniq, 'Gallery: Gallery One'];
+        $data['mime'] = 'image/jpg';
 
-        return $requestModel;
+        return $data;
     }
 }

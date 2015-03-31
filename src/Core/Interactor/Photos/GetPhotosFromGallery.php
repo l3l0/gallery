@@ -11,8 +11,6 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\GalleryRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 
 /**
  * Class GetPhotosFromGallery
@@ -22,34 +20,34 @@ class GetPhotosFromGallery extends AbstractInteractor implements CommandInterfac
 {
 
     /**
-     * @var GalleryRequestModel
-     */
-    protected $requestModel;
-    /**
      * @var PhotoRepositoryInterface
      */
     private $repository;
+    /**
+     * @var string
+     */
+    private $gallery;
 
     /**
-     * @param GalleryRequestModel $requestModel
+     * @param string $gallery
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct(GalleryRequestModel $requestModel, PhotoRepositoryInterface $repository)
+    public function __construct($gallery, PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->requestModel = $requestModel;
+        $this->gallery = $gallery;
     }
 
     /**
-     * @return PhotoResponseModel[]
+     * @return array
      */
     public function execute()
     {
-        $photos = $this->repository->findPhotosFromGallery($this->requestModel->name);
+        $photos = $this->repository->findPhotosFromGallery($this->gallery);
 
         $data = [];
         foreach ($photos as $photo) {
-            $data[] = $photo->toResponseModel();
+            $data[] = $photo->asDataStructure();
         }
 
         return $data;

@@ -9,8 +9,8 @@
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 
+use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotoById;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -23,16 +23,15 @@ class GetPhotoByIdTest extends PhotoTestCase
 
     public function testGetExistingPhoto()
     {
-        $photo = $this->addRandomPhoto();
-        $requestModel = new PhotoRequestModel();
-        $requestModel->photoId = $photo->getId();
-
-        $interactor = new GetPhotoById($requestModel, $this->repository);
+        $data = $this->generateRandomPhotoData();
+        $photo = new Photo($data);
+        $photo = $this->repository->store($photo);
+        $interactor = new GetPhotoById($photo->getId(), $this->repository);
         $fetchedPhoto = $interactor->execute();
 
-        $this->assertEquals($photo->getId(), $fetchedPhoto->photoId);
-        $this->assertEquals($photo->getName(), $fetchedPhoto->name);
-        $this->assertEquals($photo->getGallery()->getName(), $fetchedPhoto->gallery);
+        $this->assertEquals($photo->getId(), $fetchedPhoto['id']);
+        $this->assertEquals($photo->getName(), $fetchedPhoto['name']);
+        $this->assertEquals($photo->getGallery()->getName(), $fetchedPhoto['gallery']['name']);
 
     }
 
@@ -41,10 +40,7 @@ class GetPhotoByIdTest extends PhotoTestCase
      */
     public function getNonExistingPhoto()
     {
-        $requestModel = new PhotoRequestModel();
-        $requestModel->photoId = 1;
-
-        $interactor = new GetPhotoById($requestModel, $this->repository);
+        $interactor = new GetPhotoById(1, $this->repository);
         $interactor->execute();
     }
 }

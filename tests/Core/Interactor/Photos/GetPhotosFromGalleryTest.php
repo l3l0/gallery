@@ -9,7 +9,6 @@
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotosFromGallery;
-use Freyr\Gallery\Core\RequestModel\GalleryRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -23,9 +22,7 @@ class GetPhotosFromGalleryTest extends PhotoTestCase
     {
         $this->loadFixture(100, ['One', 'Two', 'three'], ['uno', 'duo', 'single', 'double', 'triple', 'octo']);
 
-        $requestModel = new GalleryRequestModel();
-        $requestModel->name = 'one';
-        $interactor = new GetPhotosFromGallery($requestModel, $this->repository);
+        $interactor = new GetPhotosFromGallery('one', $this->repository);
         $galleries = $interactor->execute();
         $this->assertNotEmpty($galleries);
     }

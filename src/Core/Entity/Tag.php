@@ -18,6 +18,11 @@ class Tag
     private $name;
 
     /**
+     * @var CoverPhoto
+     */
+    private $coverPhoto;
+
+    /**
      * @param array $data
      */
     public function __construct(array $data)
@@ -42,8 +47,33 @@ class Tag
         return $this->name;
     }
 
-    public function setCoverPhoto()
+    /**
+     * @return CoverPhoto
+     */
+    public function getCoverPhoto()
     {
+        return $this->coverPhoto;
+    }
 
+    /**
+     * @param Photo $photo
+     */
+    public function setCoverPhoto(Photo $photo)
+    {
+        $this->coverPhoto = new CoverPhoto($photo);
+    }
+
+    /**
+     * @return array
+     */
+    public function asDataStructure()
+    {
+        $result = [];
+        if ($this->coverPhoto instanceof CoverPhoto) {
+            $result['coverPhoto'] = $this->coverPhoto->asDataStructure();
+        }
+        $result['name'] = $this->name;
+
+        return $result;
     }
 }

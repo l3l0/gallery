@@ -9,24 +9,17 @@
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Entity\Photo;
-use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 
 /**
  * Class CreatePhotoFromRawData
  * @package Freyr\Gallery\Core\Interactor\Photos
  */
-class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
+class CreatePhotoFromFile extends PhotoInteractor implements CommandInterface
 {
 
-    /**
-     * @var PhotoRequestModel
-     */
-    protected $requestModel;
     /**
      * @var PhotoStorageInterface
      */
@@ -35,41 +28,46 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
      * @var PhotoRepositoryInterface
      */
     private $repository;
+    /**
+     * @var string
+     */
+    private $path;
 
     /**
-     * @param PhotoRequestModel $requestModel
+     * @param string $path
      * @param PhotoRepositoryInterface $repository
      * @param PhotoStorageInterface $storage
      */
-    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
+    public function __construct($path, PhotoRepositoryInterface $repository, PhotoStorageInterface $storage)
     {
         $this->repository = $repository;
         $this->storage = $storage;
-        $this->requestModel = $requestModel;
+        $this->path = $path;
     }
 
     /**
-     * @return PhotoResponseModel
+     * @return array
      * @throws \Exception
      */
     public function execute()
     {
-        $lightroomTags = $this->extractLightroomTags($this->requestModel->url);
+        $lightroomTags = $this->extractLightroomTags($this->path);
         $tags = $this->prepareTags($lightroomTags);
         $gallery = $this->prepareGallery($lightroomTags);
 
         $data = [
-            'url' => $this->requestModel->url,
-            'name' => $this->requestModel->name,
+            'url' => $this->path,
+            'name' => $this->path, //TODO: extract name from path
             'tags' => $tags,
             'gallery' => $gallery
         ];
 
         $photo = new Photo($data);
-        $this->storage->store($photo);
+        $result = $this->storage->store($photo);
+        $photo->setId($result['public_id']);
         $this->repository->store($photo);
 
-        return $photo->toResponseModel();
+        return $photo->asDataStructure();
     }
 
     /**
@@ -90,35 +88,6 @@ class CreatePhotoFromFile extends AbstractInteractor implements CommandInterface
             }
         }
         return $tags;
-    }
-
-    /**
-     * @param array $lightroomTags
-     * @return array
-     */
-    private function prepareTags($lightroomTags)
-    {
-        $tags = [];
-        foreach ($lightroomTags as $tagName) {
-            if (!preg_match('/Gallery:/', $tagName)) {
-                $tags[] = ['name' => $tagName];
-            }
-        }
-
-        return $tags;
-    }
-
-    /**
-     * @param array $lightroomTags
-     * @return array
-     */
-    private function prepareGallery($lightroomTags)
-    {
-        foreach ($lightroomTags as $tagName) {
-            if (preg_match('/Gallery:/', $tagName)) {
-                return ['name' => str_replace('Gallery:', '', $tagName)];
-            }
-        }
     }
 
     /**

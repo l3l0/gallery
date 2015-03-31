@@ -11,8 +11,6 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 
 /**
  * Class GetPhotoById
@@ -22,30 +20,30 @@ class GetPhotoById extends AbstractInteractor implements CommandInterface
 {
 
     /**
-     * @var PhotoRequestModel
-     */
-    protected $requestModel;
-    /**
      * @var PhotoRepositoryInterface
      */
     private $repository;
+    /**
+     * @var
+     */
+    private $photoId;
 
     /**
-     * @param PhotoRequestModel $requestModel
+     * @param $photoId
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository)
+    public function __construct($photoId, PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->requestModel = $requestModel;
+        $this->photoId = $photoId;
     }
 
     /**
-     * @return PhotoResponseModel
+     * @return array
      */
     public function execute()
     {
-        $photo = $this->repository->findById($this->requestModel->photoId);
-        return $photo->toResponseModel();
+        $photo = $this->repository->findById($this->photoId);
+        return $photo->asDataStructure();
     }
 }

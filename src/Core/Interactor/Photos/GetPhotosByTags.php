@@ -11,8 +11,6 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 
 /**
  * Class GetPhotosByTags
@@ -22,35 +20,35 @@ class GetPhotosByTags extends AbstractInteractor implements CommandInterface
 {
 
     /**
-     * @var PhotoRequestModel
-     */
-    protected $requestModel;
-    /**
      * @var PhotoRepositoryInterface
      */
     private $repository;
+    /**
+     * @var array
+     */
+    private $tags;
 
     /**
-     * @param PhotoRequestModel $requestModel
+     * @param array $tags
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository)
+    public function __construct(array $tags, PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->requestModel = $requestModel;
+        $this->tags = $tags;
     }
 
     /**
-     * @return PhotoResponseModel[]
+     * @return array
      * @throws \Exception
      */
     public function execute()
     {
-        $photos = $this->repository->findPhotosByTags($this->requestModel->tags);
+        $photos = $this->repository->findPhotosByTags($this->tags);
 
         $data = [];
         foreach ($photos as $photo) {
-            $data[] = $photo->toResponseModel();
+            $data[] = $photo->asDataStructure();
         }
 
         return $data;

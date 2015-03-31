@@ -9,7 +9,6 @@
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromBase64;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -21,19 +20,8 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
 
     public function testCreateNewPhoto()
     {
-        $requestModel = new PhotoRequestModel();
-        $requestModel->url = 'somebase64encodedstring';
-        $requestModel->name = 'photoName';
-        $requestModel->tags = [
-            ['name' => 'tag1'],
-            ['name' => 'tag2',],
-            ['name' => 'tag4'],
-            ['name' => '  tag5'],
-            ['name' => '   5jhs8  '],
-            ['name' => '  kjdhs ksjh jdh   ']
-        ];
-        $requestModel->gallery = ['name' => ' gallery1   '];
-        $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
+        $data = $this->generateBase64PhotoData();
+        $interactor = new CreatePhotoFromBase64($data, $this->repository, $this->storage);
         $interactor->execute();
     }
 
@@ -42,19 +30,9 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
      */
     public function testValidationEmptyGallery()
     {
-        $requestModel = new PhotoRequestModel();
-        $requestModel->url = 'somebase64encodedstring';
-        $requestModel->name = 'photoName';
-        $requestModel->tags = [
-            ['name' => 'tag1'],
-            ['name' => 'tag2',],
-            ['name' => 'tag4'],
-            ['name' => '  tag5'],
-            ['name' => '   5jhs8  '],
-            ['name' => '  kjdhs ksjh jdh   ']
-        ];
-
-        $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
+        $data = $this->generateBase64PhotoData();
+        array_pop($data['lightroomTags']);
+        $interactor = new CreatePhotoFromBase64($data, $this->repository, $this->storage);
         $interactor->execute();
     }
 }
