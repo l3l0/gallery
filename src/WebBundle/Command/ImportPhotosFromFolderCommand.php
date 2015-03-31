@@ -1,9 +1,10 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: michal
- * Date: 2015-03-30
- * Time: 22:49
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Freyr\Gallery\WebBundle\Command;
@@ -48,9 +49,7 @@ class ImportPhotosFromFolderCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $repository = $this->getContainer()->get('freyr.gallery.repository.photo');
-//        $repository = new MemoryPhotoRepository();
         $storage = $this->getContainer()->get('freyr.gallery.storage.photo');
-//        $storage = new MemoryPhotoStorage();
 
         $dir = $input->getArgument('dir');
         $files = $this->parseDir($dir);
