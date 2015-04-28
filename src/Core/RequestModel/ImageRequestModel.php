@@ -1,26 +1,17 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: michal
- * Date: 2015-03-29
- * Time: 22:31
- */
 
 namespace Freyr\Gallery\Core\RequestModel;
 
 use Freyr\Gallery\Core\RequestModel;
 
 /**
- * Class PhotoRequestModel
+ * Class ImageRequestModel
  * @package Freyr\Gallery\Core\RequestModel
  */
-class PhotoRequestModel implements RequestModel
+class ImageRequestModel
 {
 
-    /**
-     * @var string
-     */
-    public $photoId = null;
+    public $id = null;
     /**
      * @var string
      */
@@ -37,13 +28,4 @@ class PhotoRequestModel implements RequestModel
      * @var array
      */
     public $tags = [];
-    /**
-     * @var string
-     */
-    public $imageMime = '';
-
-    /**
-     * @var array
-     */
-    public $gallery = [];
 }

@@ -10,7 +10,7 @@ namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Entity\Tag;
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotosByTags;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
+use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -23,7 +23,7 @@ class GetPhotosByTagsTest extends PhotoTestCase
     public function testInitialise()
     {
         $this->loadFixture(100, ['One', 'Two', 'three'], ['uno', 'duo', 'single', 'double', 'triple', 'octo']);
-        $requestModel = new PhotoRequestModel();
+        $requestModel = new ImageRequestModel();
 
         $tags = [];
         $tags[] = new Tag(['name' => 'uno']);

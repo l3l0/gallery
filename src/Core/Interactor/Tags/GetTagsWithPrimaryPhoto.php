@@ -7,49 +7,46 @@
  * file that was distributed with this source code.
  */
 
-namespace Freyr\Gallery\Core\Interactor\Photos;
+namespace Freyr\Gallery\Core\Interactor\Tags;
 
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\GalleryRequestModel;
 
 /**
- * Class GetPhotosFromGallery
- * @package Freyr\Gallery\Core\Interactor\Photos
+ * Class GetTagsWithPrimaryPhoto
+ * @package Freyr\Gallery\Core\Interactor\Galleries
  */
-class GetPhotosFromGallery extends AbstractInteractor implements CommandInterface
+class GetTagsWithPrimaryPhoto extends AbstractInteractor implements CommandInterface
 {
 
     /**
      * @var PhotoRepositoryInterface
      */
     private $repository;
-    /**
-     * @var string
-     */
-    private $galleryName;
 
     /**
-     * @param string $galleryName
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct($galleryName, PhotoRepositoryInterface $repository)
+    public function __construct(PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->galleryName = $galleryName;
     }
 
     /**
-     * @return GetPhotosFromGalleryResponseModel
+     * @return GetTagsWithPrimaryPhotoResponseModel[]
+     * @throws \Exception
      */
     public function execute()
     {
-        $photos = $this->repository->findPhotosFromGallery($this->galleryName);
+        $tags = $this->repository->findAllTags();
 
         $response = [];
-        foreach ($photos as $photo) {
-            $response[] = new GetPhotosFromGalleryResponseModel($photo);
+        foreach ($tags as $tag) {
+            $photo = $this->repository->getRandomPhotoFromTag($tag);
+            $tag->setCoverPhoto($photo);
+
+            $response[] = new GetTagsWithPrimaryPhotoResponseModel($tag);
         }
 
         return $response;

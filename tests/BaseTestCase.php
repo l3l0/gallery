@@ -58,8 +58,11 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
             'name' => uniqid(),
             'url' => 'none',
             'tags' => [
-                ['name' => uniqid()], ['name' => uniqid()], ['name' => uniqid()], ['name' => 'Gallery: ' . uniqid()]
-            ]
+                ['name' => uniqid()],
+                ['name' => uniqid()],
+                ['name' => uniqid()]
+            ],
+            'gallery' => ['name' => uniqid()]
         ];
         return new Photo($data);
     }

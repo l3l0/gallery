@@ -8,6 +8,8 @@
  */
 namespace Freyr\Gallery\WebBundle\Controller;
 
+use Freyr\Gallery\Core\Interactor\Photos\AddImageAsPhotoInteractor;
+use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\WebBundle\Entity\Base64ImageData;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,10 +18,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PhotoController
+ * Class ApiController
  * @package Freyr\Gallery\WebBundle\Controller
  */
-class PhotoController extends Controller
+class ApiController extends Controller
 {
 
     /**
@@ -30,9 +32,10 @@ class PhotoController extends Controller
      */
     public function createPhotoAction(Request $request)
     {
-        $image = new Base64ImageData(json_decode($request->getContent(), true));
-        $rawPhotoService = $this->get('freyr.gallery.service.photo.raw');
-        $photo = $rawPhotoService->store($image);
+        $image = new ImageRequestModel(json_decode($request->getContent(), true));
+        $photoRepository = $this->get('freyr.gallery.repository.photo');
+        $addImageAsPhotoInteractor = new AddImageAsPhotoInteractor($image, $photoRepository);
+        $photo = $addImageAsPhotoInteractor->execute();
 
         return new JsonResponse($photo);
     }

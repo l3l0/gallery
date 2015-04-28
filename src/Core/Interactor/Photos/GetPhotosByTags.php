@@ -11,7 +11,7 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
+use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 
 /**
@@ -22,7 +22,7 @@ class GetPhotosByTags extends AbstractInteractor implements CommandInterface
 {
 
     /**
-     * @var PhotoRequestModel
+     * @var ImageRequestModel
      */
     protected $requestModel;
     /**
@@ -31,10 +31,10 @@ class GetPhotosByTags extends AbstractInteractor implements CommandInterface
     private $repository;
 
     /**
-     * @param PhotoRequestModel $requestModel
+     * @param ImageRequestModel $requestModel
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct(PhotoRequestModel $requestModel, PhotoRepositoryInterface $repository)
+    public function __construct(ImageRequestModel $requestModel, PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
         $this->requestModel = $requestModel;

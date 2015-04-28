@@ -6,8 +6,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\Gallery\Core\Entity;
 
+use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 
 /**
@@ -48,30 +50,23 @@ class Photo
     private $tags;
 
     /**
-     * @param array $data
+     * @param ImageRequestModel $image
      * @throws \Exception
-     * TODO: maybe add proper validation method and check for every field. Maybe use 3rd party?
-     * TODO: Decouple gallery creation (move it outside)
      */
-    public function __construct(array $data)
+    public function __construct(ImageRequestModel $image)
     {
-        $this->id = !empty($data['id']) ? $data['id'] : null;
-        $this->name = $data['name'];
-        $this->cloudId = !empty($data['cloudId']) ? $data['cloudId'] : null;
-        $this->url = $data['url'];
+        $this->id = $image->id;
+        $this->name = $image->name;
+        $this->cloudId = $image->cloudId;
+        $this->url = $image->url;
 
         // TODO: add exception when data['tags'] is not defined
-        if (!isset($data['tags'])) {
+        if (count($image->tags) <= 0) {
             throw new \Exception();
         }
-        foreach ($data['tags'] as $tag) {
+        foreach ($image->tags as $tag) {
             $this->tags[] = new Tag($tag);
         }
-        // TODO: add exception when data['gallery'] is not set
-        if (empty($data['gallery'])) {
-            throw new \Exception();
-        }
-        $this->gallery = new Gallery($data['gallery']);
     }
 
     /**

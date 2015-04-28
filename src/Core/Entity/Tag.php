@@ -6,6 +6,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\Gallery\Core\Entity;
 
 /**
@@ -16,6 +17,10 @@ class Tag
 {
 
     private $name;
+    /**
+     * @var Photo
+     */
+    private $coverPhoto;
 
     /**
      * @param array $data
@@ -42,8 +47,19 @@ class Tag
         return $this->name;
     }
 
-    public function setCoverPhoto()
+    /**
+     * @return Photo
+     */
+    public function getCoverPhoto()
     {
+        return $this->coverPhoto;
+    }
 
+    /**
+     * @param Photo $photo
+     */
+    public function setCoverPhoto(Photo $photo)
+    {
+        $this->coverPhoto = $photo;
     }
 }

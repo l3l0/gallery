@@ -6,7 +6,7 @@ services:
     class: Freyr\Gallery\WebBundle\Storage\Cloudinary\CloudinaryPhotoStorage
 
   freyr.gallery.repository.photo:
-    class: Freyr\Gallery\WebBundle\Repository\MongoDB\MongoDBPhotoRepository
+    class: Freyr\Gallery\WebBundle\Repository\MongoDBPhotoRepository
     factory_service: doctrine_mongodb.odm.default_document_manager
     factory_method: getRepository
     arguments:

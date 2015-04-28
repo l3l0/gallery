@@ -52,4 +52,22 @@ interface PhotoRepositoryInterface
      * @return Photo[]
      */
     public function findPhotosByTags(array $tags);
+
+    /**
+     * @param Gallery $gallery
+     * @return Photo
+     */
+    public function getRandomPhotoFromGallery(Gallery $gallery);
+
+    /**
+     * @param Tag $tag
+     * @return Photo
+     */
+    public function getRandomPhotoFromTag(Tag $tag);
+
+    /**
+     * @param string $gallenyName
+     * @return Gallery
+     */
+    public function getGalleryByName($gallenyName);
 }

@@ -6,46 +6,49 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
+use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
 use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
 
 /**
- * Class GetPhotoById
- * @package Freyr\Gallery\Core\Interactor\Photos
+ * Class AddImageAsPhotoInteractor
+ * @package Freyr\Gallery\Core\Interactor
  */
-class GetPhotoById extends AbstractInteractor implements CommandInterface
+class AddImageAsPhotoInteractor extends AbstractInteractor implements CommandInterface
 {
 
-    /**
-     * @var ImageRequestModel
-     */
-    protected $requestModel;
     /**
      * @var PhotoRepositoryInterface
      */
     private $repository;
+    /**
+     * @var ImageRequestModel
+     */
+    private $image;
 
     /**
-     * @param ImageRequestModel $requestModel
+     * @param ImageRequestModel $image
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct(ImageRequestModel $requestModel, PhotoRepositoryInterface $repository)
+    public function __construct(ImageRequestModel $image, PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->requestModel = $requestModel;
+        $this->image = $image;
     }
 
     /**
-     * @return PhotoResponseModel
+     * @return AddImageAsPhotoResponseModel
      */
     public function execute()
     {
-        $photo = $this->repository->findById($this->requestModel->photoId);
-        return $photo->toResponseModel();
+        $photo = new Photo($this->image);
+        $this->repository->store($photo);
+
+        return new AddImageAsPhotoResponseModel($photo);
     }
 }

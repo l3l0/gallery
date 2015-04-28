@@ -8,7 +8,7 @@
 
 namespace Freyr\Gallery\WebBundle\Repository;
 
-use Freyr\Gallery\Core\Entity\Gallery;
+use Freyr\Gallery\WebBundle\Document\Gallery;
 use Freyr\Gallery\WebBundle\Document\Photo;
 use Freyr\Gallery\WebBundle\Document\Tag;
 
@@ -60,16 +60,31 @@ class EntityBuilderHelper
     }
 
     /**
-     * @param \Freyr\Gallery\WebBundle\Document\Gallery $gallery
-     * @return Gallery
+     * @param Gallery $gallery
+     * @return \Freyr\Gallery\Core\Entity\Gallery
      */
-    public function buildGalleryEntity(\Freyr\Gallery\WebBundle\Document\Gallery $gallery)
+    public function buildGalleryEntity(Gallery $gallery)
     {
         $data = [
             'name' => $gallery->getName()
         ];
 
-        $entity = new Gallery($data);
+        $entity = new \Freyr\Gallery\Core\Entity\Gallery($data);
+
+        return $entity;
+    }
+
+    /**
+     * @param Tag $tag
+     * @return \Freyr\Gallery\Core\Entity\Tag
+     */
+    public function buildTagEntity(Tag $tag)
+    {
+        $data = [
+            'name' => $tag->getName()
+        ];
+
+        $entity = new \Freyr\Gallery\Core\Entity\Tag($data);
 
         return $entity;
     }

@@ -10,7 +10,7 @@ namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotoById;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
+use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -24,7 +24,7 @@ class GetPhotoByIdTest extends PhotoTestCase
     public function testGetExistingPhoto()
     {
         $photo = $this->addRandomPhoto();
-        $requestModel = new PhotoRequestModel();
+        $requestModel = new ImageRequestModel();
         $requestModel->photoId = $photo->getId();
 
         $interactor = new GetPhotoById($requestModel, $this->repository);
@@ -41,7 +41,7 @@ class GetPhotoByIdTest extends PhotoTestCase
      */
     public function getNonExistingPhoto()
     {
-        $requestModel = new PhotoRequestModel();
+        $requestModel = new ImageRequestModel();
         $requestModel->photoId = 1;
 
         $interactor = new GetPhotoById($requestModel, $this->repository);

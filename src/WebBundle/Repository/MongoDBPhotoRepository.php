@@ -28,9 +28,15 @@ use Freyr\Gallery\WebBundle\Document\Photo as PhotoDocument;
 class MongoDBPhotoRepository extends DocumentRepository implements PhotoRepositoryInterface
 {
 
+    /**
+     * @param \Doctrine\ODM\MongoDB\DocumentManager $dm
+     * @param \Doctrine\ODM\MongoDB\UnitOfWork $uow
+     * @param \Doctrine\ODM\MongoDB\Mapping\ClassMetadata $classMetadata
+     */
     public function __construct($dm, $uow, $classMetadata)
     {
         parent::__construct($dm, $uow, $classMetadata);
+        // TODO: move outside to DI container
         $this->builder = new EntityBuilderHelper();
 
     }
@@ -73,7 +79,6 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function findAllGalleries()
     {
         $result = [];
-        /** @var Cursor $cursor */
         $cursor = $this->createQueryBuilder()->distinct('gallery.name')->getQuery()->execute();
 
         foreach ($cursor as $gallery) {
@@ -93,13 +98,20 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
      */
     public function findAllTags()
     {
-        /** @var Cursor $tags */
-        $tags = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
+        $result = [];
+        /** @var Tag[] $cursor */
+        $cursor = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
 
-        /** @var Cursor $cursor */
-        $images = $this->findBy(['tag.name' => $tag->getName()], ["limit" => $randomizedSampleSize]);
-        $image = $images[array_rand($images)];
-        $tag->setPrimaryPhoto($image);
+        foreach ($cursor as $tag) {
+            $tagEntity = $this->builder->buildTagEntity($tag);
+            $photos = $this->findBy(['tag.name' => $tag->getName()], ["limit" => 3]);
+            $photo = $photos[array_rand($photos)];
+            $coverPhoto = $this->builder->buildPhotoEntity($photo);
+            $tagEntity->setCoverPhoto($coverPhoto);
+            $result[] = $tag;
+        }
+
+        return $result;
     }
 
 
@@ -109,24 +121,71 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
      */
     public function findPhotosFromGallery($name)
     {
+        $result = [];
         $cursor = $this->createQueryBuilder()
             ->field('gallery.name')->equals($name)
             ->getQuery()->execute();
 
-        // TODO: Core Photo Entity factory from ORM
+        foreach ($cursor as $photo) {
+            $entity = $this->builder->buildPhotoEntity($photo);
+            $result[] = $entity;
+        }
+
+        return $result;
     }
 
     /**
-     * @param Tag[] $tags
+     * @param array $tags
      * @return Photo[]
      */
     public function findPhotosByTags(array $tags)
     {
-        return $this->createQueryBuilder()
+        $result = [];
+
+        $cursor = $this->createQueryBuilder()
             ->field('gallery.name')
             ->in($tags)
             ->getQuery()->execute();
 
-        // TODO: Core Photo Entity factory from ORM
+        foreach ($cursor as $photo) {
+            $result[] = $this->builder->buildPhotoEntity($photo);
+        }
+
+        return $result;
     }
+
+    /**
+     * @param Gallery $gallery
+     * @return Photo
+     */
+    public function getRandomPhotoFromGallery(Gallery $gallery)
+    {
+        /** @var Cursor $cursor */
+        $images = $this->findBy(['gallery.name' => $gallery->getName()], ["limit" => 10]);
+
+        return $images[array_rand($images)];
+    }
+
+    /**
+     * @param Tag $tag
+     * @return Photo
+     */
+    public function getRandomPhotoFromTag(Tag $tag)
+    {
+        /** @var Cursor $cursor */
+        $images = $this->findBy(['tag.name' => $tag->getName()], ["limit" => 10]);
+
+        return $images[array_rand($images)];
+    }
+
+    /**
+     * @param string $gallenyName
+     * @return Gallery
+     */
+    public function getGalleryByName($gallenyName)
+    {
+
+    }
+
+
 }

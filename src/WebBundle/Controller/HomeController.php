@@ -8,6 +8,8 @@
  */
 namespace Freyr\Gallery\WebBundle\Controller;
 
+use Freyr\Gallery\Core\Interactor\Galleries\GetGalleriesWithPrimaryPhoto;
+use Freyr\Gallery\Core\Interactor\Tags\GetTagsWithPrimaryPhoto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -27,11 +29,12 @@ class HomeController extends Controller
      */
     public function getHomeAction()
     {
-        $imageService = $this->get('freyr.gallery.service.photo');
+
+        $photoRepository = $this->get('freyr.gallery.repository.photo');
+        $getTagsInteractor = new GetTagsWithPrimaryPhoto($photoRepository);
 
         return [
-            'galleries' => $imageService->getGalleryListWithPrimaryPhoto(),
-            'tags' => $imageService->getTagsListWithPrimaryPhoto()
+            'tags' => $getTagsInteractor->execute(),
         ];
     }
 

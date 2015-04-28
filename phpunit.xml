@@ -13,6 +13,10 @@
         bootstrap                   = "tests/bootstrap.php"
         >
 
+    <php>
+        <server name="KERNEL_DIR" value="/Users/mgiergielewicz/grlab/gallery/app/"/>
+    </php>
+
     <testsuites>
         <testsuite name="FreyrGalleryTestSuite">
             <directory>tests</directory>

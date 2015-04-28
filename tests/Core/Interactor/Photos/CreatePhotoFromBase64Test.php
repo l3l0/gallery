@@ -8,8 +8,8 @@
  */
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
-use Freyr\Gallery\Core\Interactor\Photos\CreatePhotoFromBase64;
-use Freyr\Gallery\Core\RequestModel\PhotoRequestModel;
+use Freyr\Gallery\Core\Interactor\Photos\AddImageAsPhotoInteractor;
+use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -21,7 +21,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
 
     public function testCreateNewPhoto()
     {
-        $requestModel = new PhotoRequestModel();
+        $requestModel = new ImageRequestModel();
         $requestModel->url = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
         $requestModel->tags = [
@@ -33,7 +33,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
             ['name' => '  kjdhs ksjh jdh   ']
         ];
         $requestModel->gallery = ['name' => ' gallery1   '];
-        $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
+        $interactor = new AddImageAsPhotoInteractor($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }
 
@@ -42,7 +42,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
      */
     public function testValidationEmptyGallery()
     {
-        $requestModel = new PhotoRequestModel();
+        $requestModel = new ImageRequestModel();
         $requestModel->url = 'somebase64encodedstring';
         $requestModel->name = 'photoName';
         $requestModel->tags = [
@@ -54,7 +54,7 @@ class CreatePhotoFromBase64Test extends PhotoTestCase
             ['name' => '  kjdhs ksjh jdh   ']
         ];
 
-        $interactor = new CreatePhotoFromBase64($requestModel, $this->repository, $this->storage);
+        $interactor = new AddImageAsPhotoInteractor($requestModel, $this->repository, $this->storage);
         $interactor->execute();
     }
 }
