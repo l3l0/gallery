@@ -1,16 +1,18 @@
 <?php
 /*
- * This file is part of the gallery package.
+ * This file is part of the Gallery package.
  * (c) Michal Giergielewicz <michal@giergielewicz.pl>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\Gallery\Core\Repository;
 
 use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
+use Freyr\Gallery\Core\Exception\PhotoNotFoundException;
 
 /**
  * Class MemoryPhotoRepository
@@ -35,19 +37,21 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
             $document->setId($id);
         }
         $this->photos[$document->getId()] = $document;
+
+        return $document;
     }
 
     /**
      * @param string $photoId
      * @return Photo
-     * @throws \Exception
+     * @throws PhotoNotFoundException
      */
     public function findById($photoId)
     {
         $photo = $this->photos[$photoId];
         if (!$photo instanceof Photo) {
             // TODO: add exception
-            throw new \Exception();
+            throw new PhotoNotFoundException('Not found', 4);
         }
 
         return $photo;
@@ -104,7 +108,7 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     }
 
     /**
-     * @param Tag[] $tags
+     * @param array $tags
      * @return Photo[]
      */
     public function findPhotosByTags(array $tags)
@@ -112,7 +116,7 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
         $tagNames = [];
         $photos = [];
         foreach ($tags as $tag) {
-            $tagNames[] = $tag->getName();
+            $tagNames[] = $tag;
         }
 
         foreach ($this->photos as $photo) {

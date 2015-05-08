@@ -1,11 +1,12 @@
 <?php
 /*
- * This file is part of the gallery package.
+ * This file is part of the Gallery package.
  * (c) Michal Giergielewicz <michal@giergielewicz.pl>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Freyr\Gallery\Core\Repository;
 
 use Freyr\Gallery\Core\Entity\Gallery;
@@ -48,7 +49,7 @@ interface PhotoRepositoryInterface
     public function findPhotosFromGallery($name);
 
     /**
-     * @param Tag[] $tags
+     * @param array $tags
      * @return Photo[]
      */
     public function findPhotosByTags(array $tags);
