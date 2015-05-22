@@ -9,15 +9,15 @@
 
 namespace Freyr\Gallery\Core\Entity;
 
-use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
-use Freyr\Gallery\Core\ResponseModel\PhotoResponseModel;
-
 /**
- * Class Photo
+ * Class Image
  * @package Freyr\Gallery\Core\Entity
  */
 class Photo
 {
+
+    const THUMBNAIL_STANDARD = 'standard';
+    const THUMBNAIL_SMALL = 'small';
 
     /**
      * @var string
@@ -25,49 +25,14 @@ class Photo
     private $id;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $cloudId;
-
-    /**
-     * @var string
+     * @var array
      */
     private $url;
-
-    /**
-     * @var Gallery
-     */
-    private $gallery;
 
     /**
      * @var Tag[]
      */
     private $tags;
-
-    /**
-     * @param ImageRequestModel $image
-     * @throws \Exception
-     */
-    public function __construct(ImageRequestModel $image)
-    {
-        $this->id = $image->id;
-        $this->name = $image->name;
-        $this->cloudId = $image->cloudId;
-        $this->url = $image->url;
-
-        // TODO: add exception when data['tags'] is not defined
-        if (count($image->tags) <= 0) {
-            throw new \Exception();
-        }
-        foreach ($image->tags as $tag) {
-            $this->tags[] = new Tag($tag);
-        }
-    }
 
     /**
      * @return null|string
@@ -86,43 +51,21 @@ class Photo
     }
 
     /**
+     * @param string $thumbnailSize
      * @return string
      */
-    public function getName()
+    public function getUrl($thumbnailSize = self::THUMBNAIL_STANDARD)
     {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCloudId()
-    {
-        return $this->cloudId;
-    }
-
-    /**
-     * @param string $cloudId
-     */
-    public function setCloudId($cloudId)
-    {
-        $this->cloudId = $cloudId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
+        return $this->url[$thumbnailSize];
     }
 
     /**
      * @param string $url
+     * @param string $thumbnailSize
      */
-    public function setUrl($url)
+    public function setUrl($url, $thumbnailSize = self::THUMBNAIL_STANDARD)
     {
-        $this->url = $url;
+        $this->url[$thumbnailSize] = $url;
     }
 
     /**
@@ -134,28 +77,42 @@ class Photo
     }
 
     /**
-     * @return Gallery
+     * @param array $tags
      */
-    public function getGallery()
+    public function setTags(array $tags)
     {
-        return $this->gallery;
+        foreach ($tags as $tag) {
+            $tag = new Tag($tag);
+            $this->tags[$tag->getName()] = $tag;
+        }
     }
 
     /**
-     * @return PhotoResponseModel
+     * @return array
      */
-    public function toResponseModel()
+    public function getTagsAsArray()
     {
-        $data = new PhotoResponseModel();
-        $data->cloudId = $this->cloudId;
-        $data->gallery = $this->gallery->getName();
+        $tags = [];
         foreach ($this->tags as $tag) {
-            $data->tags[] = $tag->getName();
+            $tags[] = $tag->getName();
         }
-        $data->name = $this->name;
-        $data->photoId = $this->id;
-        $data->url = $this->url;
 
-        return $data;
+        return $tags;
+    }
+
+    /**
+     * @return array
+     */
+    public function getThumbnails()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param array $thumbnails
+     */
+    public function setThumbnails($thumbnails)
+    {
+        $this->url = $thumbnails;
     }
 }

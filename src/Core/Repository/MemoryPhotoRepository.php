@@ -6,13 +6,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Repository;
 
-use Freyr\Gallery\Core\Entity\Gallery;
+use Freyr\Gallery\Core\Entity\CoverPhoto;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
-use Freyr\Gallery\Core\Exception\PhotoNotFoundException;
 
 /**
  * Class MemoryPhotoRepository
@@ -25,6 +23,15 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
      * @var Photo[]
      */
     private $photos = [];
+
+    /**
+     * @param Tag $tag
+     * @return Photo
+     */
+    public function getRandomPhotoFromTag(Tag $tag)
+    {
+        return $this->photos[array_rand($this->photos)];
+    }
 
     /**
      * @param Photo $document
@@ -44,33 +51,15 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
     /**
      * @param string $photoId
      * @return Photo
-     * @throws PhotoNotFoundException
      */
     public function findById($photoId)
     {
-        $photo = $this->photos[$photoId];
-        if (!$photo instanceof Photo) {
-            // TODO: add exception
-            throw new PhotoNotFoundException('Not found', 4);
+        if (!array_key_exists($photoId, $this->photos)) {
+            throw new \InvalidArgumentException();
         }
+        $photo = $this->photos[$photoId];
 
         return $photo;
-
-    }
-
-    /**
-     * @return Gallery[]
-     */
-    public function findAllGalleries()
-    {
-        $galleries = [];
-        foreach ($this->photos as $photo) {
-            $gallery = $photo->getGallery();
-            $gallery->setCoverPhoto($photo);
-            $galleries[$photo->getGallery()->getName()] = $gallery;
-        }
-
-        return $galleries;
     }
 
     /**
@@ -82,7 +71,7 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
         foreach ($this->photos as $photo) {
             $photoTags = $photo->getTags();
             foreach ($photoTags as $tag) {
-                $tag->setCoverPhoto($photo);
+                $tag->setCoverPhoto(new CoverPhoto($photo));
                 $tags[$tag->getName()] = $tag;
             }
         }
@@ -90,22 +79,6 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
         return $tags;
     }
 
-
-    /**
-     * @param string $name
-     * @return Photo[]
-     */
-    public function findPhotosFromGallery($name)
-    {
-        $photos = [];
-        foreach ($this->photos as $photo) {
-            if ($photo->getGallery()->getName() === $name) {
-                $photos[] = $photo;
-            }
-        }
-
-        return $photos;
-    }
 
     /**
      * @param array $tags

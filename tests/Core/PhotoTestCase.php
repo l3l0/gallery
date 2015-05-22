@@ -11,9 +11,6 @@ namespace Freyr\Gallery\Tests\Core;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Repository\MemoryPhotoRepository;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
-use Freyr\Gallery\Core\Storage\MemoryPhotoStorage;
-use Freyr\Gallery\Core\Storage\PhotoStorageInterface;
 use Freyr\Gallery\Tests\BaseTestCase;
 
 /**
@@ -28,15 +25,9 @@ class PhotoTestCase extends BaseTestCase
      */
     protected $repository;
 
-    /**
-     * @var PhotoStorageInterface
-     */
-    protected $storage;
-
     public function setUp()
     {
         $this->repository = new MemoryPhotoRepository();
-        $this->storage = new MemoryPhotoStorage();
     }
 
     /**
@@ -61,6 +52,19 @@ class PhotoTestCase extends BaseTestCase
     }
 
     /**
+     * @return Photo
+     */
+    protected function getSamplePhoto()
+    {
+        $photo = new Photo();
+        $photo->setTags(['tag1  ', 'tag2', 'tag 3']);
+        $photo->setId(4);
+        $photo->setThumbnails([Photo::THUMBNAIL_STANDARD => 'standardUrl', Photo::THUMBNAIL_SMALL => 'smallUrl']);
+
+        return $photo;
+    }
+
+    /**
      * @param Photo $photo
      */
     protected function addPhotoToRepository(Photo $photo)
@@ -70,27 +74,16 @@ class PhotoTestCase extends BaseTestCase
 
     /**
      * @param int $howManyPhotos
-     * @param array $galleryNames
      * @param array $tagNames
      */
-    protected function loadFixture($howManyPhotos, array $galleryNames, array $tagNames)
+    protected function loadFixture($howManyPhotos, array $tagNames)
     {
-        $tags = [];
         for ($i = 1; $i <= $howManyPhotos; $i++) {
-            shuffle($tagNames);
-            $randomTags = array_slice($tagNames, 0, rand(1, count($tagNames)));
-            $galleryName = $galleryNames[rand(0, count($galleryNames) - 1)];
-            foreach ($randomTags as $tagName) {
-                $tags[] = ['name' => $tagName];
-            }
-
-            $data = [
-                'name' => uniqid('PhotoName-'),
-                'url' => uniqid('url-'),
-                'tags' => $tags,
-                'gallery' => ['name' => $galleryName]
-            ];
-            $photo = new Photo($data);
+            $thumbnails[Photo::THUMBNAIL_SMALL] = uniqid('small');
+            $thumbnails[Photo::THUMBNAIL_STANDARD] = uniqid('standard');
+            $photo = new Photo();
+            $photo->setTags($tagNames);
+            $photo->setThumbnails($thumbnails);
             $this->repository->store($photo);
         }
     }
@@ -118,26 +111,5 @@ class PhotoTestCase extends BaseTestCase
         $photo = new Photo($data);
         $this->repository->store($photo);
         return $photo;
-    }
-
-    /**
-     * @return ImageRequestModel
-     */
-    protected function generatePhotoRequestModel()
-    {
-        $uniq = uniqid();
-        $tags = [
-            ['name' => 'tag' . $uniq],
-            ['name' => 'tag2' . $uniq],
-            ['name' => 'tag3' . $uniq]
-        ];
-
-        $requestModel = new ImageRequestModel();
-        $requestModel->name = 'photoname' . $uniq;
-        $requestModel->url = 'someBase64EncodedString';
-        $requestModel->tags = $tags;
-        $requestModel->gallery = ['name' => 'Gallery' . $uniq];
-
-        return $requestModel;
     }
 }

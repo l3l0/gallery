@@ -9,7 +9,6 @@
 
 namespace Freyr\Gallery\Core\Repository;
 
-use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
 
@@ -33,20 +32,9 @@ interface PhotoRepositoryInterface
     public function findById($photoId);
 
     /**
-     * @return Gallery[]
-     */
-    public function findAllGalleries();
-
-    /**
      * @return Tag[]
      */
     public function findAllTags();
-
-    /**
-     * @param string $name
-     * @return Photo[]
-     */
-    public function findPhotosFromGallery($name);
 
     /**
      * @param array $tags
@@ -55,20 +43,9 @@ interface PhotoRepositoryInterface
     public function findPhotosByTags(array $tags);
 
     /**
-     * @param Gallery $gallery
-     * @return Photo
-     */
-    public function getRandomPhotoFromGallery(Gallery $gallery);
-
-    /**
      * @param Tag $tag
      * @return Photo
      */
     public function getRandomPhotoFromTag(Tag $tag);
 
-    /**
-     * @param string $gallenyName
-     * @return Gallery
-     */
-    public function getGalleryByName($gallenyName);
 }

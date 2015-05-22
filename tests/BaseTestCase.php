@@ -9,7 +9,6 @@
 
 namespace Freyr\Gallery\Tests;
 
-use Freyr\Gallery\Core\Entity\Gallery;
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
 
@@ -35,18 +34,6 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         }
 
         return $tags;
-    }
-
-    /**
-     * Generates random gallery object
-     * @return Gallery
-     */
-    protected function generateGallery()
-    {
-        $data = [
-            'name' => uniqid(),
-        ];
-        return new Gallery($data);
     }
 
     /**

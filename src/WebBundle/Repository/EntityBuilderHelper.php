@@ -1,16 +1,18 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: michal
- * Date: 2015-03-30
- * Time: 10:23
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\WebBundle\Repository;
 
-use Freyr\Gallery\WebBundle\Document\Gallery;
-use Freyr\Gallery\WebBundle\Document\Photo;
-use Freyr\Gallery\WebBundle\Document\Tag;
+use Freyr\Gallery\Core\Entity\CoverPhoto;
+use Freyr\Gallery\Core\Entity\Photo;
+use Freyr\Gallery\Core\Entity\Tag;
+use Freyr\Gallery\WebBundle\Document\Photo as PhotoDocument;
+use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 
 /**
  * Class EntityBuilderHelper
@@ -20,71 +22,51 @@ class EntityBuilderHelper
 {
 
     /**
-     * @param Photo $photo
-     * @return \Freyr\Gallery\Core\Entity\Photo
+     * @param PhotoDocument $photoDocument
+     * @return CoverPhoto
      */
-    public function buildPhotoEntity(Photo $photo)
+    public function buildCoverPhoto(PhotoDocument $photoDocument)
     {
-        $data = [
-            'id' => $photo->getId(),
-            'cloudId' => $photo->getCloudId(),
-            'name' => $photo->getName(),
-            'tags' => $this->buildTagData($photo->getTags()),
-            'gallery' => $this->buildGalleryData($photo->getGallery())
-        ];
+        $photo = $this->buildPhotoEntity($photoDocument);
 
-        return new \Freyr\Gallery\Core\Entity\Photo($data);
+        return new CoverPhoto($photo);
     }
 
     /**
-     * @param Tag[] $tags
+     * @param PhotoDocument $photoDocument
+     * @return Photo
+     */
+    public function buildPhotoEntity(PhotoDocument $photoDocument)
+    {
+        $photo = new Photo();
+        $photo->setThumbnails($photoDocument->getThumbnails());
+        $photo->setId($photoDocument->getId());
+        $photo->setTags($this->buildTagData($photoDocument->getTags()));
+
+        return $photo;
+    }
+
+    /**
+     * @param TagDocument[] $tags
      * @return array
      */
     private function buildTagData($tags)
     {
         $data = [];
         foreach ($tags as $tag) {
-            $data[] = ['name' => $tag->getName()];
+            $data[] = $tag->getName();
         }
 
         return $data;
     }
 
     /**
-     * @param Gallery $gallery
-     * @return array
+     * @param TagDocument $tag
+     * @return Tag
      */
-    private function buildGalleryData(Gallery $gallery)
+    public function buildTagEntity(TagDocument $tag)
     {
-        return ['name' => $gallery->getName()];
-    }
-
-    /**
-     * @param Gallery $gallery
-     * @return \Freyr\Gallery\Core\Entity\Gallery
-     */
-    public function buildGalleryEntity(Gallery $gallery)
-    {
-        $data = [
-            'name' => $gallery->getName()
-        ];
-
-        $entity = new \Freyr\Gallery\Core\Entity\Gallery($data);
-
-        return $entity;
-    }
-
-    /**
-     * @param Tag $tag
-     * @return \Freyr\Gallery\Core\Entity\Tag
-     */
-    public function buildTagEntity(Tag $tag)
-    {
-        $data = [
-            'name' => $tag->getName()
-        ];
-
-        $entity = new \Freyr\Gallery\Core\Entity\Tag($data);
+        $entity = new Tag($tag->getName());
 
         return $entity;
     }

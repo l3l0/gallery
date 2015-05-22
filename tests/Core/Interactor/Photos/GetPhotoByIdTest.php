@@ -1,16 +1,14 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: michal
- * Date: 2015-03-28
- * Time: 21:58
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
-
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotoById;
-use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -20,20 +18,18 @@ use Freyr\Gallery\Tests\Core\PhotoTestCase;
 class GetPhotoByIdTest extends PhotoTestCase
 {
 
-
+    /**
+     *
+     */
     public function testGetExistingPhoto()
     {
-        $photo = $this->addRandomPhoto();
-        $requestModel = new ImageRequestModel();
-        $requestModel->photoId = $photo->getId();
+        $photo = $this->getSamplePhoto();
+        $this->repository->store($photo);
 
-        $interactor = new GetPhotoById($requestModel, $this->repository);
+        $interactor = new GetPhotoById($photo->getId(), $this->repository);
         $fetchedPhoto = $interactor->execute();
 
-        $this->assertEquals($photo->getId(), $fetchedPhoto->photoId);
-        $this->assertEquals($photo->getName(), $fetchedPhoto->name);
-        $this->assertEquals($photo->getGallery()->getName(), $fetchedPhoto->gallery);
-
+        $this->assertEquals($photo->getId(), $fetchedPhoto->getId());
     }
 
     /**
@@ -41,10 +37,7 @@ class GetPhotoByIdTest extends PhotoTestCase
      */
     public function getNonExistingPhoto()
     {
-        $requestModel = new ImageRequestModel();
-        $requestModel->photoId = 1;
-
-        $interactor = new GetPhotoById($requestModel, $this->repository);
+        $interactor = new GetPhotoById(1, $this->repository);
         $interactor->execute();
     }
 }

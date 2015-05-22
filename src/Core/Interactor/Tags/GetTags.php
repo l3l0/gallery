@@ -9,6 +9,8 @@
 
 namespace Freyr\Gallery\Core\Interactor\Tags;
 
+use Freyr\Gallery\Core\Entity\CoverPhoto;
+use Freyr\Gallery\Core\Entity\Tag;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
@@ -19,6 +21,7 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  */
 class GetTags extends AbstractInteractor implements CommandInterface
 {
+
     /**
      * @var PhotoRepositoryInterface
      */
@@ -33,17 +36,15 @@ class GetTags extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return array
-     * @throws \Exception
+     * @return Tag[]
      */
     public function execute()
     {
         $tags = $this->repository->findAllTags();
-        $result = [];
         foreach ($tags as $tag) {
-            $result[] = $tag->asDataStructure();
+            $tag->setCoverPhoto(new CoverPhoto($this->repository->getRandomPhotoFromTag($tag)));
         }
 
-        return $result;
+        return $tags;
     }
 }

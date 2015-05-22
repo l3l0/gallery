@@ -13,13 +13,12 @@ use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 
 /**
- * Class AddImageAsPhotoInteractor
+ * Class AddImageAsPhoto
  * @package Freyr\Gallery\Core\Interactor
  */
-class AddImageAsPhotoInteractor extends AbstractInteractor implements CommandInterface
+class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
 {
 
     /**
@@ -27,28 +26,36 @@ class AddImageAsPhotoInteractor extends AbstractInteractor implements CommandInt
      */
     private $repository;
     /**
-     * @var ImageRequestModel
+     * @var array
      */
-    private $image;
+    private $tags;
+    /**
+     * @var array
+     */
+    private $urls;
 
     /**
-     * @param ImageRequestModel $image
+     * @param array $tags
+     * @param array $urls
      * @param PhotoRepositoryInterface $repository
      */
-    public function __construct(ImageRequestModel $image, PhotoRepositoryInterface $repository)
+    public function __construct(array $tags, array $urls, PhotoRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->image = $image;
+        $this->tags = $tags;
+        $this->urls = $urls;
     }
 
     /**
-     * @return AddImageAsPhotoResponseModel
+     * @return Photo
      */
     public function execute()
     {
-        $photo = new Photo($this->image);
+        $photo = new Photo();
+        $photo->setTags($this->tags);
+        $photo->setUrl($this->urls);
         $this->repository->store($photo);
 
-        return new AddImageAsPhotoResponseModel($photo);
+        return $photo;
     }
 }

@@ -24,55 +24,25 @@ class PhotoTest extends PhotoTestCase
      */
     public function testInitialiseNewImage()
     {
-        $data = parent::prepareDataForNewPhoto();
+        $photo = new Photo();
+        $this->assertInstanceOf('\Freyr\Gallery\Core\Entity\Photo', $photo);
 
-        $photo = new Photo($data);
-        $this->assertEquals($data['name'], $photo->getName());
-        $this->assertEquals($data['url'], $photo->getUrl());
+        $photo->setTags(['tag1  ', 'tag2', 'tag 3']);
+        $this->assertCount(3, $photo->getTags());
 
-        foreach ($photo->getTags() as $key => $tag) {
-            $this->assertInstanceOf('Freyr\Gallery\Core\Entity\Tag', $tag);
-            $this->assertEquals(strtolower(str_replace(' ', '-', trim($data['tags'][$key]['name']))), $tag->getName());
-        }
+        $this->assertEmpty($photo->getId());
+        $photo->setId(4);
+        $this->assertEquals(4, $photo->getId());
 
-        $this->assertInstanceOf('Freyr\Gallery\Core\Entity\Gallery', $photo->getGallery());
-        $this->assertEquals('galleryname', $photo->getGallery()->getName());
-        $this->assertNull($photo->getId());
-        $this->assertNull($photo->getCloudId());
-    }
+        $this->assertEmpty($photo->getThumbnails());
+        $photo->setUrl('test', Photo::THUMBNAIL_STANDARD);
+        $this->assertCount(1, $photo->getThumbnails());
+        $this->assertArrayHasKey(Photo::THUMBNAIL_STANDARD, $photo->getThumbnails());
+        $thumb = $photo->getUrl(Photo::THUMBNAIL_STANDARD);
+        $this->assertEquals('test', $thumb);
 
-    public function testInitializeExistingImage()
-    {
-        $data = parent::prepareDataForNewPhoto();
-        $data['id'] = uniqid();
-        $data['cloudId'] = uniqid();
-
-        $photo = new Photo($data);
-        $this->assertNotNull($photo->getId());
-        $this->assertNotNull($photo->getCloudId());
-    }
-
-    public function testConversionToResponseModel()
-    {
-        $data = [
-            'name' => 'Name',
-            'url' => 'url',
-            'tags' => [
-                ['name' => 'one']
-            ],
-            'gallery' => ['name' => 'GalleryName'],
-        ];
-
-        $photo = new Photo($data);
-        $this->repository->store($photo);
-        $responsePhoto = $photo->asDataStructure();
-        $this->assertArrayHasKey('tags', $responsePhoto);
-        foreach ($responsePhoto['tags'] as $tag) {
-            $this->assertEquals('one', $tag['name']);
-        }
-        $this->assertEquals('galleryname', $responsePhoto['gallery']['name']);
-        $this->assertEquals('Name', $responsePhoto['name']);
-        $this->assertEquals('url', $responsePhoto['url']);
-
+        $photo->setThumbnails([Photo::THUMBNAIL_STANDARD => 'standardUrl', Photo::THUMBNAIL_SMALL => 'smallUrl']);
+        $this->assertCount(2, $photo->getThumbnails());
+        $this->assertEquals('smallUrl', $photo->getUrl(Photo::THUMBNAIL_SMALL));
     }
 }

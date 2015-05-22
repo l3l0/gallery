@@ -13,7 +13,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use JsonSerializable;
 
 /**
- * Class Photo
+ * Class Image
  * @package Freyr\Gallery\WebBundle\Document
  * @MongoDB\Document(repositoryClass="Freyr\Gallery\WebBundle\Repository\MongoDBPhotoRepository")
  */
@@ -27,44 +27,16 @@ class Photo implements JsonSerializable
     private $id;
 
     /**
-     * @MongoDB\EmbedOne(targetDocument="Gallery")
-     * @var Gallery
-     */
-    private $gallery;
-
-    /**
      * @MongoDB\EmbedMany(targetDocument="Tag")
      * @var Tag[]
      */
     private $tags = [];
 
     /**
-     * @MongoDB\String
-     * @var string
+     * @MongoDB\Hash()
+     * @var array
      */
-    private $name;
-
-    /**
-     * @MongoDB\String
-     * @var string
-     */
-    private $cloudId;
-
-    /**
-     * @return Gallery
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-    /**
-     * @param Gallery $gallery
-     */
-    public function setGallery(Gallery $gallery)
-    {
-        $this->gallery = $gallery;
-    }
+    private $thumbnails;
 
     /**
      * @return string
@@ -80,22 +52,6 @@ class Photo implements JsonSerializable
     public function setId($photoId)
     {
         $this->id = $photoId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $photoName
-     */
-    public function setName($photoName)
-    {
-        $this->name = $photoName;
     }
 
     /**
@@ -115,19 +71,19 @@ class Photo implements JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getCloudId()
+    public function getThumbnails()
     {
-        return $this->cloudId;
+        return $this->thumbnails;
     }
 
     /**
-     * @param mixed $cloudId
+     * @param array $thumbnails
      */
-    public function setCloudId($cloudId)
+    public function setThumbnails($thumbnails)
     {
-        $this->cloudId = $cloudId;
+        $this->thumbnails = $thumbnails;
     }
 
     /**
@@ -140,7 +96,7 @@ class Photo implements JsonSerializable
     function jsonSerialize()
     {
         return [
-            "name" => $this->name
+            "name" => (string) $this->id
         ];
     }
 }

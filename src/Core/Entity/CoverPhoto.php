@@ -30,29 +30,10 @@ class CoverPhoto
     }
 
     /**
-     * @return array
-     */
-    public function asDataStructure()
-    {
-        return [
-            'name' => $this->getName(),
-            'cloudId' => $this->getCloudId()
-        ];
-    }
-
-    /**
      * @return string
      */
-    public function getName()
+    public function getUrl()
     {
-        return $this->photo->getName();
-    }
-
-    /**
-     * @return string
-     */
-    public function getCloudId()
-    {
-        return $this->photo->getCloudId();
+        return $this->photo->getUrl(Photo::THUMBNAIL_SMALL);
     }
 }

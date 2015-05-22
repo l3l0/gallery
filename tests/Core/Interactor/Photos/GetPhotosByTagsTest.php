@@ -1,16 +1,14 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: michal
- * Date: 2015-03-29
- * Time: 21:33
+/*
+ * This file is part of the Gallery package.
+ * (c) Michal Giergielewicz <michal@giergielewicz.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
-use Freyr\Gallery\Core\Entity\Tag;
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotosByTags;
-use Freyr\Gallery\Core\RequestModel\ImageRequestModel;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -22,20 +20,16 @@ class GetPhotosByTagsTest extends PhotoTestCase
 
     public function testInitialise()
     {
-        $this->loadFixture(100, ['One', 'Two', 'three'], ['uno', 'duo', 'single', 'double', 'triple', 'octo']);
-        $requestModel = new ImageRequestModel();
+        $this->loadFixture(100, ['uno', 'duo', 'single', 'double', 'triple', 'octo']);
 
-        $tags = [];
-        $tags[] = new Tag(['name' => 'uno']);
-        $requestModel->tags = $tags;
-        $interactor = new GetPhotosByTags($requestModel, $this->repository);
+        $tags = ['uno'];
+
+        $interactor = new GetPhotosByTags($tags, $this->repository);
         $result = $interactor->execute();
         $this->assertNotEmpty($result);
 
-        $tags = [];
-        $tags[] = new Tag(['name' => 'ta']);
-        $requestModel->tags = $tags;
-        $interactor = new GetPhotosByTags($requestModel, $this->repository);
+        $tags = ['ta'];
+        $interactor = new GetPhotosByTags($tags, $this->repository);
         $result = $interactor->execute();
         $this->assertEmpty($result);
     }

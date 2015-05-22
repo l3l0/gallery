@@ -18,16 +18,16 @@ class Tag
 
     private $name;
     /**
-     * @var Photo
+     * @var CoverPhoto
      */
     private $coverPhoto;
 
     /**
-     * @param array $data
+     * @param string $name
      */
-    public function __construct(array $data)
+    public function __construct($name)
     {
-        $this->name = $this->sanitizeName($data['name']);
+        $this->name = $this->sanitizeName($name);
     }
 
     /**
@@ -48,7 +48,7 @@ class Tag
     }
 
     /**
-     * @return Photo
+     * @return CoverPhoto
      */
     public function getCoverPhoto()
     {
@@ -56,9 +56,9 @@ class Tag
     }
 
     /**
-     * @param Photo $photo
+     * @param CoverPhoto $photo
      */
-    public function setCoverPhoto(Photo $photo)
+    public function setCoverPhoto(CoverPhoto $photo)
     {
         $this->coverPhoto = $photo;
     }
