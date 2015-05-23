@@ -8,7 +8,7 @@ var/cache/*
 var/logs/*
 !var/cache/.gitkeep
 !var/logs/.gitkeep
-vendor/
+vendor/*
 bin/*
 !bin/console
 !bin/symfony_requirements
