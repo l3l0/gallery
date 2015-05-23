@@ -7,4 +7,4 @@ services:
     factory_service: doctrine_mongodb.odm.default_document_manager
     factory_method: getRepository
     arguments:
-      - FreyrGalleryWebBundle:Image
+      - FreyrGalleryWebBundle:Photo
