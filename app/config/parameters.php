@@ -1,2 +1,2 @@
 <?php
-$container->setParameter('mongolab.url', getenv('MONGOLAB_URL'));
+$container->setParameter('mongolab.url', getenv('MONGOLAB_URI'));
