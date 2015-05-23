@@ -13,3 +13,13 @@ monolog:
             level: debug
         console:
             type:  console
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: %mongolab.url%
+            options: {}
+    default_database: heroku_app27012761
+    document_managers:
+        default:
+            auto_mapping: true
