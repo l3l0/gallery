@@ -35,7 +35,7 @@ assetic:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://localhost:27017/app27012762
+            server: %mongolab.url%
             options: {}
     default_database: app27012762
     document_managers:
