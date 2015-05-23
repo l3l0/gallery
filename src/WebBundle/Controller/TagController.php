@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\WebBundle\Controller;
 
 use Freyr\Gallery\Core\Interactor\Photos\GetPhotosByTags;
@@ -21,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class TagController extends Controller
 {
-
     /**
      * @Route("/tag/{name}", name="tag")
      * @Template("FreyrGalleryWebBundle:Tag:index.html.twig")

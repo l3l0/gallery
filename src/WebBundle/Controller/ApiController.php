@@ -33,8 +33,8 @@ class ApiController extends Controller
         $content = json_decode($request->getContent());
         $photoRepository = $this->get('freyr.gallery.repository.photo');
         $addImageAsPhotoInteractor = new AddImageAsPhoto($content->tags, $content->urls, $photoRepository);
-        $photo = $addImageAsPhotoInteractor->execute();
+        $response = $addImageAsPhotoInteractor->execute();
 
-        return new JsonResponse($photo);
+        return new JsonResponse($response);
     }
 }

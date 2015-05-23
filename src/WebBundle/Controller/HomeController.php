@@ -8,8 +8,7 @@
  */
 namespace Freyr\Gallery\WebBundle\Controller;
 
-use Freyr\Gallery\Core\Interactor\Galleries\GetGalleriesWithPrimaryPhoto;
-use Freyr\Gallery\Core\Interactor\Tags\GetTagsWithPrimaryPhoto;
+use Freyr\Gallery\Core\Interactor\Tags\GetTags;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -31,7 +30,7 @@ class HomeController extends Controller
     {
 
         $photoRepository = $this->get('freyr.gallery.repository.photo');
-        $getTagsInteractor = new GetTagsWithPrimaryPhoto($photoRepository);
+        $getTagsInteractor = new GetTags($photoRepository);
 
         return [
             'tags' => $getTagsInteractor->execute(),

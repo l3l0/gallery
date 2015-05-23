@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Entity\Photo;
@@ -40,10 +39,22 @@ class GetPhotosByTags extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return Photo[]
+     * @return GetPhotosResponse
      */
     public function execute()
     {
-        return $this->repository->findPhotosByTags($this->tags);
+        $photos = $this->repository->findPhotosByTags($this->tags);
+        $response = new GetPhotosResponse();
+
+        foreach ($photos as $photo) {
+            $photoResponse = new GetPhotoResponse();
+            $photoResponse->smallUrl = $photo->getUrl(Photo::THUMBNAIL_SMALL);
+            $photoResponse->standardUrl = $photo->getUrl(Photo::THUMBNAIL_STANDARD);
+            $photoResponse->tags = $photo->getTagsAsArray();
+
+            $response->photos[] = $photoResponse;
+        }
+
+        return $response;
     }
 }

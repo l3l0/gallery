@@ -47,7 +47,7 @@ class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return Photo
+     * @return AddImageAsPhotoResponse
      */
     public function execute()
     {
@@ -56,6 +56,12 @@ class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
         $photo->setUrl($this->urls);
         $this->repository->store($photo);
 
-        return $photo;
+        $response = new AddImageAsPhotoResponse();
+        $response->status = false;
+        if ($photo->getId() !== false) {
+            $response->status = true;
+        }
+
+        return $response;
     }
 }
