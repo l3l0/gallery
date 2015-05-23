@@ -75,12 +75,11 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function findAllTags()
     {
         $result = [];
-        /** @var TagDocument[] $cursor */
         $cursor = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
 
         foreach ($cursor as $tag) {
             /** @var Tag $tag */
-            $tag = new Tag($tag->getName());
+            $tag = new Tag($tag);
             $result[] = $tag;
         }
 
