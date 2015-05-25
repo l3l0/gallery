@@ -1,0 +1,17 @@
+{
+  "name":"gallery",
+  "description":"review app from heroku ",
+  "scripts":{},
+  "env":{
+    "SYMFONY_ENV":{
+      "required":true
+    }
+  },
+  "addons":[
+    "cloudinary",
+    "mongohq",
+    "mongolab",
+    "newrelic",
+    "papertrail"
+  ]
+}
