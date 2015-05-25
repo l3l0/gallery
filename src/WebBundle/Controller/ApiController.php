@@ -8,7 +8,10 @@
  */
 namespace Freyr\Gallery\WebBundle\Controller;
 
-use Freyr\Gallery\Core\Interactor\Photos\AddImageAsPhoto;
+use Freyr\Gallery\Core\Interactor\Photos\AddPhoto;
+use Freyr\Gallery\Core\Interactor\Photos\GetPhotoById;
+use Freyr\Gallery\Core\Interactor\Photos\GetPhotosByTags;
+use Freyr\Gallery\Core\Interactor\Tags\GetTags;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,7 +26,7 @@ class ApiController extends Controller
 {
 
     /**
-     * @Route("/api/image", name="api.image")
+     * @Route("/api/photos", name="api.photos")
      * @Method("POST")
      * @param Request $request
      * @return JsonResponse
@@ -32,8 +35,37 @@ class ApiController extends Controller
     {
         $content = json_decode($request->getContent());
         $photoRepository = $this->get('freyr.gallery.repository.photo');
-        $addImageAsPhotoInteractor = new AddImageAsPhoto($content->tags, $content->urls, $photoRepository);
-        $response = $addImageAsPhotoInteractor->execute();
+        $addPhotoInteractor = new AddPhoto($content->tags, $content->urls, $photoRepository);
+        $response = $addPhotoInteractor->execute();
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/api/photos", name="api.photos")
+     * @Method("GET")
+     * @return JsonResponse
+     */
+    public function getPhotosAction()
+    {
+        $photoRepository = $this->get('freyr.gallery.repository.photo');
+        $tagsInteractor = new GetTags($photoRepository);
+        $photosInteractor = new GetPhotosByTags($tagsInteractor->execute()->asArray(), $photoRepository);
+        $response = $photosInteractor->execute();
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/api/photos/{photoId}", name="api.photo")
+     * @Method("GET")
+     * @return JsonResponse
+     */
+    public function getPhotoAction($photoId)
+    {
+        $photoRepository = $this->get('freyr.gallery.repository.photo');
+        $photosInteractor = new GetPhotoById($photoId, $photoRepository);
+        $response = $photosInteractor->execute();
 
         return new JsonResponse($response);
     }

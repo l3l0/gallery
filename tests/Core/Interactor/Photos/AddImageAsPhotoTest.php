@@ -9,7 +9,7 @@
 namespace Freyr\Gallery\Tests\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Entity\Photo;
-use Freyr\Gallery\Core\Interactor\Photos\AddImageAsPhoto;
+use Freyr\Gallery\Core\Interactor\Photos\AddPhoto;
 use Freyr\Gallery\Tests\Core\PhotoTestCase;
 
 /**
@@ -26,7 +26,7 @@ class AddImageAsPhotoTest extends PhotoTestCase
             "tags" => ['uno', 'duo']
         ];
 
-        $interactor = new AddImageAsPhoto($apiData['tags'], $apiData['urls'], $this->repository);
+        $interactor = new AddPhoto($apiData['tags'], $apiData['urls'], $this->repository);
         $expected = $interactor->execute();
         $actual = $this->repository->findById($expected->id);
 

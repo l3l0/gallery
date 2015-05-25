@@ -66,6 +66,9 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     {
         /** @var PhotoDocument $photo */
         $photo = $this->findOneBy(["id" => new \MongoId($photoId)]);
+        if ($photo === null) {
+            throw new \InvalidArgumentException();
+        }
         return $this->builder->buildPhotoEntity($photo);
     }
 

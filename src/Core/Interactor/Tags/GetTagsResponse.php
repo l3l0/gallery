@@ -21,4 +21,17 @@ class GetTagsResponse
      * @var TagResponse[]
      */
     public $tags;
+
+    /**
+     * @return array
+     */
+    public function asArray()
+    {
+        $tags = [];
+        foreach ($this->tags as $tag) {
+            $tags[] = $tag->name;
+        }
+
+        return $tags;
+    }
 }

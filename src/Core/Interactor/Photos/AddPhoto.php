@@ -15,12 +15,11 @@ use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
 
 /**
- * Class AddImageAsPhoto
+ * Class AddPhoto
  * @package Freyr\Gallery\Core\Interactor
  */
-class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
+class AddPhoto extends AbstractInteractor implements CommandInterface
 {
-
     /**
      * @var PhotoRepositoryInterface
      */
@@ -47,7 +46,7 @@ class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return AddImageAsPhotoResponse
+     * @return AddPhotoResponse
      */
     public function execute()
     {
@@ -56,8 +55,7 @@ class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
         $photo->setUrl($this->urls);
         $this->repository->store($photo);
 
-        $response = new AddImageAsPhotoResponse();
-        $response->status = false;
+        $response = new AddPhotoResponse();
         if ($photo->getId() !== false) {
             $response->status = true;
             $response->id = $photo->getId();

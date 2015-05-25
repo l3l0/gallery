@@ -9,12 +9,11 @@
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 /**
- * Class AddImageAsPhotoResponse
+ * Class AddPhotoResponse
  * @package Freyr\Gallery\Core\Interactor\Photos
  */
-class AddImageAsPhotoResponse
+class AddPhotoResponse
 {
-
     /**
      * @var string
      */
