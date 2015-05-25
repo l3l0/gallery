@@ -20,7 +20,7 @@ class GetTagsResponse
     /**
      * @var TagResponse[]
      */
-    public $tags;
+    public $tags = [];
 
     /**
      * @return array
