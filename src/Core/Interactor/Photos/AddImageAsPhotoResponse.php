@@ -15,5 +15,12 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
 class AddImageAsPhotoResponse
 {
 
-    public $status;
+    /**
+     * @var string
+     */
+    public $status = false;
+    /**
+     * @var string
+     */
+    public $id = null;
 }

@@ -16,6 +16,10 @@ class GetPhotoResponse
 {
 
     /**
+     * @var string
+     */
+    public $id;
+    /**
      * @var array;
      */
     public $tags;

@@ -28,9 +28,9 @@ class AddImageAsPhotoTest extends PhotoTestCase
 
         $interactor = new AddImageAsPhoto($apiData['tags'], $apiData['urls'], $this->repository);
         $expected = $interactor->execute();
-        $actual = $this->repository->findById($expected->getId());
+        $actual = $this->repository->findById($expected->id);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals($expected->id, $actual->getId());
     }
 
 }

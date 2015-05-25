@@ -31,7 +31,7 @@ class GetPhotosByTagsTest extends PhotoTestCase
         $tags = ['ta'];
         $interactor = new GetPhotosByTags($tags, $this->repository);
         $result = $interactor->execute();
-        $this->assertEmpty($result);
+        $this->assertEmpty($result->photos);
     }
 
 }

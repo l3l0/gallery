@@ -49,6 +49,7 @@ class GetPhotoById extends AbstractInteractor implements CommandInterface
         $response->smallUrl = $photo->getUrl(Photo::THUMBNAIL_SMALL);
         $response->standardUrl = $photo->getUrl(Photo::THUMBNAIL_STANDARD);
         $response->tags = $photo->getTagsAsArray();
+        $response->id = $photo->getId();
 
         return $response;
     }

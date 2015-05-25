@@ -60,6 +60,7 @@ class AddImageAsPhoto extends AbstractInteractor implements CommandInterface
         $response->status = false;
         if ($photo->getId() !== false) {
             $response->status = true;
+            $response->id = $photo->getId();
         }
 
         return $response;

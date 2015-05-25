@@ -29,7 +29,7 @@ class GetPhotoByIdTest extends PhotoTestCase
         $interactor = new GetPhotoById($photo->getId(), $this->repository);
         $fetchedPhoto = $interactor->execute();
 
-        $this->assertEquals($photo->getId(), $fetchedPhoto->getId());
+        $this->assertEquals($photo->getId(), $fetchedPhoto->id);
     }
 
     /**
