@@ -115,10 +115,6 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         /** @var Cursor $cursor */
         $images = $this->findBy(['tag.name' => $tag->getName()], null, 10);
 
-        if (count($images) > 0) {
-            return $this->builder->buildPhotoEntity($images[array_rand($images)]);
-        } else {
-            return null; //temporary, to fix
-        }
+        return $this->builder->buildPhotoEntity($images[array_rand($images)]);
     }
 }
