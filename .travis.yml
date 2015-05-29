@@ -4,4 +4,6 @@ php:
 
 before_script:
     - echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+    - "mkdir -p ~/.composer"
+    - cp .travis.composer.json ~/.composer/config.json
     - composer install --no-dev --prefer-dist --no-progress --optimize-autoloader
