@@ -6,10 +6,10 @@
     "autoload": {
         "psr-0": {
             "SymfonyStandard": "app/"
-    },
+        },
         "psr-4": {
             "Freyr\\Gallery\\": "src/"
-    }
+        }
     },
     "require": {
         "php": "~5.4",
