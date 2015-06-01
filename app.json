@@ -3,9 +3,6 @@
     "description": "review app from heroku",
     "scripts": { },
     "env": {
-        "MONGOLAB_URI": {
-            "required": true
-        },
         "SYMFONY_ENV": "dev"
     },
     "addons": [
