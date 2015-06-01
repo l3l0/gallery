@@ -9,17 +9,14 @@
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 /**
- * Class AddPhotoResponse
+ * Class GetPhotosDTO
  * @package Freyr\Gallery\Core\Interactor\Photos
  */
-class AddPhotoResponse
+class GetPhotosDTO
 {
+
     /**
-     * @var string
+     * @var GetPhotoDTO[]
      */
-    public $status = false;
-    /**
-     * @var string
-     */
-    public $id = null;
+    public $photos;
 }

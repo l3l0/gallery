@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Entity;
 
 /**
@@ -16,7 +15,13 @@ namespace Freyr\Gallery\Core\Entity;
 class Photo
 {
 
+    /**
+     * Code for standard size thumbnail
+     */
     const THUMBNAIL_STANDARD = 'standard';
+    /**
+     * Code for small size thumbnail
+     */
     const THUMBNAIL_SMALL = 'small';
 
     /**

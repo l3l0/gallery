@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 use Freyr\Gallery\Core\Entity\Photo;
@@ -20,6 +19,7 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  */
 class AddPhoto extends AbstractInteractor implements CommandInterface
 {
+
     /**
      * @var PhotoRepositoryInterface
      */
@@ -46,7 +46,7 @@ class AddPhoto extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return AddPhotoResponse
+     * @return AddPhotoDTO
      */
     public function execute()
     {
@@ -55,7 +55,7 @@ class AddPhoto extends AbstractInteractor implements CommandInterface
         $photo->setUrl($this->urls);
         $this->repository->store($photo);
 
-        $response = new AddPhotoResponse();
+        $response = new AddPhotoDTO();
         if ($photo->getId() !== false) {
             $response->status = true;
             $response->id = $photo->getId();

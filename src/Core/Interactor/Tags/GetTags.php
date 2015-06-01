@@ -6,12 +6,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Interactor\Tags;
 
 use Freyr\Gallery\Core\Entity\CoverPhoto;
-use Freyr\Gallery\Core\Entity\CoverPhotoResponse;
-use Freyr\Gallery\Core\Entity\TagResponse;
+use Freyr\Gallery\Core\Entity\CoverPhotoDTO;
+use Freyr\Gallery\Core\Entity\TagDTO;
 use Freyr\Gallery\Core\Interactor\AbstractInteractor;
 use Freyr\Gallery\Core\Interactor\CommandInterface;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
@@ -37,7 +36,7 @@ class GetTags extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return GetTagsResponse
+     * @return GetTagsDTO
      */
     public function execute()
     {
@@ -46,11 +45,11 @@ class GetTags extends AbstractInteractor implements CommandInterface
             $tag->setCoverPhoto(new CoverPhoto($this->repository->getRandomPhotoFromTag($tag)));
         }
 
-        $response = new GetTagsResponse();
+        $response = new GetTagsDTO();
         foreach ($tags as $tag) {
-            $tagResponse = new TagResponse();
+            $tagResponse = new TagDTO();
             $tagResponse->name = $tag->getName();
-            $coverPhotoResponse = new CoverPhotoResponse();
+            $coverPhotoResponse = new CoverPhotoDTO();
             $coverPhotoResponse->url = $tag->getCoverPhoto()->getUrl();
             $tagResponse->coverPhoto = $coverPhotoResponse;
 

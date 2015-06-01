@@ -9,10 +9,10 @@
 namespace Freyr\Gallery\Core\Interactor\Photos;
 
 /**
- * Class GetPhotoResponse
+ * Class GetPhotoDTO
  * @package Freyr\Gallery\Core\Interactor\Photos
  */
-class GetPhotoResponse
+class GetPhotoDTO
 {
 
     /**
