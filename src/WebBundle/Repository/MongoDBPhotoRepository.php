@@ -117,7 +117,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function getRandomPhotoFromTag(Tag $tag)
     {
         /** @var Cursor $cursor */
-        $images = $this->findBy(['tag.name' => $tag->getName()], null, 10);
+        $images = $this->findBy(['tags.name' => $tag->getName()], null, 10);
 
         return $this->builder->buildPhotoEntity($images[array_rand($images)]);
     }
