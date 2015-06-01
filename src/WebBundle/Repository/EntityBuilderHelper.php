@@ -28,6 +28,7 @@ class EntityBuilderHelper
     public function buildCoverPhoto(PhotoDocument $photoDocument)
     {
         $photo = $this->buildPhotoEntity($photoDocument);
+
         return new CoverPhoto($photo);
     }
 

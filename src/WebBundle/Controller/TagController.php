@@ -20,6 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class TagController extends Controller
 {
+
     /**
      * @Route("/tag/{name}", name="tag")
      * @Template("FreyrGalleryWebBundle:Tag:index.html.twig")
@@ -32,6 +33,7 @@ class TagController extends Controller
         $tags = explode(',', $name);
         $interactor = new GetPhotosByTags($tags, $this->get('freyr.gallery.repository.photo'));
         $photos = $interactor->execute();
+
         return [
             'photos' => $photos,
             'tags' => $tags

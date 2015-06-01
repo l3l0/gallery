@@ -10,13 +10,11 @@ namespace Freyr\Gallery\WebBundle\Repository;
 
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-
-use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 use Freyr\Gallery\WebBundle\Document\Photo as PhotoDocument;
+use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 
 /**
  * Class MongoDBPhotoRepository
@@ -37,6 +35,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         $this->builder = new EntityBuilderHelper();
 
     }
+
     /**
      * @param Photo $photo
      * @return Photo
@@ -54,7 +53,8 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         $this->getDocumentManager()->persist($document);
         $this->getDocumentManager()->flush();
 
-        $photo->setId((string)$document->getId());
+        $photo->setId((string) $document->getId());
+
         return $photo;
     }
 
@@ -69,6 +69,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         if ($photo === null) {
             throw new \InvalidArgumentException();
         }
+
         return $this->builder->buildPhotoEntity($photo);
     }
 
