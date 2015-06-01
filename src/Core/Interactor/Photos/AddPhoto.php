@@ -52,7 +52,7 @@ class AddPhoto extends AbstractInteractor implements CommandInterface
     {
         $photo = new Photo();
         $photo->setTags($this->tags);
-        $photo->setUrl($this->urls);
+        $photo->setThumbnails($this->urls);
         $this->repository->store($photo);
 
         $response = new AddPhotoDTO();

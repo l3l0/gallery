@@ -20,13 +20,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ApiController
+ *
+ * @Route("/api")
  * @package Freyr\Gallery\WebBundle\Controller
  */
 class ApiController extends Controller
 {
 
     /**
-     * @Route("/api/photos", name="api.photos")
+     * @Route("/photos", name="api.photos.create")
      * @Method("POST")
      * @param Request $request
      * @return JsonResponse
@@ -35,14 +37,14 @@ class ApiController extends Controller
     {
         $content = json_decode($request->getContent());
         $photoRepository = $this->get('freyr.gallery.repository.photo');
-        $addPhotoInteractor = new AddPhoto($content->tags, $content->urls, $photoRepository);
+        $addPhotoInteractor = new AddPhoto((array) $content->tags, (array) $content->urls, $photoRepository);
         $response = $addPhotoInteractor->execute();
 
         return new JsonResponse($response);
     }
 
     /**
-     * @Route("/api/photos", name="api.photos")
+     * @Route("/photos", name="api.photos.get")
      * @Method("GET")
      * @return JsonResponse
      */
@@ -57,7 +59,7 @@ class ApiController extends Controller
     }
 
     /**
-     * @Route("/api/photos/{photoId}", name="api.photo")
+     * @Route("/photos/{photoId}", name="api.photo")
      * @Method("GET")
      * @return JsonResponse
      */
