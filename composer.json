@@ -6,20 +6,20 @@
     "autoload": {
         "psr-0": {
             "SymfonyStandard": "app/"
-    },
+        },
         "psr-4": {
             "Freyr\\Gallery\\": "src/"
-    }
+        }
     },
     "require": {
         "php": "~5.4",
-        "symfony/symfony": "~2.6",
+        "symfony/symfony": "2.6.7",
         "doctrine/orm": "2.4.3",
         "doctrine/doctrine-bundle": "1.2.0",
         "doctrine/mongodb-odm": "1.0.0-BETA12",
         "doctrine/mongodb-odm-bundle": "3.0.0-BETA6",
         "twig/extensions": "1.0.1",
-        "symfony/assetic-bundle": "~2.6",
+        "symfony/assetic-bundle": "2.6.1",
         "symfony/swiftmailer-bundle": "2.3.7",
         "symfony/monolog-bundle": "2.6.0",
         "sensio/distribution-bundle": "3.0.1",
@@ -34,7 +34,7 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.5.0"
+        "phpunit/phpunit": "4.6.6"
     },
     "minimum-stability": "stable",
     "scripts": {
