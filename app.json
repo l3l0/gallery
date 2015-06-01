@@ -1,17 +1,15 @@
 {
-  "name":"gallery",
-  "description":"review app from heroku ",
-  "scripts":{},
-  "env":{
-    "SYMFONY_ENV":{
-      "required":true
-    }
-  },
-  "addons":[
-    "cloudinary",
-    "mongohq",
-    "mongolab",
-    "newrelic",
-    "papertrail"
-  ]
+    "name": "freyr/gallery",
+    "description": "review app from heroku",
+    "scripts": { },
+    "env": {
+        "MONGOLAB_URI": {
+            "required": true
+        },
+        "SYMFONY_ENV": "dev"
+    },
+    "addons": [
+        "mongolab",
+        "papertrail"
+    ]
 }
