@@ -19,7 +19,6 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  */
 class GetPhotoById extends AbstractInteractor implements CommandInterface
 {
-
     /**
      * @var PhotoRepositoryInterface
      */

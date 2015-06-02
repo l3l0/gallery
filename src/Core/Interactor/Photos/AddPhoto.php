@@ -19,7 +19,6 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  */
 class AddPhoto extends AbstractInteractor implements CommandInterface
 {
-
     /**
      * @var PhotoRepositoryInterface
      */

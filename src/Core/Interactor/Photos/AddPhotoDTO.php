@@ -14,7 +14,6 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
  */
 class AddPhotoDTO
 {
-
     /**
      * @var string
      */

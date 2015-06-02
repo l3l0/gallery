@@ -20,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class HomeController extends Controller
 {
-
     /**
      * @Route("/", name="home")
      * @Method("GET")
@@ -28,7 +27,6 @@ class HomeController extends Controller
      */
     public function getHomeAction()
     {
-
         $photoRepository = $this->get('freyr.gallery.repository.photo');
         $getTagsInteractor = new GetTags($photoRepository);
 

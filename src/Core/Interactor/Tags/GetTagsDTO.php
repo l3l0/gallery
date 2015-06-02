@@ -16,7 +16,6 @@ use Freyr\Gallery\Core\Entity\TagDTO;
  */
 class GetTagsDTO
 {
-
     /**
      * @var TagDTO[]
      */

@@ -21,7 +21,6 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  */
 class GetTags extends AbstractInteractor implements CommandInterface
 {
-
     /**
      * @var PhotoRepositoryInterface
      */

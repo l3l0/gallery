@@ -17,7 +17,6 @@ use Freyr\Gallery\Core\Entity\Tag;
  */
 interface PhotoRepositoryInterface
 {
-
     /**
      * @param Photo $document
      * @return Photo
@@ -46,5 +45,4 @@ interface PhotoRepositoryInterface
      * @return Photo
      */
     public function getRandomPhotoFromTag(Tag $tag);
-
 }

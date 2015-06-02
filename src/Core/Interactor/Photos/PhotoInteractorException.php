@@ -14,5 +14,4 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
  */
 class PhotoInteractorException extends \Exception
 {
-
 }

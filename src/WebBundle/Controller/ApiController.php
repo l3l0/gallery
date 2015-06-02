@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ApiController extends Controller
 {
-
     /**
      * @Route("/photos", name="api.photos.create")
      * @Method("POST")

@@ -21,7 +21,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class FreyrGalleryWebExtension extends Extension
 {
-
     /**
      * {@inheritDoc}
      */

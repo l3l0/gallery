@@ -14,7 +14,6 @@ namespace Freyr\Gallery\Core\Entity;
  */
 class CoverPhoto
 {
-
     /**
      * @var Photo
      */

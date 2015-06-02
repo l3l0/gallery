@@ -19,7 +19,6 @@ use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
  */
 class GetPhotosByTags extends AbstractInteractor implements CommandInterface
 {
-
     /**
      * @var PhotoRepositoryInterface
      */

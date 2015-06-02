@@ -22,7 +22,6 @@ use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
  */
 class MongoDBPhotoRepository extends DocumentRepository implements PhotoRepositoryInterface
 {
-
     /**
      * @param \Doctrine\ODM\MongoDB\DocumentManager $dm
      * @param \Doctrine\ODM\MongoDB\UnitOfWork $uow
@@ -33,7 +32,6 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         parent::__construct($dm, $uow, $classMetadata);
         // TODO: move outside to DI container
         $this->builder = new EntityBuilderHelper();
-
     }
 
     /**

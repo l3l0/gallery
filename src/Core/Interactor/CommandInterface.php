@@ -14,7 +14,6 @@ namespace Freyr\Gallery\Core\Interactor;
  */
 interface CommandInterface
 {
-
     /**
      * @return array
      */

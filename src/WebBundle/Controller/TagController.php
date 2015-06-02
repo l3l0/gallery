@@ -20,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class TagController extends Controller
 {
-
     /**
      * @Route("/tag/{name}", name="tag")
      * @Template("FreyrGalleryWebBundle:Tag:index.html.twig")

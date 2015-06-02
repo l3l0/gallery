@@ -14,7 +14,6 @@ namespace Freyr\Gallery\Core\Interactor\Photos;
  */
 class PhotoNotFoundException extends PhotoInteractorException
 {
-
     /**
      * @param string $photoId
      * @param \Exception $exception
