@@ -30,7 +30,6 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function __construct($dm, $uow, $classMetadata)
     {
         parent::__construct($dm, $uow, $classMetadata);
-        // TODO: move outside to DI container
         $this->builder = new EntityBuilderHelper();
     }
 
@@ -63,7 +62,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function findById($photoId)
     {
         /** @var PhotoDocument $photo */
-        $photo = $this->findOneBy(["id" => new \MongoId($photoId)]);
+        $photo = $this->findOneBy(['id' => new \MongoId($photoId)]);
         if ($photo === null) {
             throw new \InvalidArgumentException();
         }
@@ -77,8 +76,9 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function findAllTags()
     {
         $result = [];
-        $cursor = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
 
+        /** @var Cursor $cursor */
+        $cursor = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
         foreach ($cursor as $tag) {
             /** @var Tag $tag */
             $tag = new Tag($tag);
@@ -96,12 +96,14 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     {
         $result = [];
 
+        /** @var Cursor $cursor */
         $cursor = $this->createQueryBuilder()
             ->field('tags.name')
             ->in($tags)
             ->getQuery()->execute();
 
         foreach ($cursor as $photo) {
+            /** @var PhotoDocument $photo */
             $result[] = $this->builder->buildPhotoEntity($photo);
         }
 
