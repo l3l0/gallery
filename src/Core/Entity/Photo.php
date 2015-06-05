@@ -60,6 +60,9 @@ class Photo
      */
     public function getUrl($thumbnailSize = self::THUMBNAIL_STANDARD)
     {
+        if (!$this->thumbnailExists($thumbnailSize)) {
+            throw new \InvalidArgumentException('Cannot find this thumbnail type');
+        }
         return $this->url[$thumbnailSize];
     }
 
@@ -118,5 +121,14 @@ class Photo
     public function setThumbnails($thumbnails)
     {
         $this->url = $thumbnails;
+    }
+
+    /**
+     * @param string $thumbnailSize
+     * @return bool
+     */
+    private function thumbnailExists($thumbnailSize)
+    {
+        return array_key_exists($thumbnailSize, $this->url);
     }
 }
