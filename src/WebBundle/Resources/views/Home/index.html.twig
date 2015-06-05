@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="page-header">
-        <h2>Tags <small>freyr photography</small></h2>
+        <h2>Tags
+            <small>freyr photography</small>
+        </h2>
     </div>
     <div class="row">
     {% for tag in tags %}
@@ -15,6 +17,7 @@
                 <img class="thumbnail" src="{{ tag.coverPhoto.url }}" data-src="{{ tag.coverPhoto.url }}"
                      alt="{{ tag.name }}"/>
             </a>
+
             <div class="caption">
                 <h3 class="text-center">{{ tag.name|e }}</h3>
             </div>

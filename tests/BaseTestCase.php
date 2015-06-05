@@ -18,6 +18,7 @@ use Freyr\Gallery\Core\Entity\Tag;
  */
 class BaseTestCase extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * Generates random tag object
      * @param int $howMany
@@ -52,6 +53,7 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
             ],
             'gallery' => ['name' => uniqid()]
         ];
+
         return new Photo($data);
     }
 }

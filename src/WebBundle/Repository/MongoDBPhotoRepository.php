@@ -10,13 +10,11 @@ namespace Freyr\Gallery\WebBundle\Repository;
 
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-
 use Freyr\Gallery\Core\Entity\Photo;
 use Freyr\Gallery\Core\Entity\Tag;
 use Freyr\Gallery\Core\Repository\PhotoRepositoryInterface;
-
-use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 use Freyr\Gallery\WebBundle\Document\Photo as PhotoDocument;
+use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
 
 /**
  * Class MongoDBPhotoRepository
@@ -24,7 +22,6 @@ use Freyr\Gallery\WebBundle\Document\Photo as PhotoDocument;
  */
 class MongoDBPhotoRepository extends DocumentRepository implements PhotoRepositoryInterface
 {
-
     /**
      * @param \Doctrine\ODM\MongoDB\DocumentManager $dm
      * @param \Doctrine\ODM\MongoDB\UnitOfWork $uow
@@ -33,10 +30,9 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function __construct($dm, $uow, $classMetadata)
     {
         parent::__construct($dm, $uow, $classMetadata);
-        // TODO: move outside to DI container
         $this->builder = new EntityBuilderHelper();
-
     }
+
     /**
      * @param Photo $photo
      * @return Photo
@@ -54,7 +50,8 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
         $this->getDocumentManager()->persist($document);
         $this->getDocumentManager()->flush();
 
-        $photo->setId((string)$document->getId());
+        $photo->setId((string) $document->getId());
+
         return $photo;
     }
 
@@ -65,10 +62,11 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function findById($photoId)
     {
         /** @var PhotoDocument $photo */
-        $photo = $this->findOneBy(["id" => new \MongoId($photoId)]);
+        $photo = $this->findOneBy(['id' => new \MongoId($photoId)]);
         if ($photo === null) {
             throw new \InvalidArgumentException();
         }
+
         return $this->builder->buildPhotoEntity($photo);
     }
 
@@ -78,8 +76,9 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function findAllTags()
     {
         $result = [];
-        $cursor = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
 
+        /** @var Cursor $cursor */
+        $cursor = $this->createQueryBuilder()->distinct('tags.name')->getQuery()->execute();
         foreach ($cursor as $tag) {
             /** @var Tag $tag */
             $tag = new Tag($tag);
@@ -97,12 +96,14 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     {
         $result = [];
 
+        /** @var Cursor $cursor */
         $cursor = $this->createQueryBuilder()
             ->field('tags.name')
             ->in($tags)
             ->getQuery()->execute();
 
         foreach ($cursor as $photo) {
+            /** @var PhotoDocument $photo */
             $result[] = $this->builder->buildPhotoEntity($photo);
         }
 
@@ -116,7 +117,7 @@ class MongoDBPhotoRepository extends DocumentRepository implements PhotoReposito
     public function getRandomPhotoFromTag(Tag $tag)
     {
         /** @var Cursor $cursor */
-        $images = $this->findBy(['tag.name' => $tag->getName()], null, 10);
+        $images = $this->findBy(['tags.name' => $tag->getName()], null, 10);
 
         return $this->builder->buildPhotoEntity($images[array_rand($images)]);
     }

@@ -32,6 +32,7 @@ class TagController extends Controller
         $tags = explode(',', $name);
         $interactor = new GetPhotosByTags($tags, $this->get('freyr.gallery.repository.photo'));
         $photos = $interactor->execute();
+
         return [
             'photos' => $photos,
             'tags' => $tags

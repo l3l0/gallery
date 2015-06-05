@@ -17,5 +17,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class FreyrGalleryWebBundle extends Bundle
 {
-
 }

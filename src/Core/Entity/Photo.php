@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Entity;
 
 /**
@@ -15,8 +14,13 @@ namespace Freyr\Gallery\Core\Entity;
  */
 class Photo
 {
-
+    /**
+     * Code for standard size thumbnail
+     */
     const THUMBNAIL_STANDARD = 'standard';
+    /**
+     * Code for small size thumbnail
+     */
     const THUMBNAIL_SMALL = 'small';
 
     /**
@@ -56,6 +60,9 @@ class Photo
      */
     public function getUrl($thumbnailSize = self::THUMBNAIL_STANDARD)
     {
+        if (!$this->thumbnailExists($thumbnailSize)) {
+            throw new \InvalidArgumentException('Cannot find this thumbnail type');
+        }
         return $this->url[$thumbnailSize];
     }
 
@@ -114,5 +121,14 @@ class Photo
     public function setThumbnails($thumbnails)
     {
         $this->url = $thumbnails;
+    }
+
+    /**
+     * @param string $thumbnailSize
+     * @return bool
+     */
+    private function thumbnailExists($thumbnailSize)
+    {
+        return array_key_exists($thumbnailSize, $this->url);
     }
 }

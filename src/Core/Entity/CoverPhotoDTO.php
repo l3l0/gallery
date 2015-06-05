@@ -6,20 +6,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Freyr\Gallery\Core\Interactor\Photos;
+namespace Freyr\Gallery\Core\Entity;
 
 /**
- * Class AddPhotoResponse
- * @package Freyr\Gallery\Core\Interactor\Photos
+ * Class TagDTO
+ * @package Freyr\Gallery\Core\Entity
  */
-class AddPhotoResponse
+class CoverPhotoDTO
 {
     /**
      * @var string
      */
-    public $status = false;
-    /**
-     * @var string
-     */
-    public $id = null;
+    public $url;
 }

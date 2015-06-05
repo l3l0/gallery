@@ -8,17 +8,16 @@
  */
 namespace Freyr\Gallery\Core\Interactor\Tags;
 
-use Freyr\Gallery\Core\Entity\TagResponse;
+use Freyr\Gallery\Core\Entity\TagDTO;
 
 /**
- * Class GetTagsResponse
+ * Class GetTagsDTO
  * @package Freyr\Gallery\Core\Interactor\Tags
  */
-class GetTagsResponse
+class GetTagsDTO
 {
-
     /**
-     * @var TagResponse[]
+     * @var TagDTO[]
      */
     public $tags = [];
 
