@@ -9,19 +9,18 @@
 namespace Freyr\Gallery\Core\Entity;
 
 /**
- * Class TagResponse
+ * Class TagDTO
  * @package Freyr\Gallery\Core\Interactor\Tags
  */
-class TagResponse
+class TagDTO
 {
-
     /**
      * @var string
      */
     public $name;
 
     /**
-     * @var CoverPhotoResponse
+     * @var CoverPhotoDTO
      */
     public $coverPhoto;
 }

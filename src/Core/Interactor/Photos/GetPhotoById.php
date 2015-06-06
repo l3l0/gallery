@@ -39,14 +39,14 @@ class GetPhotoById extends AbstractInteractor implements CommandInterface
     }
 
     /**
-     * @return GetPhotoResponse
+     * @return GetPhotoDTO
      * @throws PhotoNotFoundException
      */
     public function execute()
     {
         try {
             $photo = $this->repository->findById($this->photoId);
-            $response = new GetPhotoResponse();
+            $response = new GetPhotoDTO();
             $response->smallUrl = $photo->getUrl(Photo::THUMBNAIL_SMALL);
             $response->standardUrl = $photo->getUrl(Photo::THUMBNAIL_STANDARD);
             $response->tags = $photo->getTagsAsArray();

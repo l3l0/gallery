@@ -110,6 +110,7 @@ class PhotoTestCase extends BaseTestCase
 
         $photo = new Photo($data);
         $this->repository->store($photo);
+
         return $photo;
     }
 }

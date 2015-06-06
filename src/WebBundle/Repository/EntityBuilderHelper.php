@@ -20,7 +20,6 @@ use Freyr\Gallery\WebBundle\Document\Tag as TagDocument;
  */
 class EntityBuilderHelper
 {
-
     /**
      * @param PhotoDocument $photoDocument
      * @return CoverPhoto
@@ -28,6 +27,7 @@ class EntityBuilderHelper
     public function buildCoverPhoto(PhotoDocument $photoDocument)
     {
         $photo = $this->buildPhotoEntity($photoDocument);
+
         return new CoverPhoto($photo);
     }
 

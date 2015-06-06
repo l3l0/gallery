@@ -17,7 +17,6 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  */
 class Tag
 {
-
     /**
      * @MongoDB\String
      * @var string

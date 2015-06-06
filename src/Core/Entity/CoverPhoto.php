@@ -6,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Freyr\Gallery\Core\Entity;
 
 /**
@@ -15,7 +14,6 @@ namespace Freyr\Gallery\Core\Entity;
  */
 class CoverPhoto
 {
-
     /**
      * @var Photo
      */

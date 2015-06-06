@@ -37,7 +37,7 @@ doctrine_mongodb:
         default:
             server: %mongolab.url%
             options: {}
-    default_database: heroku_app27012761
+    default_database: %mongolab.default_database%
     document_managers:
         default:
             auto_mapping: true

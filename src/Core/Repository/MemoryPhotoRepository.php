@@ -18,7 +18,6 @@ use Freyr\Gallery\Core\Entity\Tag;
  */
 class MemoryPhotoRepository implements PhotoRepositoryInterface
 {
-
     /**
      * @var Photo[]
      */
@@ -107,6 +106,4 @@ class MemoryPhotoRepository implements PhotoRepositoryInterface
 
         return $photos;
     }
-
-
 }
